@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import '../App.css'
 function AddFlashcard()
 {
     const [word, setWord] = useState("");
@@ -17,7 +17,8 @@ function AddFlashcard()
             });
             const data = await response.json();
             console.log("Flashcard added", data)
-
+            setWord("")
+            setTranslation("")
         
 
         } catch (error){
@@ -28,14 +29,15 @@ function AddFlashcard()
 
     return (
 
-        <div> 
-            <button className="" onClick={handleAddFlashcard}> Add Flashcard </button>
-            <input type ="text" onChange={(e) => {
+        <div className="" > 
+            <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition" onClick={handleAddFlashcard}> Add Flashcard </button>
+            Word:
+            <input type ="text" value = {word} className="px-4 py-2 bg-red-500 text-white rounded" onChange={(e) => {
                 const value = e.target.value;
                 setWord(value);
                 console.log("Word:", word)}} />
-            
-            <input type ="text" onChange={(e) => {
+            Translation:
+            <input type ="text" value = {translation} className="px-4 py-2 bg-red-500 text-white rounded" onChange={(e) => {
                 const value = e.target.value;
                 setTranslation(value);
                 console.log("Translation:", translation)}} />
