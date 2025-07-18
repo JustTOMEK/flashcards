@@ -13,8 +13,8 @@ app.use('/flashcards', flashcardsRouter);
 
 initDB().then(() => {
   app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server is at http://localhost:${PORT}`);
   });
 }).catch((err) => {
-  console.error('Failed to initialize database:', err);
+  console.error('Error:', err);
 });
