@@ -12,7 +12,6 @@ const Flashcards: React.FC = () => {
         fetch('http://localhost:3000/flashcards')
         .then((res) => res.json())
         .then((data) => {
-            console.log('Data: ', data)
             setFlashcards(data)})
 
     }, [])
