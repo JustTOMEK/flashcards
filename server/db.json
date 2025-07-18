@@ -7,6 +7,14 @@
     {
       "word": "dog",
       "translation": "pies"
+    },
+    {
+      "word": "mouse",
+      "translation": "mysz"
+    },
+    {
+      "word": "mice",
+      "translation": "myszka"
     }
   ]
 }
