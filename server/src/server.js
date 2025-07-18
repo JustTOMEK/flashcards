@@ -1,4 +1,5 @@
 
+const cors = require('cors')
 const express = require('express');
 const flashcardsRouter = require('./routes/flashcards');
 const { initDB } = require('./db/lowdb'); 
@@ -6,6 +7,7 @@ const { initDB } = require('./db/lowdb');
 const app = express();
 const PORT = 3000;
 
+app.use(cors())
 app.use(express.json());
 app.use('/flashcards', flashcardsRouter);
 
