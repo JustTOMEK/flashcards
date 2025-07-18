@@ -1,5 +1,6 @@
 const express = require('express')
 const {db} = require('../db/lowdb')
+const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router()
 
@@ -9,11 +10,12 @@ router.get('/', async (req, res) => {
     res.json(flashcards)
 })
 
-router.post('/', async (req, res) =>
-{
+router.post('/', async (req, res) =>{
     const {word, translation} = req.body
 
-    const newFlashcard = {word, translation}
+    const id = uuidv4();
+
+    const newFlashcard = {word, translation, id}
 
     if (!db.data.flashcards) {
         db.data.flashcards = [];
@@ -24,6 +26,21 @@ router.post('/', async (req, res) =>
     await db.write()
 
     res.status(201).json(newFlashcard)
+})
+
+router.delete('/:id', async (req, res) =>{
+    const id = req.params
+    await db.read()
+
+    const flashcards = db.data?.flashcards || [];
+
+    const index = flashcards.findIndex(card => card.id === id)
+
+    flashcards.splice(index, 1);
+
+    await db.write();
+
+
 })
 
 module.exports = router
