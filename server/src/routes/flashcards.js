@@ -11,11 +11,10 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) =>{
-    const {word, translation} = req.body
-
+    const {word, translation, setId} = req.body
     const id = uuidv4();
 
-    const newFlashcard = {word, translation, id}
+    const newFlashcard = {word, translation, id, setId}
 
     if (!db.data.flashcards) {
         db.data.flashcards = [];
@@ -29,7 +28,7 @@ router.post('/', async (req, res) =>{
 })
 
 router.delete('/:id', async (req, res) =>{
-    const id = req.params
+    const {id} = req.params
     await db.read()
 
     const flashcards = db.data?.flashcards || [];
@@ -40,7 +39,7 @@ router.delete('/:id', async (req, res) =>{
 
     await db.write();
 
-    res.status(200).json(newFlashcard)
+    res.status(200).json()
 
 
 })
