@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-
+import '../App.css'
 
 type FlashcardSet = {
     name: string,
@@ -32,7 +32,8 @@ const FlashcardSets: React.FC = () => {
                 {flashcardSets.map((flashcardSet, index) =>  (
                     <li key={index}>
                         <strong> {flashcardSet.name} </strong> : {flashcardSet.description}
-                        <button onClick={ () => handleDelete(flashcardSet.id)} > Id: {flashcardSet.id} </button>
+                        <button className='bg-yellow-400 px-4 py-2 rounded' onClick={ () => handleDelete(flashcardSet.id)} > Id: {flashcardSet.id} </button>
+                        <button className='bg-green-400 px-4 py-2 rounded' onClick={ () => handleDelete(flashcardSet.id)} > More </button>
                     </li>
                 ))}
                 
