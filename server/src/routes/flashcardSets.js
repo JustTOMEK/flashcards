@@ -26,12 +26,15 @@ router.post('/', async (req, res) => {
     const id = uuidv4()
 
     const newFlashcardSet = {id, name, description}
-
+        
     if (!db.data.flashcardSets) {
         db.data.flashcardSets = [];
     }
 
-    db.data.flashcards.push(newFlashcardSet)
+    
+    db.data.flashcardSets.push(newFlashcardSet)
+
+    await db.write()
 
     res.status(201).json(newFlashcardSet)
 })
