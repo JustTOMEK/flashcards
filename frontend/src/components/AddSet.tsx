@@ -34,13 +34,11 @@ function AddSet()
             Name:
             <input type ="text" value = {name} className="px-4 py-2 bg-red-500 text-white rounded" onChange={(e) => {
                 const value = e.target.value;
-                setName(value);
-                console.log("Word:", name)}} />
+                setName(value); }} />
             Description:
             <input type ="text" value = {description} className="px-4 py-2 bg-red-500 text-white rounded" onChange={(e) => {
                 const value = e.target.value;
-                setDescription(value);
-                console.log("Translation:", description)}} />
+                setDescription(value); }} />
         </div>
     )
 
