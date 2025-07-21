@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { useLocation } from 'react-router'
 
 type Flashcard = {
     word: string,
@@ -9,10 +10,13 @@ type Flashcard = {
 
 
 const Flashcards: React.FC = () => {
-    const [flashcards, setFlashcards] = useState<Flashcard> ([])
+    const location = useLocation();
+    const set_id = location.state;
 
+    const [flashcards, setFlashcards] = useState<Flashcard> ([])
+    
     useEffect(() => {
-        fetch('http://localhost:3000/flashcards')
+        fetch(`http://localhost:3000/flashcardSets/${set_id}`)
         .then((res) => res.json())
         .then((data) => {
             setFlashcards(data)})
