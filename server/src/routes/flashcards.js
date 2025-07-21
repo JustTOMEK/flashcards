@@ -40,6 +40,8 @@ router.delete('/:id', async (req, res) =>{
 
     await db.write();
 
+    res.status(200).json(newFlashcard)
+
 
 })
 
