@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-    const id = req.params
+    const {id} = req.params
     await db.read()
 
     const flashcardSets = db.data?.flashcardSets || [];
@@ -52,14 +52,14 @@ router.delete('/:id', async (req, res) => {
     const flashcards = db.data?.flashcards || [];
 
     for (let i = flashcards.length - 1; i >=0; i--){
-        if (flashcards[i].id === id){
+        if (flashcards[i].setId === id){
             flashcards.splice(i, 1)
         }
     }
 
     await db.write();
 
-    res.status(200).json(newFlashcard)  
+    res.status(200).json()  
 })
 
 module.exports = router
