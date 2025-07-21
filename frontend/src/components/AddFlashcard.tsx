@@ -1,7 +1,11 @@
 import { useState } from "react"
 import '../App.css'
+import { useLocation } from "react-router";
 function AddFlashcard()
 {
+    const location = useLocation();
+    const setId = location.state;
+    
     const [word, setWord] = useState("");
     const [translation, setTranslation] = useState("");
 
@@ -13,7 +17,7 @@ function AddFlashcard()
                 headers: {
                 "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ word, translation }),
+                body: JSON.stringify({ word, translation, setId }),
             });
             const data = await response.json();
             console.log("Flashcard added", data)
@@ -34,13 +38,11 @@ function AddFlashcard()
             Word:
             <input type ="text" value = {word} className="px-4 py-2 bg-red-500 text-white rounded" onChange={(e) => {
                 const value = e.target.value;
-                setWord(value);
-                console.log("Word:", word)}} />
+                setWord(value) }} />
             Translation:
             <input type ="text" value = {translation} className="px-4 py-2 bg-red-500 text-white rounded" onChange={(e) => {
                 const value = e.target.value;
-                setTranslation(value);
-                console.log("Translation:", translation)}} />
+                setTranslation(value) }} />
         </div>
     )
 
