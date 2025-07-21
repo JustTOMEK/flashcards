@@ -5,18 +5,19 @@ type Flashcard = {
     word: string,
     translation: string
     id: string
+    setId: string
 }
 
 
 
 const Flashcards: React.FC = () => {
     const location = useLocation();
-    const set_id = location.state;
+    const setId = location.state;
 
     const [flashcards, setFlashcards] = useState<Flashcard> ([])
-    
+
     useEffect(() => {
-        fetch(`http://localhost:3000/flashcardSets/${set_id}`)
+        fetch(`http://localhost:3000/flashcardSets/${setId}`)
         .then((res) => res.json())
         .then((data) => {
             setFlashcards(data)})
