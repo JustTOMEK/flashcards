@@ -1,20 +1,9 @@
 {
   "flashcards": [
     {
-      "word": "cat",
-      "translation": "kot"
-    },
-    {
-      "word": "dog",
-      "translation": "pies"
-    },
-    {
-      "word": "mouse",
-      "translation": "mysz"
-    },
-    {
-      "word": "mice",
-      "translation": "myszka"
+      "word": "tomek",
+      "translation": "boss",
+      "id": "41877147-971c-453c-b8ba-4f13affedf53"
     }
   ]
 }
