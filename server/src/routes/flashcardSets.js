@@ -10,12 +10,22 @@ router.get('/', async (req, res ) => {
     res.json(flashcardSets)
 })
 
+router.get('/:id', async (req, res) => {
+    const id = req.params
+    await db.read()
+
+    const flashcards = db.data?.flashcards.filter(card => card.id === id) || []
+
+    res.json(flashcards)
+
+})
+
 router.post('/', async (req, res) => {
-    const {description} = req.body
+    const {name, description} = req.body
 
     const id = uuidv4()
 
-    const newFlashcardSet = {id, description}
+    const newFlashcardSet = {id, name, description}
 
     if (!db.data.flashcardSets) {
         db.data.flashcardSets = [];
