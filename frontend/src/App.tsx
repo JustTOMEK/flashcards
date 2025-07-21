@@ -1,14 +1,19 @@
 import './App.css'
-import Flashcards from './components/Flashcards'
-import AddFlashcard from './components/AddFlashcard'
+import { BrowserRouter, Routes, Route } from "react-router";
+import FlashcardSets from './components/Sets'
+import AddSet from './components/AddSet'
 
 function App() {
   return (
-    <div className = "App">
-      <h1> APP HERE</h1>
-      <Flashcards />
-      <AddFlashcard />
-    </div>
+    <BrowserRouter>
+      <div className = "App">
+        <h1> APP HERE</h1>
+          <Routes>
+            <Route path = "/" element = { <> <FlashcardSets />
+        <AddSet /> </>} />     
+          </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
