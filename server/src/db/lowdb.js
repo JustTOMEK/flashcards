@@ -3,7 +3,9 @@ const { JSONFile } = require('lowdb/node');
 const { Low } = require('lowdb');
 
 
-const defaultData = { flashcards: [] };
+const defaultData = { 
+  flashcards: [], 
+  flashcardSets: []};
 
 
 const adapter = new JSONFile('db.json');
