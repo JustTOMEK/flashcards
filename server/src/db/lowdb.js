@@ -5,7 +5,9 @@ const { Low } = require('lowdb');
 
 const defaultData = { 
   flashcards: [], 
-  flashcardSets: []};
+  flashcardSets: [],
+  users: []  
+};
 
 
 const adapter = new JSONFile('db.json');
