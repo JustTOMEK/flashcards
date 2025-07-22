@@ -25,7 +25,7 @@ router.post('/', async(req, res) =>{
 
     await db.write()
 
-    res.status(201)
+    res.status(201).json({message: 'User created sucessfully'})
 })
 
 module.exports = router
