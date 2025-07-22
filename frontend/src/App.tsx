@@ -4,6 +4,7 @@ import FlashcardSets from './components/FlashcardSets'
 import AddSet from './components/AddSet'
 import Flashcards from './components/Flashcards'
 import AddFlashcard from './components/AddFlashcard'
+import Translation from './components/Translation'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
               <> <Flashcards />
                   <AddFlashcard />
               </>} />
+
+            <Route path = "/translation" element = {<Translation />} />
           </Routes>
       </div>
     </BrowserRouter>
