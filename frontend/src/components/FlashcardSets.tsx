@@ -8,7 +8,7 @@ type FlashcardSet = {
     id: string
 }
 
-const FlashcardSets: React.FC = () => {
+function FlashcardSets()  {
     const [flashcardSets, setflashcardSets] = useState<FlashcardSet> ([])
     
     useEffect(() => {
@@ -39,11 +39,7 @@ const FlashcardSets: React.FC = () => {
                         <button className='bg-green-400 px-4 py-2 rounded' onClick={ () => navigate('set', {state : flashcardSet.id}  )} > More </button>
                     </li>
                 ))}
-                
-    
             </ul>
-
-
         </div>
     )
 }
