@@ -5,7 +5,8 @@ import AddSet from './components/AddSet'
 import Flashcards from './components/Flashcards'
 import AddFlashcard from './components/AddFlashcard'
 import Translation from './components/Translation'
-
+import Login from './components/Login'
+import Register from './components/Register'
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +23,11 @@ function App() {
               </>} />
 
             <Route path = "/translation" element = {<Translation />} />
+
+            <Route path = "/login" element = {<Login />} />
+
+            <Route path = "/register" element = {<Register />} />
+
           </Routes>
       </div>
     </BrowserRouter>
