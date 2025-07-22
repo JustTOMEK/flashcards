@@ -10,7 +10,7 @@ type Flashcard = {
 
 
 
-const Flashcards: React.FC = () => {
+function Flashcards() {
     const location = useLocation();
     const setId = location.state;
 
