@@ -4,6 +4,7 @@ const express = require('express');
 const flashcardsRouter = require('./routes/flashcards');
 const flashcardSetsRouter = require('./routes/flashcardSets')
 const registerRouter = require('./routes/register')
+const loginRouter = require('./routes/login')
 const { initDB } = require('./db/lowdb'); 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/flashcards', flashcardsRouter);
 app.use('/flashcardSets', flashcardSetsRouter);
 app.use('/register', registerRouter);
+app.use('/login', loginRouter)
 
 initDB().then(() => {
   app.listen(PORT, () => {
