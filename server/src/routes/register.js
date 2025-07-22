@@ -12,8 +12,8 @@ router.post('/', async(req, res) =>{
     const id = uuidv4();
 
     //Checking whether user with this username already exists
-    const existinguser = db.data.users.find(user => user.username === username)
-    if (existinguser){
+    const existingUser = db.data.users.find(user => user.username === username)
+    if (existingUser){
         return res.status(409).json({message: 'Username already taken.'})
     }
 
