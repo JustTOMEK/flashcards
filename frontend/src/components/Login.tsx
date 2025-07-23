@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import '../App.css'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 
 function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
+    const navigate = useNavigate()
 
     const handleLogin = async () => {
         try {
@@ -21,6 +23,7 @@ function Login() {
             const data = await response.json()
             if (response.ok) {
                 localStorage.setItem('token', data.token)
+                navigate('/')
                 console.log('Token: ', data.token)
             } else {
                 console.log('Login unsucessful')
@@ -53,11 +56,9 @@ function Login() {
                 }}
             />
             <button className="bg-blue-500 rounded" onClick={handleLogin}>
-                {' '}
                 Signin
             </button>
             <NavLink to="/register" className="bg-green-500 rounded" end>
-                {' '}
                 Register
             </NavLink>
         </>
