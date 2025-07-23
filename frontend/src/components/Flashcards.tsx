@@ -1,35 +1,33 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
 type Flashcard = {
-    word: string,
+    word: string
     translation: string
     id: string
     setId: string
 }
 
-
-
 function Flashcards() {
-    const location = useLocation();
-    const setId = location.state;
+    const location = useLocation()
+    const setId = location.state
 
-    const [flashcards, setFlashcards] = useState<Flashcard> ([])
+    const [flashcards, setFlashcards] = useState<Flashcard>([])
 
     useEffect(() => {
         fetch(`http://localhost:3000/flashcardSets/${setId}`)
-        .then((res) => res.json())
-        .then((data) => {
-            setFlashcards(data)})
-
+            .then((res) => res.json())
+            .then((data) => {
+                setFlashcards(data)
+            })
     }, [])
 
     const handleDelete = async (id: string) => {
         fetch(`http://localhost:3000/flashcards/${id}`, {
             method: 'DELETE',
-        });
-        setFlashcards((previous) => previous.filter((card) => card.id !== id));
-    };
+        })
+        setFlashcards((previous) => previous.filter((card) => card.id !== id))
+    }
 
     return (
         <div>
@@ -38,10 +36,12 @@ function Flashcards() {
                 {flashcards.map((card, index) => (
                     <li key={index}>
                         <strong> {card.word} </strong> : {card.translation}
-                        <button onClick={ () => handleDelete(card.id)} > Id: {card.id} </button>
+                        <button onClick={() => handleDelete(card.id)}>
+                            {' '}
+                            Id: {card.id}{' '}
+                        </button>
                     </li>
                 ))}
-
             </ul>
         </div>
     )
