@@ -15,7 +15,6 @@ function Flashcards() {
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
 
     useEffect(() => {
-        console.log('Tu jest setid:  ', setId)
         fetch(`http://localhost:3000/flashcardSets/set/${setId}`)
             .then((res) => res.json())
             .then((data) => {
@@ -35,9 +34,9 @@ function Flashcards() {
                 },
                 body: JSON.stringify({ word, translation, setId }),
             })
-            const newFlashcard = await addRes.json()
+            const newFlashcard = await addRes.json();
 
-            setFlashcards((prevFlashcards) => [...prevFlashcards, newFlashcard])
+            setFlashcards(prevFlashcards => [...prevFlashcards, newFlashcard])
 
             setWord('')
             setTranslation('')
@@ -60,7 +59,7 @@ function Flashcards() {
                 {flashcards.map((card, index) => (
                     <li key={index}>
                         <strong> {card.word} </strong> : {card.translation}
-                        <button
+                        <button 
                             className="bg-yellow-400 px-4 py-2 rounded"
                             onClick={() => handleDelete(card.id)}
                         >
