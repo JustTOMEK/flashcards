@@ -10,22 +10,33 @@ router.get('/', async (req, res) => {
     res.json(flashcardSets)
 })
 
-router.get('/:id', async (req, res) => {
-    const id = req.params
+// this is to get flashcards of specific flascardSet
+router.get('/set/:setId', async (req, res) => {
+    const { setId } = req.params
     await db.read()
 
     const flashcards =
-        db.data?.flashcards.filter((card) => card.id === id) || []
+        db.data?.flashcards.filter((card) => card.setId === setId) || []
 
     res.json(flashcards)
 })
 
+// this is to get all sets that an userowns
+router.get('/:userId', async (req, res) => {
+    const { userId } = req.params
+    await db.read()
+
+    const sets = db.data?.flashcardSets.filter((set) => (set.userId = userId))
+
+    res.json(sets)
+})
+
 router.post('/', async (req, res) => {
-    const { name, description } = req.body
+    const { name, description, userId } = req.body
 
     const id = uuidv4()
 
-    const newFlashcardSet = { id, name, description }
+    const newFlashcardSet = { id, name, description, userId }
 
     if (!db.data.flashcardSets) {
         db.data.flashcardSets = []
