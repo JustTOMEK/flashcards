@@ -6,18 +6,66 @@ type FlashcardSet = {
     name: string
     description: string
     id: string
+    userId: string
 }
 
 function FlashcardSets() {
-    const [flashcardSets, setflashcardSets] = useState<FlashcardSet>([])
+    const [flashcardSets, setflashcardSets] = useState<FlashcardSet[]>([])
 
     useEffect(() => {
-        fetch('http://localhost:3000/flashcardSets')
+        const token = localStorage.getItem('token')
+
+        fetch('http://localhost:3000/me', {
+            headers: {
+                token: token ?? '',
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
-                setflashcardSets(data)
+                const userId = data.userId
+
+                return fetch(`http://localhost:3000/flashcardSets/${userId}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setflashcardSets(data)
+                    })
             })
     }, [])
+
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+
+    const handleAddSet = async () => {
+        try {
+            const token = localStorage.getItem('token')
+
+            const userRes = await fetch('http://localhost:3000/me', {
+                headers: {
+                    token: token ?? '',
+                },
+            })
+
+            const userData = await userRes.json()
+            const userId = userData.userId
+
+            const addRes = await fetch('http://localhost:3000/flashcardSets', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, description, userId }),
+            })
+
+            const newFlashcardSet = await addRes.json()
+
+            setflashcardSets((prevSets) => [...prevSets, newFlashcardSet])
+
+            setName('')
+            setDescription('')
+        } catch (error) {
+            console.error('Error tu jest:', error)
+        }
+    }
 
     const handleDelete = async (id: string) => {
         fetch(`http://localhost:3000/flashcardSets/${id}`, {
@@ -36,14 +84,13 @@ function FlashcardSets() {
             <ul>
                 {flashcardSets.map((flashcardSet, index) => (
                     <li key={index}>
-                        <strong> {flashcardSet.name} </strong> :{' '}
+                        <strong> {flashcardSet.name} </strong> :
                         {flashcardSet.description}
                         <button
                             className="bg-yellow-400 px-4 py-2 rounded"
                             onClick={() => handleDelete(flashcardSet.id)}
                         >
-                            {' '}
-                            Id: {flashcardSet.id}{' '}
+                            Delete
                         </button>
                         <button
                             className="bg-green-400 px-4 py-2 rounded"
@@ -51,12 +98,37 @@ function FlashcardSets() {
                                 navigate('set', { state: flashcardSet.id })
                             }
                         >
-                            {' '}
-                            More{' '}
+                            More
                         </button>
                     </li>
                 ))}
             </ul>
+            <button
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                onClick={handleAddSet}
+            >
+                Add set
+            </button>
+            Name:
+            <input
+                type="text"
+                value={name}
+                className="px-4 py-2 bg-red-500 text-white rounded"
+                onChange={(e) => {
+                    const value = e.target.value
+                    setName(value)
+                }}
+            />
+            Description:
+            <input
+                type="text"
+                value={description}
+                className="px-4 py-2 bg-red-500 text-white rounded"
+                onChange={(e) => {
+                    const value = e.target.value
+                    setDescription(value)
+                }}
+            />
         </div>
     )
 }
