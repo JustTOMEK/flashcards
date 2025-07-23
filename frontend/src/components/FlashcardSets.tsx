@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router'
+import  withAuth from './withAuth'
 
 type FlashcardSet = {
     name: string
@@ -12,9 +13,8 @@ type FlashcardSet = {
 function FlashcardSets() {
     const [flashcardSets, setflashcardSets] = useState<FlashcardSet[]>([])
 
+    const token = localStorage.getItem('token') 
     useEffect(() => {
-        const token = localStorage.getItem('token')
-
         fetch('http://localhost:3000/me', {
             headers: {
                 token: token ?? '',
@@ -24,7 +24,11 @@ function FlashcardSets() {
             .then((data) => {
                 const userId = data.userId
 
-                return fetch(`http://localhost:3000/flashcardSets/${userId}`)
+                return fetch(`http://localhost:3000/flashcardSets/${userId}`,{
+                    headers: {
+                        token: token ?? '',
+                    },
+            })
                     .then((res) => res.json())
                     .then((data) => {
                         setflashcardSets(data)
@@ -51,6 +55,7 @@ function FlashcardSets() {
             const addRes = await fetch('http://localhost:3000/flashcardSets', {
                 method: 'POST',
                 headers: {
+                    token: token ?? '',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ name, description, userId }),
@@ -70,6 +75,9 @@ function FlashcardSets() {
     const handleDelete = async (id: string) => {
         fetch(`http://localhost:3000/flashcardSets/${id}`, {
             method: 'DELETE',
+            headers: {
+                token: token ?? '',
+            }
         })
         setflashcardSets((previous) =>
             previous.filter((card) => card.id !== id)
@@ -132,4 +140,4 @@ function FlashcardSets() {
         </div>
     )
 }
-export default FlashcardSets
+export default withAuth(FlashcardSets)

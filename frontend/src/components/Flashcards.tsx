@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
+import withAuth from './withAuth'
 
 type Flashcard = {
     word: string
@@ -14,8 +15,15 @@ function Flashcards() {
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
 
+    const token = localStorage.getItem('token')
+
     useEffect(() => {
-        fetch(`http://localhost:3000/flashcardSets/set/${setId}`)
+        fetch(`http://localhost:3000/flashcardSets/set/${setId}`, 
+            {
+                headers: {
+                    token: token ?? '',
+                },
+            })
             .then((res) => res.json())
             .then((data) => {
                 setFlashcards(data)
@@ -30,6 +38,7 @@ function Flashcards() {
             const addRes = await fetch('http://localhost:3000/flashcards', {
                 method: 'POST',
                 headers: {
+                     token: token ?? '',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ word, translation, setId }),
@@ -48,6 +57,10 @@ function Flashcards() {
     const handleDelete = async (id: string) => {
         fetch(`http://localhost:3000/flashcards/${id}`, {
             method: 'DELETE',
+            headers: {
+                token: token ?? '',
+            },
+            
         })
         setFlashcards((previous) => previous.filter((card) => card.id !== id))
     }
@@ -99,4 +112,4 @@ function Flashcards() {
     )
 }
 
-export default Flashcards
+export default withAuth(Flashcards)
