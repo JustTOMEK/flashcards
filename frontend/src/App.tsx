@@ -1,10 +1,8 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import FlashcardSets from './components/FlashcardSets'
-import AddSet from './components/AddSet'
 import Flashcards from './components/Flashcards'
-import AddFlashcard from './components/AddFlashcard'
 import Translation from './components/Translation'
+import FlashcardSets from './components/FlashcardSets'
 import Login from './components/Login'
 import Register from './components/Register'
 function App() {
@@ -13,26 +11,9 @@ function App() {
             <div className="App">
                 <h1> APP HERE</h1>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <>
-                                {' '}
-                                <FlashcardSets />
-                                <AddSet />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/set"
-                        element={
-                            <>
-                                {' '}
-                                <Flashcards />
-                                <AddFlashcard />
-                            </>
-                        }
-                    />
+                    <Route path="/" element={<FlashcardSets />} />
+
+                    <Route path="/set" element={<Flashcards />} />
 
                     <Route path="/translation" element={<Translation />} />
 
