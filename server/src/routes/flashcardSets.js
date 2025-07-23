@@ -1,17 +1,17 @@
 const express = require('express')
 const { db } = require('../db/lowdb')
 const { v4: uuidv4 } = require('uuid')
-
+const {authenticate} = require('./authenticateMid')
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', authenticate,  async (req, res) => {
     await db.read()
     const flashcardSets = db.data?.flashcardSets || []
     res.json(flashcardSets)
 })
 
 // this is to get flashcards of specific flascardSet
-router.get('/set/:setId', async (req, res) => {
+router.get('/set/:setId', authenticate, async (req, res) => {
     const { setId } = req.params
     await db.read()
 
@@ -22,7 +22,7 @@ router.get('/set/:setId', async (req, res) => {
 })
 
 // this is to get all sets that an userowns
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', authenticate, async (req, res) => {
     const { userId } = req.params
     await db.read()
 
@@ -31,7 +31,7 @@ router.get('/:userId', async (req, res) => {
     res.json(sets)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
     const { name, description, userId } = req.body
 
     const id = uuidv4()
@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
     res.status(201).json(newFlashcardSet)
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticate,  async (req, res) => {
     const { id } = req.params
     await db.read()
 
