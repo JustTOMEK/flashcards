@@ -56,7 +56,6 @@ function Register() {
                 }}
             />
             <button className="bg-blue-500 rounded" onClick={handleRegister}>
-                {' '}
                 Register
             </button>
         </>
