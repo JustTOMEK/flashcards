@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import withAuth from './withAuth'
+import Logout from './Logout'
 
 type Flashcard = {
     word: string
@@ -108,6 +109,7 @@ function Flashcards() {
                     setTranslation(value)
                 }}
             />
+            <Logout />
         </div>
     )
 }
