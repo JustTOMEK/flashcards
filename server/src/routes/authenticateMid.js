@@ -1,10 +1,16 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
-const express = require('express')
 
 //This is the middleware to authenticate whether user has right to use specific request
 
 const authenticate = (req, res, next) => {
+
+    
+    if (process.env.SKIP_AUTH === 'true') {
+        return next();
+    }
+
+
     const token = req.headers['token']
     try {
         jwt.verify(token, process.env.JWT_SECRET)
