@@ -1,9 +1,8 @@
 const express = require('express')
 const { db } = require('../db/lowdb')
 const { v4: uuidv4 } = require('uuid')
-const {authenticate} = require('./authenticateMid')
+const { authenticate } = require('./authenticateMid')
 const router = express.Router()
-
 
 //Get is never used, all flashcards are never displayed
 router.get('/', authenticate, async (req, res) => {
@@ -29,7 +28,7 @@ router.post('/', authenticate, async (req, res) => {
     res.status(201).json(newFlashcard)
 })
 
-router.delete('/:id', authenticate,  async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
     const { id } = req.params
     await db.read()
 

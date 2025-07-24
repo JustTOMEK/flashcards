@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 
-
-
-
 //This is for the withAuth wrapper to use
 router.post('/', async (req, res) => {
     const token = req.headers['token']

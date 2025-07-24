@@ -1,11 +1,10 @@
-process.env.SKIP_AUTH = 'true';
+process.env.SKIP_AUTH = 'true'
 
-import { test, expect} from 'vitest'
+import { test, expect } from 'vitest'
 const request = require('supertest')
 import app from '../app'
 
-
 test('GET /flashcards', async () => {
     const res = await request(app).get('/flashcards')
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(200)
 })

@@ -1,10 +1,10 @@
 const express = require('express')
 const { db } = require('../db/lowdb')
 const { v4: uuidv4 } = require('uuid')
-const {authenticate} = require('./authenticateMid')
+const { authenticate } = require('./authenticateMid')
 const router = express.Router()
 
-router.get('/', authenticate,  async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
     await db.read()
     const flashcardSets = db.data?.flashcardSets || []
     res.json(flashcardSets)
@@ -49,7 +49,7 @@ router.post('/', authenticate, async (req, res) => {
     res.status(201).json(newFlashcardSet)
 })
 
-router.delete('/:id', authenticate,  async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
     const { id } = req.params
     await db.read()
 

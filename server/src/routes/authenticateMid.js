@@ -4,12 +4,9 @@ const jwt = require('jsonwebtoken')
 //This is the middleware to authenticate whether user has right to use specific request
 
 const authenticate = (req, res, next) => {
-
-    
     if (process.env.SKIP_AUTH === 'true') {
-        return next();
+        return next()
     }
-
 
     const token = req.headers['token']
     try {
@@ -20,4 +17,4 @@ const authenticate = (req, res, next) => {
     }
 }
 
-module.exports = {authenticate}
+module.exports = { authenticate }

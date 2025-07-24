@@ -1,10 +1,7 @@
 const app = require('./app')
 const { initDB } = require('./db/lowdb')
 
-
 const PORT = 3000
-
-
 
 initDB()
     .then(() => {
