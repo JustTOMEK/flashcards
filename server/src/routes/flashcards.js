@@ -4,10 +4,12 @@ const { v4: uuidv4 } = require('uuid')
 const {authenticate} = require('./authenticateMid')
 const router = express.Router()
 
+
+//Get is never used, all flashcards are never displayed
 router.get('/', authenticate, async (req, res) => {
     await db.read()
     const flashcards = db.data?.flashcards || []
-    res.json(flashcards)
+    res.status(200).json(flashcards)
 })
 
 router.post('/', authenticate, async (req, res) => {
