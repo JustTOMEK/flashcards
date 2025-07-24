@@ -1,4 +1,5 @@
 import '../App.css'
+import withAuth from './withAuth'
 
 const Translation: React.FC = () => {
     const handleButtonclick = async () => {
@@ -31,4 +32,4 @@ const Translation: React.FC = () => {
     )
 }
 
-export default Translation
+export default withAuth(Translation)
