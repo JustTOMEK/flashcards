@@ -26,7 +26,7 @@ router.get('/:userId', authenticate, async (req, res) => {
     const { userId } = req.params
     await db.read()
 
-    const sets = db.data?.flashcardSets.filter((set) => (set.userId = userId))
+    const sets = db.data?.flashcardSets.filter((set) => (set.userId === userId))
 
     res.json(sets)
 })
