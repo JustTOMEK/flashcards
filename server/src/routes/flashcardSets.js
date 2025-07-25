@@ -4,6 +4,19 @@ const { v4: uuidv4 } = require('uuid')
 const { authenticate } = require('./authenticateMid')
 const router = express.Router()
 
+/*
+type FlashcardSet = {
+    name: string
+    description: string
+    id: string
+    userId: string
+    sourceLanguage: string
+    targetLanguage: string
+    sourceLanguageCode: string
+    targetLanguageCode: string
+}
+*/
+
 router.get('/', authenticate, async (req, res) => {
     await db.read()
     const flashcardSets = db.data?.flashcardSets || []
@@ -32,11 +45,11 @@ router.get('/:userId', authenticate, async (req, res) => {
 })
 
 router.post('/', authenticate, async (req, res) => {
-    const { name, description, userId } = req.body
+    const { name, description, userId, sourceLanguage, targetLanguage, sourceLanguageCode, targetLanguageCode  } = req.body
 
     const id = uuidv4()
 
-    const newFlashcardSet = { id, name, description, userId }
+    const newFlashcardSet = { id, name, description, userId, sourceLanguage, targetLanguage, sourceLanguageCode, targetLanguageCode }
 
     if (!db.data.flashcardSets) {
         db.data.flashcardSets = []
