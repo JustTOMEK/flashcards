@@ -8,6 +8,8 @@ type Flashcard = {
     translation: string
     id: string
     setId: string
+    level: number
+    repetitions: number
 }
 
 function Flashcards() {

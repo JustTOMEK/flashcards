@@ -4,6 +4,18 @@ const { v4: uuidv4 } = require('uuid')
 const { authenticate } = require('./authenticateMid')
 const router = express.Router()
 
+/*
+type Flashcard = {
+    word: string
+    translation: string
+    id: string
+    setId: string
+    level: number
+    repetitions: number
+}
+*/
+
+
 //Get is never used, all flashcards are never displayed
 router.get('/', authenticate, async (req, res) => {
     await db.read()
@@ -15,7 +27,7 @@ router.post('/', authenticate, async (req, res) => {
     const { word, translation, setId } = req.body
     const id = uuidv4()
 
-    const newFlashcard = { word, translation, id, setId }
+    const newFlashcard = { word, translation, id, setId, level: 0, repetitions: 0}
 
     if (!db.data.flashcards) {
         db.data.flashcards = []
