@@ -71,6 +71,51 @@ function Flashcards() {
         setFlashcards((previous) => previous.filter((card) => card.id !== id))
     }
 
+    const handleTranslate= async () => {
+        let q = ""
+        let source = ""
+        let target = ""
+        if(translation == ""){
+            q = word
+            source = sourceLanguageCode
+            target = targetLanguageCode
+        }
+        else if (word == ""){
+            q = translation
+            source = targetLanguageCode
+            target = sourceLanguageCode
+        }
+        else{
+            console.log('Leave word or translation blank')
+        }
+
+        const translateResponse = await fetch('http://127.0.0.1:5000/translate', {
+            method: 'POST',
+            body: JSON.stringify({
+                q: q,
+                source: source,
+                target: target,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        if (translateResponse.status){
+            console.log('No translation available for custom languages')
+            return
+        }
+
+        const response = await translateResponse.json()
+        const translatedText = response.translatedText
+
+        if(translation == ""){
+            setTranslation(translatedText)
+        }
+        else if (word == ""){
+            setWord(translatedText)
+        }
+    }
+
     return (
         <div>
             <h1> Flashcards: </h1>
@@ -114,6 +159,7 @@ function Flashcards() {
                     setTranslation(value)
                 }}
             />
+            <button className='bg-pink-500' onClick={() =>{handleTranslate()}}> Translate</button>
             <Logout />
         </div>
     )
