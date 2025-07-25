@@ -12,13 +12,18 @@ type Flashcard = {
 
 function Flashcards() {
     const location = useLocation()
-    const setId = location.state
+    const setId = location.state.setId
+    const sourceLanguageCode = location.state.sourceLanguageCode
+    const targetLanguageCode = location.state.targetLanguageCode
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
 
     const token = localStorage.getItem('token')
 
     useEffect(() => {
+        console.log('Set id ', setId)
+        console.log('Source ',sourceLanguageCode)
+        console.log('Target ', targetLanguageCode)
         fetch(`http://localhost:3000/flashcardSets/set/${setId}`, 
             {
                 headers: {
