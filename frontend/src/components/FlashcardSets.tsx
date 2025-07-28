@@ -120,8 +120,7 @@ function FlashcardSets() {
                                 navigate('set', { 
                                     state: {
                                         setId: flashcardSet.id,
-                                        sourceLanguageCode: flashcardSet.sourceLanguageCode,
-                                        targetLanguageCode: flashcardSet.targetLanguageCode } })
+                                     }})
                             }
                         >
                             More

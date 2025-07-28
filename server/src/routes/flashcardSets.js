@@ -34,6 +34,7 @@ router.get('/set/:setId', authenticate, async (req, res) => {
     res.json(flashcards)
 })
 
+
 // this is to get all sets that an userowns
 router.get('/:userId', authenticate, async (req, res) => {
     const { userId } = req.params
@@ -42,6 +43,14 @@ router.get('/:userId', authenticate, async (req, res) => {
     const sets = db.data?.flashcardSets.filter((set) => (set.userId === userId))
 
     res.json(sets)
+})
+
+router.get(`/languagecodes/:setId`, authenticate, async(req, res) => {
+    const { setId } = req.params
+    await db.read()
+    const set = db.data?.flashcardSets.find((set) => (set.id === setId))
+
+    res.status(201).json({sourceLanguageCode: set.sourceLanguageCode, targetLanguageCode: set.targetLanguageCode})
 })
 
 router.post('/', authenticate, async (req, res) => {
