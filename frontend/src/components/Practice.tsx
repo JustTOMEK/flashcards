@@ -13,6 +13,9 @@ type Flashcard = {
 function Practice() {
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
+    const [currentIndex, setcurrentIndex] = useState(0)
+    const [isAnswered, setisAnswered] = useState(false)
+    const [isFlipped, setisFlipped] = useState(false)
     const location = useLocation()
     
 
@@ -25,12 +28,44 @@ function Practice() {
     }, [location.state])
 
 
+    function handleAnswer(answer: boolean){
+        if (isAnswered){
+            return
+        }
+        setisAnswered(true)
+        if (answer){
+
+        }
+        else{
+
+        }
+
+    }
+
+    function handleFlip(){
+        setisFlipped(!isFlipped)
+    }
+
+    function handleNext(){
+        setcurrentIndex(currentIndex+1)
+        setisFlipped(false)
+        setisAnswered(false)
+    }
+
+
 
 
     return (
         <>
-            Tu jesteśmy
-            <button className="bg-pink-500" onClick={() => {console.log(flashcards)}} > Sprawdz</button>
+            
+            {flashcards.length > 0 && flashcards[currentIndex] && (
+                isFlipped ? flashcards[currentIndex].translation : flashcards[currentIndex].word
+                )}
+
+            <button className="bg-pink-500" disabled={isAnswered} onClick={() => {handleAnswer(true)}} > I know this</button>
+            <button className="bg-pink-500" disabled={isAnswered} onClick={() => {handleAnswer(false)}} > I don't know this</button>
+            <button className="bg-blue-500" disabled={!isAnswered} onClick={() => {handleFlip()}} > Flip</button>
+            <button className="bg-green-500" disabled={!isAnswered} onClick={() => {handleNext()}} > Next</button>
         </>
     )
 }
