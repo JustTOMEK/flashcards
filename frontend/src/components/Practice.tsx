@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import withAuth from "./withAuth";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 type Flashcard = {
     word: string
     translation: string
@@ -64,7 +64,7 @@ function Practice() {
     }
 
 
-
+    const navigate = useNavigate()
 
     return (
         <>
@@ -77,6 +77,7 @@ function Practice() {
             <button className="bg-pink-500" disabled={isAnswered} onClick={() => {handleAnswer(false)}} > I don't know this</button>
             <button className="bg-blue-500" disabled={!isAnswered} onClick={() => {handleFlip()}} > Flip</button>
             <button className="bg-green-500" disabled={!isAnswered} onClick={() => {handleNext()}} > Next</button>
+            <button className="bg-red-500" onClick={() => {navigate('/set', {state: {setId: flashcards[0].setId}})}} > Finish practice</button>
         </>
     )
 }
