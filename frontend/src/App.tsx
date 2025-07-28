@@ -5,6 +5,7 @@ import Translation from './components/Translation'
 import FlashcardSets from './components/FlashcardSets'
 import Login from './components/Login'
 import Register from './components/Register'
+import Practice from './components/Practice'
 function App() {
     return (
         <BrowserRouter>
@@ -20,6 +21,8 @@ function App() {
                     <Route path="/login" element={<Login />} />
 
                     <Route path="/register" element={<Register />} />
+
+                    <Route path="/practice" element={<Practice />} />
                 </Routes>
             </div>
         </BrowserRouter>
