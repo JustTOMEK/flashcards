@@ -40,6 +40,26 @@ router.post('/', authenticate, async (req, res) => {
     res.status(201).json(newFlashcard)
 })
 
+router.patch('/:id', authenticate, async (req, res) => {
+    const { id } = req.params
+    const {updatedLevel} = req.body
+    console.log('Level: ', updatedLevel)
+
+    await db.read()
+
+    const flashcards = db.data?.flashcards || []
+
+    const index = flashcards.findIndex((card) => card.id === id)
+
+    flashcards[index].level = updatedLevel
+    flashcards[index].repetitions = flashcards[index].repetitions + 1
+
+    await db.write()
+
+    res.status(200).json({message: 'Flashcard updated'})
+
+})
+
 router.delete('/:id', authenticate, async (req, res) => {
     const { id } = req.params
     await db.read()
