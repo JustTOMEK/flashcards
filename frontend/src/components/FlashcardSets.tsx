@@ -3,7 +3,7 @@ import '../App.css'
 import { useNavigate } from 'react-router'
 import withAuth from './withAuth'
 import Logout from './Logout'
-import LanguageSelector from './SelectLanguage'
+import FlashcardSetForm from './FlashcardSetForm'
 
 type FlashcardSet = {
     name: string
@@ -22,6 +22,9 @@ function FlashcardSets() {
     const [targetLanguage, settargetLanguage] = useState('')
     const [sourceLanguageCode, setsourceLanguageCode] = useState('')
     const [targetLanguageCode, settargetLanguageCode] = useState('')
+    const [username, setusername] = useState('')
+    const [showForm, setShowForm] = useState(false)
+    const [userId, setuserId] = useState('')
 
     const token = localStorage.getItem('token')
     useEffect(() => {
@@ -32,7 +35,8 @@ function FlashcardSets() {
         })
             .then((res) => res.json())
             .then((data) => {
-                const userId = data.userId
+                setuserId(data.userId)
+                setusername(data.username)
                 return fetch(`http://localhost:3000/flashcardSets/${userId}`, {
                     headers: {
                         token: token ?? '',
@@ -104,77 +108,86 @@ function FlashcardSets() {
     const navigate = useNavigate()
 
     return (
-        <div>
-            <h1> Sets: </h1>
-            <ul>
-                {flashcardSets.map((flashcardSet, index) => (
-                    <li key={index}>
-                        <strong> {flashcardSet.name} </strong> :
-                        {flashcardSet.description}
-                        Source language: {flashcardSet.sourceLanguage}
-                        Target language: {flashcardSet.targetLanguage}
-                        <button
-                            className="bg-yellow-400 px-4 py-2 rounded"
-                            onClick={() => handleDelete(flashcardSet.id)}
+        <div className="flex h-screen bg-blue-50 text-blue-900">
+            <div className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center">
+                <div className="space-y-6 w-3/5">
+                    <div className="w-full bg-tan p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl mb-2 text-cream">Welcome {username}</h3>
+                        <p className="text-base text-cream">Remember cosistency is important.</p>
+                    </div>
+                        <>
+                        <button 
+                            className="w-full bg-tan p-6 rounded-lg shadow-md"
+                            onClick={() => setShowForm(true)}
                         >
-                            Delete
+                            <h3 className="text-xl mb-2 text-cream">Create a new set</h3>
+                            <p className="text-base text-cream"></p>
                         </button>
-                        <button
-                            className="bg-green-400 px-4 py-2 rounded"
-                            onClick={() =>
-                                navigate('set', {
-                                    state: {
-                                        setId: flashcardSet.id,
-                                    },
-                                })
-                            }
-                        >
-                            More
-                        </button>
-                    </li>
-                ))}
-            </ul>
-            <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-                onClick={handleAddSet}
-            >
-                Add set
-            </button>
-            Name:
-            <input
-                type="text"
-                value={name}
-                className="px-4 py-2 bg-red-500 text-white rounded"
-                onChange={(e) => {
-                    const value = e.target.value
-                    setName(value)
-                }}
-            />
-            Description:
-            <input
-                type="text"
-                value={description}
-                className="px-4 py-2 bg-red-500 text-white rounded"
-                onChange={(e) => {
-                    const value = e.target.value
-                    setDescription(value)
-                }}
-            />
-            <label htmlFor="languageSelect">Choose source language:</label>
-            <LanguageSelector
-                onChange={(selected) => {
-                    setsourceLanguage(selected?.label || '')
-                    setsourceLanguageCode(selected?.value || '')
-                }}
-            />
-            <label htmlFor="languageSelect">Choose target language:</label>
-            <LanguageSelector
-                onChange={(selected) => {
-                    settargetLanguage(selected?.label || '')
-                    settargetLanguageCode(selected?.value || '')
-                }}
-            />
-            <Logout />
+
+                        {showForm && (
+                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                            <FlashcardSetForm
+                                userId={userId}
+                                setflashcardSets={setflashcardSets}
+                                setShowForm={setShowForm}
+                            />
+                            </div>
+                        )}
+                        </>
+
+                    <div className="w-full bg-tan p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl mb-2 text-cream">Your statistics:</h3>
+                        <p className="text-base text-cream"></p>
+                    </div>
+                </div>
+            </div>
+            <div className="w-1/2 p-6 overflow-y-auto bg-cream">
+                <div className="grid grid-cols-1 md:grid-cols-2  gap-6 w-4/5 mx-auto">
+                    {flashcardSets.map((flashcardSet, index) => (
+                        <div 
+                            key={index}
+                            className='bg-tan rounded p-4'>
+                            
+                            <h3 className="text-lg font-semibold text-cream mb-2 text-center">
+                                        {flashcardSet.name}
+                                    </h3>
+                            <p className="text-cream mb-1 text-center">{flashcardSet.description}</p>
+                            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4 ">
+                                <button
+                                    className="bg-olive px-4 py-2 rounded text-cream w-full sm:w-1/3"
+                                    onClick={() => handleDelete(flashcardSet.id)}
+                                >
+                                    Delete
+                                </button>
+                                <button
+                                    className="bg-olive px-4 py-2 rounded text-cream w-full sm:w-1/3"
+                                    onClick={() =>
+                                        navigate('set', {
+                                            state: {
+                                                setId: flashcardSet.id,
+                                            },
+                                        })
+                                    }
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="bg-olive px-4 py-2 rounded text-cream w-full sm:w-1/3 "
+                                    onClick={() =>
+                                        navigate('set', {
+                                            state: {
+                                                setId: flashcardSet.id,
+                                            },
+                                        })
+                                    }
+                                >
+                                    Practice
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
