@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 
         const userId = decoded.id
         console.log(userId)
-        const user = db.data.users.find(u => u.id === userId)
+        const user = db.data.users.find((u) => u.id === userId)
         console.log(user)
         return res.status(200).json({ userId, username: user.username })
     } catch (error) {

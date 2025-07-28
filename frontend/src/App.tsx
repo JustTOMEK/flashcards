@@ -12,7 +12,7 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Routes>
-                    <Route path ="/welcome" element ={<Welcome />} />
+                    <Route path="/welcome" element={<Welcome />} />
 
                     <Route path="/" element={<FlashcardSets />} />
 

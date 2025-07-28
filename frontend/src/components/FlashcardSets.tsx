@@ -112,31 +112,39 @@ function FlashcardSets() {
             <div className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center">
                 <div className="space-y-6 w-3/5">
                     <div className="w-full bg-tan p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">Welcome {username}</h3>
-                        <p className="text-base text-cream">Remember cosistency is important.</p>
+                        <h3 className="text-xl mb-2 text-cream">
+                            Welcome {username}
+                        </h3>
+                        <p className="text-base text-cream">
+                            Remember cosistency is important.
+                        </p>
                     </div>
-                        <>
-                        <button 
+                    <>
+                        <button
                             className="w-full bg-tan p-6 rounded-lg shadow-md"
                             onClick={() => setShowForm(true)}
                         >
-                            <h3 className="text-xl mb-2 text-cream">Create a new set</h3>
+                            <h3 className="text-xl mb-2 text-cream">
+                                Create a new set
+                            </h3>
                             <p className="text-base text-cream"></p>
                         </button>
 
                         {showForm && (
                             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                            <FlashcardSetForm
-                                userId={userId}
-                                setflashcardSets={setflashcardSets}
-                                setShowForm={setShowForm}
-                            />
+                                <FlashcardSetForm
+                                    userId={userId}
+                                    setflashcardSets={setflashcardSets}
+                                    setShowForm={setShowForm}
+                                />
                             </div>
                         )}
-                        </>
+                    </>
 
                     <div className="w-full bg-tan p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">Your statistics:</h3>
+                        <h3 className="text-xl mb-2 text-cream">
+                            Your statistics:
+                        </h3>
                         <p className="text-base text-cream"></p>
                     </div>
                 </div>
@@ -144,18 +152,19 @@ function FlashcardSets() {
             <div className="w-1/2 p-6 overflow-y-auto bg-cream">
                 <div className="grid grid-cols-1 md:grid-cols-2  gap-6 w-4/5 mx-auto">
                     {flashcardSets.map((flashcardSet, index) => (
-                        <div 
-                            key={index}
-                            className='bg-tan rounded p-4'>
-                            
+                        <div key={index} className="bg-tan rounded p-4">
                             <h3 className="text-lg font-semibold text-cream mb-2 text-center">
-                                        {flashcardSet.name}
-                                    </h3>
-                            <p className="text-cream mb-1 text-center">{flashcardSet.description}</p>
+                                {flashcardSet.name}
+                            </h3>
+                            <p className="text-cream mb-1 text-center">
+                                {flashcardSet.description}
+                            </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4 ">
                                 <button
                                     className="bg-olive px-4 py-2 rounded text-cream w-full sm:w-1/3"
-                                    onClick={() => handleDelete(flashcardSet.id)}
+                                    onClick={() =>
+                                        handleDelete(flashcardSet.id)
+                                    }
                                 >
                                     Delete
                                 </button>
