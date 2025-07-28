@@ -11,6 +11,7 @@ type Flashcard = {
 }
 
 function Practice() {
+    
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
     const [currentIndex, setcurrentIndex] = useState(0)
@@ -27,19 +28,29 @@ function Practice() {
         }
     }, [location.state])
 
+    const token = localStorage.getItem('token') 
 
-    function handleAnswer(answer: boolean){
+    async function handleAnswer(answer: boolean){
         if (isAnswered){
             return
         }
+        let updatedLevel = flashcards[currentIndex].level
+        if (answer && updatedLevel < 3){
+            updatedLevel = updatedLevel + 1
+        }
+        else if (!answer && updatedLevel > 0 ){
+            updatedLevel = updatedLevel - 1
+        }
+        console.log('dsad ', updatedLevel)
+        fetch(`http://localhost:3000/flashcards/${flashcards[currentIndex].id}`, {
+            method: 'PATCH',
+            headers: {
+                token: token ?? '',
+                'Content-Type': 'application/json',
+            },
+            body : JSON.stringify({updatedLevel})
+        })
         setisAnswered(true)
-        if (answer){
-
-        }
-        else{
-
-        }
-
     }
 
     function handleFlip(){
