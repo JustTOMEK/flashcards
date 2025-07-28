@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import withAuth from './withAuth'
 import Logout from './Logout'
+import { useNavigate } from 'react-router'
 
 type Flashcard = {
     word: string
@@ -116,7 +117,10 @@ function Flashcards() {
         else if (word == ""){
             setWord(translatedText)
         }
+
     }
+
+    const navigate = useNavigate()
 
     return (
         <div>
@@ -162,6 +166,7 @@ function Flashcards() {
                 }}
             />
             <button className='bg-pink-500' onClick={() =>{handleTranslate()}}> Translate</button>
+            <button className='bg-blue-400' onClick={() => {navigate('/practice', {state: flashcards})}} > Start Practice</button>
             <Logout />
         </div>
     )
