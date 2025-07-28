@@ -83,14 +83,16 @@ function FlashcardSets() {
                         </button>
 
                         {showForm && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                            <div className="overlay">
                                 <FlashcardSetForm
-                                    userId={userId}
-                                    setflashcardSets={setflashcardSets}
-                                    setShowForm={setShowForm}
+                                userId={userId}
+                                setflashcardSets={setflashcardSets}
+                                setShowForm={setShowForm}
                                 />
                             </div>
-                        )}
+                            )}
+
+
                     </>
 
                     <div className="w-full bg-tan p-6 rounded-lg shadow-md">
