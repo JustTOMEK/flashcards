@@ -16,17 +16,14 @@ type Flashcard = {
 function Flashcards() {
     const location = useLocation()
     const setId = location.state.setId
-    const sourceLanguageCode = location.state.sourceLanguageCode
-    const targetLanguageCode = location.state.targetLanguageCode
+    const [sourceLanguageCode, setsourceLanguageCode] = useState("")
+    const [targetLanguageCode, settargetLanguageCode] = useState("")
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
 
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        console.log('Set id ', setId)
-        console.log('Source ',sourceLanguageCode)
-        console.log('Target ', targetLanguageCode)
         fetch(`http://localhost:3000/flashcardSets/set/${setId}`, 
             {
                 headers: {
@@ -36,6 +33,17 @@ function Flashcards() {
             .then((res) => res.json())
             .then((data) => {
                 setFlashcards(data)
+            })
+        fetch(`http://localhost:3000/flashcardSets/languagecodes/${setId}`, 
+            {
+                headers: {
+                    token: token ?? '',
+                },
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                setsourceLanguageCode(data.sourceLanguageCode)
+                settargetLanguageCode(data.targetLanguageCode)
             })
     }, [])
 
@@ -103,7 +111,8 @@ function Flashcards() {
                 'Content-Type': 'application/json',
             },
         })
-        if (translateResponse.status){
+        console.log('Odpowiedz: ', translateResponse)
+        if (!translateResponse.ok){
             console.log('No translation available for custom languages')
             return
         }
