@@ -6,12 +6,14 @@ import FlashcardSets from './components/FlashcardSets'
 import Login from './components/Login'
 import Register from './components/Register'
 import Practice from './components/Practice'
+import Welcome from './components/Welcome'
 function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <h1> APP HERE</h1>
                 <Routes>
+                    <Route path ="/welcome" element ={<Welcome />} />
+
                     <Route path="/" element={<FlashcardSets />} />
 
                     <Route path="/set" element={<Flashcards />} />
