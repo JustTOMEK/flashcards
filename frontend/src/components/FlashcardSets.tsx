@@ -33,8 +33,6 @@ function FlashcardSets() {
             .then((res) => res.json())
             .then((data) => {
                 const userId = data.userId
-                console.log(userId)
-
                 return fetch(`http://localhost:3000/flashcardSets/${userId}`,{
                     headers: {
                         token: token ?? '',

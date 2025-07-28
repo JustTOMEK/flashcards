@@ -24,7 +24,6 @@ function Login() {
             if (response.ok) {
                 localStorage.setItem('token', data.token)
                 navigate('/')
-                console.log('Token: ', data.token)
             } else {
                 console.log('Login unsucessful')
             }

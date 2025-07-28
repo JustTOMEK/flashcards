@@ -41,7 +41,6 @@ function Practice() {
         else if (!answer && updatedLevel > 0 ){
             updatedLevel = updatedLevel - 1
         }
-        console.log('dsad ', updatedLevel)
         fetch(`http://localhost:3000/flashcards/${flashcards[currentIndex].id}`, {
             method: 'PATCH',
             headers: {

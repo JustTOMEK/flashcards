@@ -43,8 +43,6 @@ router.post('/', authenticate, async (req, res) => {
 router.patch('/:id', authenticate, async (req, res) => {
     const { id } = req.params
     const {updatedLevel} = req.body
-    console.log('Level: ', updatedLevel)
-
     await db.read()
 
     const flashcards = db.data?.flashcards || []

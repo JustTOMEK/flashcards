@@ -22,8 +22,7 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
   const handleChange = (newValue: LanguageOption | null) => {
     setSelectedOption(newValue);
     onChange(newValue);
-    console.log('Selected:', newValue);
-  };
+    };
 
   return (
     <div>
