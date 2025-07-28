@@ -51,7 +51,7 @@ function Login() {
                 </div>
             </div>
             <div className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md">
-            <h2 className="text-2xl font-semibold mb-6 text-olive">Login</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-olive">Log in</h2>
             <label className="w-full max-w-sm mb-4">
                 <span className="block mb-1 text-sm font-medium text-olive">Username</span>
                 <input
@@ -81,7 +81,7 @@ function Login() {
                         onClick={handleLogin}
                         className="w-full bg-tan hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
                     >
-                        login
+                        Log in
                     </button>
 
                     <button
