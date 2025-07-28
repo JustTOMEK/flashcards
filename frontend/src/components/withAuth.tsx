@@ -1,10 +1,8 @@
 import { useEffect, useState, type ComponentType } from 'react'
 import { useNavigate } from 'react-router'
 
-
 const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
     return (props: P) => {
-
         const [loading, setLoading] = useState(true)
         const navigate = useNavigate()
 

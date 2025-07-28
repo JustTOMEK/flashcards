@@ -18,4 +18,4 @@ app.use('/login', loginRouter)
 app.use('/authenticate', authenticateRouter)
 app.use('/me', meRouter)
 
-module.exports = app;
+module.exports = app

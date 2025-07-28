@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router'
-import  withAuth from './withAuth'
+import withAuth from './withAuth'
 import Logout from './Logout'
 import LanguageSelector from './SelectLanguage'
 
@@ -18,12 +18,12 @@ type FlashcardSet = {
 
 function FlashcardSets() {
     const [flashcardSets, setflashcardSets] = useState<FlashcardSet[]>([])
-    const [sourceLanguage, setsourceLanguage] = useState("")
-    const [targetLanguage, settargetLanguage] = useState("")
-    const [sourceLanguageCode, setsourceLanguageCode] = useState("")
-    const [targetLanguageCode, settargetLanguageCode] = useState("")
+    const [sourceLanguage, setsourceLanguage] = useState('')
+    const [targetLanguage, settargetLanguage] = useState('')
+    const [sourceLanguageCode, setsourceLanguageCode] = useState('')
+    const [targetLanguageCode, settargetLanguageCode] = useState('')
 
-    const token = localStorage.getItem('token') 
+    const token = localStorage.getItem('token')
     useEffect(() => {
         fetch('http://localhost:3000/me', {
             headers: {
@@ -33,11 +33,11 @@ function FlashcardSets() {
             .then((res) => res.json())
             .then((data) => {
                 const userId = data.userId
-                return fetch(`http://localhost:3000/flashcardSets/${userId}`,{
+                return fetch(`http://localhost:3000/flashcardSets/${userId}`, {
                     headers: {
                         token: token ?? '',
                     },
-            })
+                })
                     .then((res) => res.json())
                     .then((data) => {
                         setflashcardSets(data)
@@ -67,7 +67,15 @@ function FlashcardSets() {
                     token: token ?? '',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, description, userId, sourceLanguage, targetLanguage, sourceLanguageCode, targetLanguageCode }),
+                body: JSON.stringify({
+                    name,
+                    description,
+                    userId,
+                    sourceLanguage,
+                    targetLanguage,
+                    sourceLanguageCode,
+                    targetLanguageCode,
+                }),
             })
 
             const newFlashcardSet = await addRes.json()
@@ -86,13 +94,12 @@ function FlashcardSets() {
             method: 'DELETE',
             headers: {
                 token: token ?? '',
-            }
+            },
         })
         setflashcardSets((previous) =>
             previous.filter((card) => card.id !== id)
         )
     }
-    
 
     const navigate = useNavigate()
 
@@ -115,10 +122,11 @@ function FlashcardSets() {
                         <button
                             className="bg-green-400 px-4 py-2 rounded"
                             onClick={() =>
-                                navigate('set', { 
+                                navigate('set', {
                                     state: {
                                         setId: flashcardSet.id,
-                                     }})
+                                    },
+                                })
                             }
                         >
                             More
@@ -153,18 +161,19 @@ function FlashcardSets() {
                 }}
             />
             <label htmlFor="languageSelect">Choose source language:</label>
-            <LanguageSelector onChange = {(selected) => {
-                setsourceLanguage(selected?.label || "")
-                setsourceLanguageCode(selected?.value || "")
-            }}
-                />
-            
+            <LanguageSelector
+                onChange={(selected) => {
+                    setsourceLanguage(selected?.label || '')
+                    setsourceLanguageCode(selected?.value || '')
+                }}
+            />
             <label htmlFor="languageSelect">Choose target language:</label>
-            <LanguageSelector onChange = {(selected) => {
-                settargetLanguage(selected?.label || "")
-                settargetLanguageCode(selected?.value || "")
-            }}
-                />
+            <LanguageSelector
+                onChange={(selected) => {
+                    settargetLanguage(selected?.label || '')
+                    settargetLanguageCode(selected?.value || '')
+                }}
+            />
             <Logout />
         </div>
     )

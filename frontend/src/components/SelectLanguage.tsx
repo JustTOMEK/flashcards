@@ -1,41 +1,43 @@
-import { useState } from 'react';
-import CreatableSelect from 'react-select/creatable';
-import languages from '../filtered_languages.json';
+import { useState } from 'react'
+import CreatableSelect from 'react-select/creatable'
+import languages from '../filtered_languages.json'
 
 interface LanguageOption {
-  value: string;
-  label: string;
+    value: string
+    label: string
 }
 
 interface LanguageSelectorProps {
-  onChange: (selected: LanguageOption | null) => void;
+    onChange: (selected: LanguageOption | null) => void
 }
 
 const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
-  const [selectedOption, setSelectedOption] = useState<LanguageOption | null>(null);
+    const [selectedOption, setSelectedOption] = useState<LanguageOption | null>(
+        null
+    )
 
-  const options: LanguageOption[] = languages.map(lang => ({
-    value: lang.code,
-    label: lang.name
-  }));
+    const options: LanguageOption[] = languages.map((lang) => ({
+        value: lang.code,
+        label: lang.name,
+    }))
 
-  const handleChange = (newValue: LanguageOption | null) => {
-    setSelectedOption(newValue);
-    onChange(newValue);
-    };
+    const handleChange = (newValue: LanguageOption | null) => {
+        setSelectedOption(newValue)
+        onChange(newValue)
+    }
 
-  return (
-    <div>
-      <CreatableSelect
-        id="languageSelect"
-        isClearable
-        options={options}
-        value={selectedOption}
-        onChange={handleChange}
-        placeholder="Type to search or create..."
-      />
-    </div>
-  );
-};
+    return (
+        <div>
+            <CreatableSelect
+                id="languageSelect"
+                isClearable
+                options={options}
+                value={selectedOption}
+                onChange={handleChange}
+                placeholder="Type to search or create..."
+            />
+        </div>
+    )
+}
 
-export default LanguageSelector;
+export default LanguageSelector

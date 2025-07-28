@@ -1,18 +1,17 @@
 import { useNavigate } from 'react-router'
 import '../App.css'
 
-function Logout(){
+function Logout() {
+    const navigate = useNavigate()
 
-    const navigate = useNavigate();
-    
     const handleLogout = () => {
         localStorage.removeItem('token')
         navigate('/login')
     }
 
     return (
-        <button  className="bg-green-500"onClick={handleLogout}>
-        Logout
+        <button className="bg-green-500" onClick={handleLogout}>
+            Logout
         </button>
     )
 }

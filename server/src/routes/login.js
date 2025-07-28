@@ -9,12 +9,14 @@ router.post('/', async (req, res) => {
     await db.read()
     const { username, password } = req.body
 
-    if (!username || !password){
-        return res.status(400).json({ message: 'Username and password cannot be empty' })
+    if (!username || !password) {
+        return res
+            .status(400)
+            .json({ message: 'Username and password cannot be empty' })
     }
 
     const user = db.data.users.find((user) => user.username === username)
-    if (!user){
+    if (!user) {
         return res.status(401).json({ message: 'Invalid username' })
     }
 

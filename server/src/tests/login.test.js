@@ -24,7 +24,7 @@ beforeEach(async () => {
 test('Successful login', async () => {
     const res = await request(app).post('/login').send({
         username: 'janek',
-        password: 'passworddd'
+        password: 'passworddd',
     })
     expect(res.status).toBe(200)
     expect(res.body).toHaveProperty('token')
@@ -34,7 +34,7 @@ test('Successful login', async () => {
 test('wrong password', async () => {
     const res = await request(app).post('/login').send({
         username: 'janek',
-        password: 'passwordd'
+        password: 'passwordd',
     })
     expect(res.status).toBe(401)
     expect(res.body.message).toBe('Invalid password')
@@ -43,17 +43,16 @@ test('wrong password', async () => {
 test('Not exisiting user', async () => {
     const res = await request(app).post('/login').send({
         username: 'tomek',
-        password: 'passwordd'
+        password: 'passwordd',
     })
     expect(res.status).toBe(401)
     expect(res.body.message).toBe('Invalid username')
 })
 
-
 test('Empty password', async () => {
     const res = await request(app).post('/login').send({
         username: 'tomek',
-        password: ''
+        password: '',
     })
     expect(res.status).toBe(400)
     expect(res.body.message).toBe('Username and password cannot be empty')
@@ -62,7 +61,7 @@ test('Empty password', async () => {
 test('Empty user', async () => {
     const res = await request(app).post('/login').send({
         username: '',
-        password: 'passwordd'
+        password: 'passwordd',
     })
     expect(res.status).toBe(400)
     expect(res.body.message).toBe('Username and password cannot be empty')

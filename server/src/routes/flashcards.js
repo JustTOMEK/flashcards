@@ -15,7 +15,6 @@ type Flashcard = {
 }
 */
 
-
 //Get is never used, all flashcards are never displayed
 router.get('/', authenticate, async (req, res) => {
     await db.read()
@@ -27,7 +26,14 @@ router.post('/', authenticate, async (req, res) => {
     const { word, translation, setId } = req.body
     const id = uuidv4()
 
-    const newFlashcard = { word, translation, id, setId, level: 0, repetitions: 0}
+    const newFlashcard = {
+        word,
+        translation,
+        id,
+        setId,
+        level: 0,
+        repetitions: 0,
+    }
 
     if (!db.data.flashcards) {
         db.data.flashcards = []
@@ -42,7 +48,7 @@ router.post('/', authenticate, async (req, res) => {
 
 router.patch('/:id', authenticate, async (req, res) => {
     const { id } = req.params
-    const {updatedLevel} = req.body
+    const { updatedLevel } = req.body
     await db.read()
 
     const flashcards = db.data?.flashcards || []
@@ -54,8 +60,7 @@ router.patch('/:id', authenticate, async (req, res) => {
 
     await db.write()
 
-    res.status(200).json({message: 'Flashcard updated'})
-
+    res.status(200).json({ message: 'Flashcard updated' })
 })
 
 router.delete('/:id', authenticate, async (req, res) => {

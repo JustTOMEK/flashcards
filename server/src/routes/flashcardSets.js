@@ -34,31 +34,50 @@ router.get('/set/:setId', authenticate, async (req, res) => {
     res.json(flashcards)
 })
 
-
 // this is to get all sets that an userowns
 router.get('/:userId', authenticate, async (req, res) => {
     const { userId } = req.params
     await db.read()
 
-    const sets = db.data?.flashcardSets.filter((set) => (set.userId === userId))
+    const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
 
     res.json(sets)
 })
 
-router.get(`/languagecodes/:setId`, authenticate, async(req, res) => {
+router.get(`/languagecodes/:setId`, authenticate, async (req, res) => {
     const { setId } = req.params
     await db.read()
-    const set = db.data?.flashcardSets.find((set) => (set.id === setId))
+    const set = db.data?.flashcardSets.find((set) => set.id === setId)
 
-    res.status(201).json({sourceLanguageCode: set.sourceLanguageCode, targetLanguageCode: set.targetLanguageCode})
+    res.status(201).json({
+        sourceLanguageCode: set.sourceLanguageCode,
+        targetLanguageCode: set.targetLanguageCode,
+    })
 })
 
 router.post('/', authenticate, async (req, res) => {
-    const { name, description, userId, sourceLanguage, targetLanguage, sourceLanguageCode, targetLanguageCode  } = req.body
+    const {
+        name,
+        description,
+        userId,
+        sourceLanguage,
+        targetLanguage,
+        sourceLanguageCode,
+        targetLanguageCode,
+    } = req.body
 
     const id = uuidv4()
 
-    const newFlashcardSet = { id, name, description, userId, sourceLanguage, targetLanguage, sourceLanguageCode, targetLanguageCode }
+    const newFlashcardSet = {
+        id,
+        name,
+        description,
+        userId,
+        sourceLanguage,
+        targetLanguage,
+        sourceLanguageCode,
+        targetLanguageCode,
+    }
 
     if (!db.data.flashcardSets) {
         db.data.flashcardSets = []
