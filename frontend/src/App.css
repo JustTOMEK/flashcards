@@ -38,3 +38,16 @@
 .border-dark-olive {
     border-color: #283618;
 }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fefae0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2115;
+  }
+  
