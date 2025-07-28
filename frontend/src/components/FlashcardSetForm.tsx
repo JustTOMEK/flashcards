@@ -63,12 +63,12 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 onClick={() => {
                     ;(setShowForm(false), console.log('zabawa'))
                 }}
-                className="absolute top-2 right-2 text-red-600 hover:text-red-800 text-xl font-bold"
+                className="absolute top-2 right-2 text-olive text-xl font-bold"
             >
                 X
             </button>
 
-            <h2 className="text-2xl text-olive font-semibold">
+            <h2 className="text-2xl text-olive text-center font-semibold">
                 Create a New Flashcard Set
             </h2>
 
@@ -87,7 +87,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 className="w-full px-4 py-2 bg-cream text-olive rounded"
                 onChange={(e) => setDescription(e.target.value)}
             />
-
+            
             <label className="text-olive">Choose source language:</label>
             <LanguageSelector
                 onChange={(selected: LanguageOption | null) => {
@@ -106,7 +106,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
 
             <button
                 onClick={handleAddSet}
-                className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                className="w-full px-4 py-2 bg-cream text-olive rounded hover:bg-blue-600 transition"
             >
                 Add Set
             </button>
