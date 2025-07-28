@@ -1,1 +1,16 @@
 @import 'tailwindcss';
+
+.bg-olive { background-color: #606C38; }
+.bg-dark-olive { background-color: #283618; }
+.bg-cream { background-color: #FEFAE0; }
+.bg-tan { background-color: #DDA15E; }
+.bg-burnt-orange { background-color: #BC6C25; }
+
+.text-olive { color: #606C38; }
+.text-dark-olive { color: #283618; }
+.text-cream { color: #FEFAE0; }
+.text-tan { color: #DDA15E; }
+.text-burnt-orange { color: #BC6C25; }
+
+.border-olive { border-color: #606C38; }
+.border-dark-olive { border-color: #283618; }
