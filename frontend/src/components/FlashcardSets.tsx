@@ -18,10 +18,6 @@ type FlashcardSet = {
 
 function FlashcardSets() {
     const [flashcardSets, setflashcardSets] = useState<FlashcardSet[]>([])
-    const [sourceLanguage, setsourceLanguage] = useState('')
-    const [targetLanguage, settargetLanguage] = useState('')
-    const [sourceLanguageCode, setsourceLanguageCode] = useState('')
-    const [targetLanguageCode, settargetLanguageCode] = useState('')
     const [username, setusername] = useState('')
     const [showForm, setShowForm] = useState(false)
     const [userId, setuserId] = useState('')
@@ -48,50 +44,6 @@ function FlashcardSets() {
                     })
             })
     }, [])
-
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-
-    const handleAddSet = async () => {
-        try {
-            const token = localStorage.getItem('token')
-
-            const userRes = await fetch('http://localhost:3000/me', {
-                headers: {
-                    token: token ?? '',
-                },
-            })
-
-            const userData = await userRes.json()
-            const userId = userData.userId
-
-            const addRes = await fetch('http://localhost:3000/flashcardSets', {
-                method: 'POST',
-                headers: {
-                    token: token ?? '',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name,
-                    description,
-                    userId,
-                    sourceLanguage,
-                    targetLanguage,
-                    sourceLanguageCode,
-                    targetLanguageCode,
-                }),
-            })
-
-            const newFlashcardSet = await addRes.json()
-
-            setflashcardSets((prevSets) => [...prevSets, newFlashcardSet])
-
-            setName('')
-            setDescription('')
-        } catch (error) {
-            console.error('Error tu jest:', error)
-        }
-    }
 
     const handleDelete = async (id: string) => {
         fetch(`http://localhost:3000/flashcardSets/${id}`, {
