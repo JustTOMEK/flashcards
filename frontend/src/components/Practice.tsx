@@ -16,17 +16,20 @@ function Practice() {
     const [isAnswered, setisAnswered] = useState(false)
     const [isFlipped, setisFlipped] = useState(false)
     const location = useLocation()
-
-    useEffect(() => {
-        if (location.state) {
-            const sortedFlashcards = [...location.state].sort(
-                (a, b) => a.level - b.level
-            )
-            setFlashcards(sortedFlashcards)
-        }
-    }, [location.state])
-
+    const setId = location.state.setId
     const token = localStorage.getItem('token')
+    useEffect(() => {
+        fetch(`http://localhost:3000/flashcardSets/set/${setId}`, {
+            headers: {
+                token: token ?? '',
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setFlashcards([...data].sort((a,b) => a.level - b.level))
+            })
+
+    }, [])
 
     async function handleAnswer(answer: boolean) {
         if (isAnswered) {
@@ -79,7 +82,6 @@ function Practice() {
                     handleAnswer(true)
                 }}
             >
-                {' '}
                 I know this
             </button>
             <button
@@ -89,7 +91,6 @@ function Practice() {
                     handleAnswer(false)
                 }}
             >
-                {' '}
                 I don't know this
             </button>
             <button
@@ -99,7 +100,6 @@ function Practice() {
                     handleFlip()
                 }}
             >
-                {' '}
                 Flip
             </button>
             <button
@@ -109,7 +109,6 @@ function Practice() {
                     handleNext()
                 }}
             >
-                {' '}
                 Next
             </button>
             <button
@@ -118,7 +117,6 @@ function Practice() {
                     navigate('/set', { state: { setId: flashcards[0].setId } })
                 }}
             >
-                {' '}
                 Finish practice
             </button>
         </>
