@@ -46,7 +46,7 @@ router.post('/', authenticate, async (req, res) => {
     res.status(201).json(newFlashcard)
 })
 
-router.patch('/:id', authenticate, async (req, res) => {
+router.patch('/level/:id', authenticate, async (req, res) => {
     const { id } = req.params
     const { updatedLevel } = req.body
     await db.read()
@@ -62,6 +62,25 @@ router.patch('/:id', authenticate, async (req, res) => {
 
     res.status(200).json({ message: 'Flashcard updated' })
 })
+
+router.patch('/edit/:id', authenticate, async (req, res) => {
+    const { id } = req.params
+    const { name, translation } = req.body
+    await db.read()
+
+    const flashcards = db.data?.flashcards || []
+
+    const index = flashcards.findIndex((card) => card.id === id)
+
+    flashcards[index].name = name
+    flashcards[index].translation = translation
+
+    await db.write()
+
+    res.status(200).json({ message: 'Flashcard updated' })
+})
+
+router
 
 router.delete('/:id', authenticate, async (req, res) => {
     const { id } = req.params
