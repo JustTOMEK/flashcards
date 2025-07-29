@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router'
 import withAuth from './withAuth'
-import Logout from './Logout'
 import FlashcardSetForm from './FlashcardSetForm'
 
 type FlashcardSet = {
