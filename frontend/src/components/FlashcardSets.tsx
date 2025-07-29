@@ -134,9 +134,9 @@ function FlashcardSets() {
                                 <button
                                     className="bg-olive px-4 py-2 rounded text-cream text-center whitespace-nowrap overflow-hidden text-ellipsis w-full sm:basis-1/3 min-w-[120px]"
                                     onClick={() =>
-                                    navigate('set', {
+                                    navigate('practice', {
                                         state: {
-                                        setId: flashcardSet.id,
+                                            setId: flashcardSet.id,
                                         },
                                     })
                                     }
