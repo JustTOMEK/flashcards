@@ -68,58 +68,65 @@ function Practice() {
     const navigate = useNavigate()
 
     return (
-        <>
-            {flashcards.length > 0 &&
-                flashcards[currentIndex] &&
-                (isFlipped
+        <div className="h-screen bg-cream overflow-auto flex justify-center items-center">
+            <div className="bg-white w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
+                
+                <div className="text-gray-600 text-sm font-medium">
+                {currentIndex + 1} / {flashcards.length}
+                </div>
+
+                <div className="bg-tan w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-black">
+                {flashcards.length > 0 &&
+                    flashcards[currentIndex] &&
+                    (isFlipped
                     ? flashcards[currentIndex].translation
                     : flashcards[currentIndex].word)}
+                </div>
 
-            <button
-                className="bg-pink-500"
-                disabled={isAnswered}
-                onClick={() => {
-                    handleAnswer(true)
-                }}
-            >
-                I know this
-            </button>
-            <button
-                className="bg-pink-500"
-                disabled={isAnswered}
-                onClick={() => {
-                    handleAnswer(false)
-                }}
-            >
-                I don't know this
-            </button>
-            <button
-                className="bg-blue-500"
-                disabled={!isAnswered}
-                onClick={() => {
-                    handleFlip()
-                }}
-            >
-                Flip
-            </button>
-            <button
-                className="bg-green-500"
-                disabled={!isAnswered}
-                onClick={() => {
-                    handleNext()
-                }}
-            >
-                Next
-            </button>
-            <button
-                className="bg-red-500"
-                onClick={() => {
+                <div className="flex w-full justify-between space-x-4">
+                <button
+                    className="flex-1 bg-green-500 text-white py-2 rounded-md disabled:opacity-50"
+                    disabled={isAnswered}
+                    onClick={() => handleAnswer(true)}
+                >
+                    I Know This
+                </button>
+                <button
+                    className="flex-1 bg-red-500 text-white py-2 rounded-md disabled:opacity-50"
+                    disabled={isAnswered}
+                    onClick={() => handleAnswer(false)}
+                >
+                    I Don't Know This
+                </button>
+                </div>
+
+                <div className="flex w-full justify-between space-x-2 pt-4">
+                <button
+                    className="flex-1 bg-blue-500 text-white py-2 rounded-md disabled:opacity-50"
+                    disabled={!isAnswered}
+                    onClick={handleFlip}
+                >
+                    Flip
+                </button>
+                <button
+                    className="flex-1 bg-green-600 text-white py-2 rounded-md disabled:opacity-50"
+                    disabled={!isAnswered}
+                    onClick={handleNext}
+                >
+                    Next
+                </button>
+                <button
+                    className="flex-1 bg-red-600 text-white py-2 rounded-md"
+                    onClick={() =>
                     navigate('/set', { state: { setId: flashcards[0].setId } })
-                }}
-            >
-                Finish practice
-            </button>
-        </>
+                    }
+                >
+                    Finish Practice
+                </button>
+                </div>
+            </div>
+</div>
+
     )
 }
 
