@@ -120,14 +120,14 @@ function Practice() {
                     <FaSync />
                     Flip
                 </button>
-                <button
+                { currentIndex + 1 != flashcards.length && (<button 
                     className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
                     disabled={!isAnswered}
                     onClick={handleNext}
                 >
                     <FaArrowRight />
                     Next
-                </button>
+                </button>)}
                 <button
                     className="flex-1 bg-cream text-dark-olive py-2 rounded-md flex items-center justify-center gap-2"
                     onClick={() =>
