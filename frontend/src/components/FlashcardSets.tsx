@@ -105,7 +105,7 @@ function FlashcardSets() {
             <div className="w-1/2 p-6 overflow-y-auto bg-cream">
                 <div className="grid grid-cols-1 md:grid-cols-2  gap-6 w-4/5 mx-auto">
                     {flashcardSets.map((flashcardSet, index) => (
-                        <div key={index} className="bg-tan rounded-xl p-4  shadow-md hover:shadow-lg transition-shadow">
+                        <div key={index} className="bg-tan rounded-xl p-4  shadow-md hover:shadow-lg transition-shadow min-h-[200px]">
                             <h3 className="text-lg font-semibold text-cream mb-2 text-center">
                                 {flashcardSet.name}
                             </h3>
