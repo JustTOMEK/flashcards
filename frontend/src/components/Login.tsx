@@ -36,7 +36,7 @@ function Login() {
         <div className="flex h-screen bg-blue-50 text-blue-900">
             <div className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center">
                 <div className="space-y-6">
-                    <div className="bg-tan p-6 rounded-lg shadow-md">
+                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
                         <h3 className="text-xl mb-2 text-cream">
                             Create Flashcard Sets
                         </h3>
@@ -45,14 +45,14 @@ function Login() {
                             topics effectively.
                         </p>
                     </div>
-                    <div className="bg-tan p-6 rounded-lg shadow-md">
+                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
                         <h3 className="text-xl mb-2 text-cream">Practice</h3>
                         <p className="text-base text-cream">
                             Test your knowledge by practicing with flashcards
                             created by you.
                         </p>
                     </div>
-                    <div className="bg-tan p-6 rounded-lg shadow-md">
+                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
                         <h3 className="text-xl mb-2 text-cream">
                             Track Your Progress
                         </h3>
@@ -64,11 +64,11 @@ function Login() {
                 </div>
             </div>
             <div className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md">
-                <h2 className="text-2xl font-semibold mb-6 text-olive">
+                <h2 className="text-2xl font-semibold mb-6 text-dark-olive">
                     Log in
                 </h2>
                 <label className="w-full max-w-sm mb-4">
-                    <span className="block mb-1 text-sm font-medium text-olive">
+                    <span className="block mb-1 text-sm font-medium text-dark-olive">
                         Username
                     </span>
                     <input
@@ -83,7 +83,7 @@ function Login() {
                 </label>
 
                 <label className="w-full max-w-sm mb-6">
-                    <span className="block mb-1 text-sm font-medium text-olive">
+                    <span className="block mb-1 text-sm font-medium text-dark-olive">
                         Password
                     </span>
                     <input
@@ -100,7 +100,7 @@ function Login() {
                 <div className="w-full max-w-sm space-y-4">
                     <button
                         onClick={handleLogin}
-                        className="w-full bg-tan hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
+                        className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
                     >
                         Log in
                     </button>
@@ -109,7 +109,7 @@ function Login() {
                         onClick={() => {
                             navigate('/register')
                         }}
-                        className="w-full bg-tan hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
+                        className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
                     >
                         New to Flashcards? Create an account
                     </button>
