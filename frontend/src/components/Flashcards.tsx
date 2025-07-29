@@ -4,6 +4,7 @@ import withAuth from './withAuth'
 import { FaTrash } from "react-icons/fa6";
 import { useNavigate } from 'react-router'
 import { MdModeEditOutline } from "react-icons/md";
+import EditFlashcardForm from './EditFlashcardForm';
 
 type Flashcard = {
     word: string
@@ -19,6 +20,7 @@ function Flashcards() {
     const setId = location.state.setId
     const [sourceLanguageCode, setsourceLanguageCode] = useState('')
     const [targetLanguageCode, settargetLanguageCode] = useState('')
+    const [editingCard, setEditingCard] = useState<Flashcard| null>(null)
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
 
@@ -126,7 +128,10 @@ function Flashcards() {
         }
     }
 
-    const navigate = useNavigate()
+    function handleEdit(editedCard: Flashcard): void {
+        setFlashcards(prev => prev.map(card => card.id === editedCard.id ? editedCard: card))
+        setEditingCard(null)
+    }
 
     return (
     <div className="h-screen bg-cream  pt-10 overflow-auto">    
@@ -151,7 +156,7 @@ function Flashcards() {
 
                             <button
                                 className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2"
-                        
+                                onClick={() => setEditingCard(card)}
                             >
                                 <MdModeEditOutline  className='text-xl'/>
                                 Edit
@@ -159,6 +164,15 @@ function Flashcards() {
                         </div>
                     </div>
                 ))}
+                {editingCard && (
+                    <div className='overlay' >
+                        <EditFlashcardForm
+                        flashcard={editingCard}
+                        onEdit={handleEdit}
+                        onExit={() => setEditingCard(null)}
+                        />
+                    </div>
+                )}
         <div  className='h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow' >
             <p className='flex items-center justify-center h-full'>  Word: </p>
             <input
