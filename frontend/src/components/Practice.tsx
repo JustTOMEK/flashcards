@@ -131,7 +131,7 @@ function Practice() {
                 <button
                     className="flex-1 bg-cream text-dark-olive py-2 rounded-md flex items-center justify-center gap-2"
                     onClick={() =>
-                    navigate('/set', { state: { setId: flashcards[0].setId } })
+                    navigate('/')
                     }
                 >
                     <FaFlagCheckered />
