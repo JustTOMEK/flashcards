@@ -113,40 +113,38 @@ function FlashcardSets() {
                             <p className="text-cream mb-1 text-center">
                                 {flashcardSet.description}
                             </p>
-                            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4 ">
+                            <div className="flex flex-wrap justify-center gap-4 mt-4 w-full">
                                 <button
-                                    className="bg-olive px-4 py-2 rounded text-cream w-full sm:w-1/3"
-                                    onClick={() =>
-                                        handleDelete(flashcardSet.id)
-                                    }
+                                    className="bg-olive px-4 py-2 rounded text-cream text-center whitespace-nowrap overflow-hidden text-ellipsis w-full sm:basis-1/3 min-w-[120px]"
+                                    onClick={() => handleDelete(flashcardSet.id)}
                                 >
                                     Delete
                                 </button>
                                 <button
-                                    className="bg-olive px-4 py-2 rounded text-cream w-full sm:w-1/3"
+                                    className="bg-olive px-4 py-2 rounded text-cream text-center whitespace-nowrap overflow-hidden text-ellipsis w-full sm:basis-1/3 min-w-[120px]"
                                     onClick={() =>
-                                        navigate('set', {
-                                            state: {
-                                                setId: flashcardSet.id,
-                                            },
-                                        })
+                                    navigate('set', {
+                                        state: {
+                                        setId: flashcardSet.id,
+                                        },
+                                    })
                                     }
                                 >
                                     Edit
                                 </button>
                                 <button
-                                    className="bg-olive px-4 py-2 rounded text-cream w-full sm:w-1/3 "
+                                    className="bg-olive px-4 py-2 rounded text-cream text-center whitespace-nowrap overflow-hidden text-ellipsis w-full sm:basis-1/3 min-w-[120px]"
                                     onClick={() =>
-                                        navigate('set', {
-                                            state: {
-                                                setId: flashcardSet.id,
-                                            },
-                                        })
+                                    navigate('set', {
+                                        state: {
+                                        setId: flashcardSet.id,
+                                        },
+                                    })
                                     }
                                 >
                                     Practice
                                 </button>
-                            </div>
+                                </div>
                         </div>
                     ))}
                 </div>
