@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import withAuth from './withAuth'
-import Logout from './Logout'
+import { FaTrash } from "react-icons/fa6";
 import { useNavigate } from 'react-router'
+import { MdModeEditOutline } from "react-icons/md";
 
 type Flashcard = {
     word: string
@@ -128,68 +129,76 @@ function Flashcards() {
     const navigate = useNavigate()
 
     return (
-        <div>
-            <h1> Flashcards: </h1>
-            <ul>
+    <div className="h-screen bg-cream  pt-10 overflow-auto">    
+        <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch  ">
                 {flashcards.map((card, index) => (
-                    <li key={index}>
-                        <strong> {card.word} </strong> : {card.translation}
-                        <button
-                            className="bg-yellow-400 px-4 py-2 rounded"
-                            onClick={() => handleDelete(card.id)}
-                        >
-                            Delete
-                        </button>
-                    </li>
+                    <div key={index} className='min-h-[170px] bg-tan rounded-xl p-4 flex flex-col justify-between text-cream h-full w-full shadow-md hover:shadow-lg transition-shadow'>
+                        <div className='text-center text-xl font-bold '>
+                            {card.word} : {card.translation}    
+                        </div>
+
+                        <div className='text-center text-md  '>
+                            Practiced : {card.repetitions}
+                        </div>
+                        <div className='flex gap-2 justify-center' >
+                            <button
+                                className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2 "
+                                onClick={() => handleDelete(card.id)}
+                            >
+                                <FaTrash />
+                                Delete
+                            </button>
+
+                            <button
+                                className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2"
+                        
+                            >
+                                <MdModeEditOutline  className='text-xl'/>
+                                Edit
+                            </button>
+                        </div>
+                    </div>
                 ))}
-            </ul>
-            <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-                onClick={handleAddFlashcard}
-            >
-                {' '}
-                Add Flashcard{' '}
-            </button>
-            Word:
+        <div  className='h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow' >
+            <p className='flex items-center justify-center h-full'>  Word: </p>
             <input
                 type="text"
                 value={word}
-                className="px-4 py-2 bg-red-500 text-white rounded"
+                className="px-1 py-1 bg-cream text-olive rounded"
                 onChange={(e) => {
                     const value = e.target.value
                     setWord(value)
                 }}
             />
-            Translation:
+            <p className='flex items-center justify-center h-full'>  Translation: </p>
             <input
                 type="text"
                 value={translation}
-                className="px-4 py-2 bg-red-500 text-white rounded"
+                className="px-1 py-1 bg-cream text-olive rounded"
                 onChange={(e) => {
                     const value = e.target.value
                     setTranslation(value)
                 }}
             />
             <button
-                className="bg-pink-500"
+                className="bg-olive rounded"
                 onClick={() => {
                     handleTranslate()
                 }}
             >
-                {' '}
-                Translate
+                    Translate
             </button>
+            
             <button
-                className="bg-blue-400"
-                onClick={() => {
-                    navigate('/practice', { state: flashcards })
-                }}
+                className="px-4 py-2 bg-olive text-white rounded hover:bg-blue-600 transition"
+                onClick={handleAddFlashcard}
             >
-                {' '}
-                Start Practice
+                Add Flashcard
             </button>
-            <Logout />
+
         </div>
+        </div>
+    </div>
     )
 }
 
