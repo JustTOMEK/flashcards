@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react'
 import withAuth from './withAuth'
 import { useLocation, useNavigate } from 'react-router'
+import { FaThumbsDown, FaThumbsUp } from "react-icons/fa6";
+import { FaSync } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { FaFlagCheckered } from "react-icons/fa";
+
+
+
 type Flashcard = {
     word: string
     translation: string
@@ -68,14 +75,14 @@ function Practice() {
     const navigate = useNavigate()
 
     return (
-        <div className="h-screen bg-cream overflow-auto flex justify-center items-center">
-            <div className="bg-white w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
+        <div className="h-screen bg-dark-olive overflow-auto flex justify-center items-center">
+            <div className="bg-tan w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
                 
-                <div className="text-gray-600 text-sm font-medium">
+                <div className="text-dark-olive text-sm font-medium">
                 {currentIndex + 1} / {flashcards.length}
                 </div>
 
-                <div className="bg-tan w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-black">
+                <div className="bg-cream w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-dark-olive">
                 {flashcards.length > 0 &&
                     flashcards[currentIndex] &&
                     (isFlipped
@@ -85,43 +92,50 @@ function Practice() {
 
                 <div className="flex w-full justify-between space-x-4">
                 <button
-                    className="flex-1 bg-green-500 text-white py-2 rounded-md disabled:opacity-50"
+                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
                     disabled={isAnswered}
                     onClick={() => handleAnswer(true)}
                 >
+                    <FaThumbsUp />
+
                     I Know This
                 </button>
+
                 <button
-                    className="flex-1 bg-red-500 text-white py-2 rounded-md disabled:opacity-50"
+                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
                     disabled={isAnswered}
                     onClick={() => handleAnswer(false)}
                 >
+                    <FaThumbsDown />
                     I Don't Know This
                 </button>
                 </div>
 
                 <div className="flex w-full justify-between space-x-2 pt-4">
                 <button
-                    className="flex-1 bg-blue-500 text-white py-2 rounded-md disabled:opacity-50"
+                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
                     disabled={!isAnswered}
                     onClick={handleFlip}
                 >
+                    <FaSync />
                     Flip
                 </button>
                 <button
-                    className="flex-1 bg-green-600 text-white py-2 rounded-md disabled:opacity-50"
+                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
                     disabled={!isAnswered}
                     onClick={handleNext}
                 >
+                    <FaArrowRight />
                     Next
                 </button>
                 <button
-                    className="flex-1 bg-red-600 text-white py-2 rounded-md"
+                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md flex items-center justify-center gap-2"
                     onClick={() =>
                     navigate('/set', { state: { setId: flashcards[0].setId } })
                     }
                 >
-                    Finish Practice
+                    <FaFlagCheckered />
+                    Finish
                 </button>
                 </div>
             </div>
