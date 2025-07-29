@@ -49,7 +49,7 @@ function Practice() {
             updatedLevel = updatedLevel - 1
         }
         fetch(
-            `http://localhost:3000/flashcards/${flashcards[currentIndex].id}`,
+            `http://localhost:3000/flashcards/level/${flashcards[currentIndex].id}`,
             {
                 method: 'PATCH',
                 headers: {
