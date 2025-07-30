@@ -33,7 +33,7 @@ function FlashcardSets() {
             .then((data) => {
                 setuserId(data.userId)
                 setusername(data.username)
-                return fetch(`http://localhost:3000/flashcardSets/${userId}`, {
+                return fetch(`http://localhost:3000/flashcardSets`, {
                     headers: {
                         token: token ?? '',
                     },

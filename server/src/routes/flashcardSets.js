@@ -17,12 +17,6 @@ type FlashcardSet = {
 }
 */
 
-router.get('/', authenticate, async (req, res) => {
-    await db.read()
-    const flashcardSets = db.data?.flashcardSets || []
-    res.json(flashcardSets)
-})
-
 // this is to get flashcards of specific flascardSet
 router.get('/set/:setId', authenticate, async (req, res) => {
     const { setId } = req.params
@@ -35,8 +29,8 @@ router.get('/set/:setId', authenticate, async (req, res) => {
 })
 
 // this is to get all sets that an userowns
-router.get('/:userId', authenticate, async (req, res) => {
-    const { userId } = req.params
+router.get('/', authenticate, async (req, res) => {
+    const userId = req.userId
     await db.read()
 
     const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
