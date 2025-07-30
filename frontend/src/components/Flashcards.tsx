@@ -126,8 +126,6 @@ function Flashcards() {
     }
 
     return (
-        <>
-        <Navbar userId={'blank'} username={'blank'}/>
         <div className="min-h-screen bg-cream  pt-10 overflow-auto">
             <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
                 
@@ -216,15 +214,12 @@ function Flashcards() {
                             flashcard={editingCard}
                             onEdit={handleEdit}
                             onExit={() => setEditingCard(null)}
-                            sourceLanguageCode={flashcardSet.sourceLanguageCode}
-                            targetLanguageCode={flashcardSet.targetLanguageCode}
                         />
                     </div>
                 )}
                 
             </div>
         </div>
-        </>
     )
 }
 

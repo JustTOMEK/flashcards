@@ -4,21 +4,14 @@ import { IoStatsChart } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 import { useNavigate } from "react-router";
 
-
-
-
-type NavbarProps = {
-    userId: string;
-    username: string
-  };
   
 
-function Navbar({userId, username}: NavbarProps){
+function Navbar(){
 
     const navigate = useNavigate()
     return (
         <div className="sticky top-0 bg-dark-olive text-white px-4 py-3 flex justify-between items-center">
-            <p className="text-2xl">Welcome {username} to Flashcards </p>
+            <p className="text-2xl">Welcome debilu to Flashcards </p>
             <div className="text-3xl flex justify-center items-center gap-3"> 
                 <IoStatsChart />
                 <FaRegUserCircle />
