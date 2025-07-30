@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import LanguageSelector from './LanguageSelector'
 import { IoMdCloseCircleOutline } from 'react-icons/io'
 interface FlashcardSetFormProps {
-    userId: string
     setflashcardSets?: React.Dispatch<React.SetStateAction<any[]>>
     setShowForm: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -13,7 +12,6 @@ interface LanguageOption {
 }
 
 const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
-    userId,
     setflashcardSets,
     setShowForm,
 }) => {
@@ -37,7 +35,6 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 body: JSON.stringify({
                     name,
                     description,
-                    userId,
                     sourceLanguage,
                     targetLanguage,
                     sourceLanguageCode,

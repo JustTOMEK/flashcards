@@ -53,13 +53,13 @@ router.post('/', authenticate, async (req, res) => {
     const {
         name,
         description,
-        userId,
         sourceLanguage,
         targetLanguage,
         sourceLanguageCode,
         targetLanguageCode,
     } = req.body
 
+    const userId = req.userId
     const id = uuidv4()
 
     const newFlashcardSet = {

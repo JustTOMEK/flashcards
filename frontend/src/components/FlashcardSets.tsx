@@ -18,22 +18,11 @@ type FlashcardSet = {
 
 function FlashcardSets() {
     const [flashcardSets, setflashcardSets] = useState<FlashcardSet[]>([])
-    const [username, setusername] = useState('')
     const [showForm, setShowForm] = useState(false)
-    const [userId, setuserId] = useState('')
-
     const token = localStorage.getItem('token')
     useEffect(() => {
-        fetch('http://localhost:3000/me', {
-            headers: {
-                token: token ?? '',
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setuserId(data.userId)
-                setusername(data.username)
-                return fetch(`http://localhost:3000/flashcardSets`, {
+        
+                fetch(`http://localhost:3000/flashcardSets`, {
                     headers: {
                         token: token ?? '',
                     },
@@ -42,8 +31,8 @@ function FlashcardSets() {
                     .then((data) => {
                         setflashcardSets(data)
                     })
-            })
-    }, [])
+            },[])
+    
 
     const handleDelete = async (id: string) => {
         fetch(`http://localhost:3000/flashcardSets/${id}`, {
@@ -69,7 +58,6 @@ function FlashcardSets() {
                 {showForm && (
                     <div className='overlay' >
                         <FlashcardSetForm
-                            userId={userId}
                             setflashcardSets={setflashcardSets}
                             setShowForm={setShowForm} 
                         />
