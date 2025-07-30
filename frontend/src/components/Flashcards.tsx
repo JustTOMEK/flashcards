@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import withAuth from './withAuth'
 import { FaTrash } from "react-icons/fa6";
-import { useNavigate } from 'react-router'
 import { MdModeEditOutline } from "react-icons/md";
 import EditFlashcardForm from './EditFlashcardForm';
 
