@@ -65,14 +65,14 @@ router.patch('/level/:id', authenticate, async (req, res) => {
 
 router.patch('/edit/:id', authenticate, async (req, res) => {
     const { id } = req.params
-    const { name, translation } = req.body
+    const { word, translation } = req.body
     await db.read()
 
     const flashcards = db.data?.flashcards || []
 
     const index = flashcards.findIndex((card) => card.id === id)
 
-    flashcards[index].name = name
+    flashcards[index].word = word
     flashcards[index].translation = translation
 
     await db.write()

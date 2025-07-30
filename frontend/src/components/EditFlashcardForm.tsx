@@ -19,25 +19,25 @@ const EditFlashcardForm: React.FC<{
     onExit: () => void;
 }> = ({flashcard, onEdit, onExit}) =>{
 
-    const[name, setName] = useState(flashcard.word)
+    const[word, setWord] = useState(flashcard.word)
     const[translation, setTranslation] = useState(flashcard.translation)
 
     const token = localStorage.getItem('token')
 
     async function  handleEdit(){
         fetch(
-            `http://localhost:3000/flashcards/level/${flashcard.id}`,
+            `http://localhost:3000/flashcards/edit/${flashcard.id}`,
             {
                 method: 'PATCH',
                 headers: {
                     token: token ?? '',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, translation }),
+                body: JSON.stringify({ word, translation }),
             }
         )
 
-        const editedCard = {...flashcard, name, translation}
+        const editedCard = {...flashcard, word, translation}
         onEdit(editedCard)
 
 
@@ -45,7 +45,7 @@ const EditFlashcardForm: React.FC<{
 
 
     return (
-        <div className="relative bg-tan p-8 rounded-lg shadow-lg w-full max-w-xl space-y-4">
+        <div className="relative bg-tan p-8 rounded-lg shadow-lg w-full max-w-xl space-y-4" >
             
             <button
                             onClick={onExit}
@@ -58,9 +58,9 @@ const EditFlashcardForm: React.FC<{
             <input
                 type="text"
                 placeholder="Name"
-                value={name}
+                value={word}
                 className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2 "
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setWord(e.target.value)}
             />
 
             <input
@@ -74,7 +74,7 @@ const EditFlashcardForm: React.FC<{
                 onClick={handleEdit}
                 className="bg-cream"
             >
-                Add Set
+                Edit Flashcard
             </button>
         </div>
     )
