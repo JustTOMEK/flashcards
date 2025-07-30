@@ -107,7 +107,7 @@ function FlashcardSets() {
                                     onClick={() =>
                                         navigate('set', {
                                             state: {
-                                                setId: flashcardSet.id,
+                                                flashcardSet: flashcardSet,
                                             },
                                         })
                                     }

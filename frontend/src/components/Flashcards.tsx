@@ -19,9 +19,8 @@ type Flashcard = {
 
 function Flashcards() {
     const location = useLocation()
-    const setId = location.state.setId
-    const [sourceLanguageCode, setsourceLanguageCode] = useState('')
-    const [targetLanguageCode, settargetLanguageCode] = useState('')
+    const flashcardSet = location.state.flashcardSet
+    console.log(flashcardSet)
     const [editingCard, setEditingCard] = useState<Flashcard | null>(null)
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
@@ -29,7 +28,7 @@ function Flashcards() {
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        fetch(`http://localhost:3000/flashcardSets/set/${setId}`, {
+        fetch(`http://localhost:3000/flashcardSets/set/${flashcardSet.id}`, {
             headers: {
                 token: token ?? '',
             },
@@ -37,16 +36,6 @@ function Flashcards() {
             .then((res) => res.json())
             .then((data) => {
                 setFlashcards(data)
-            })
-        fetch(`http://localhost:3000/flashcardSets/languagecodes/${setId}`, {
-            headers: {
-                token: token ?? '',
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setsourceLanguageCode(data.sourceLanguageCode)
-                settargetLanguageCode(data.targetLanguageCode)
             })
     }, [])
 
@@ -61,7 +50,7 @@ function Flashcards() {
                     token: token ?? '',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ word, translation, setId }),
+                body: JSON.stringify({ word, translation, setId: flashcardSet?.setId || "" }),
             })
             const newFlashcard = await addRes.json()
 
@@ -90,12 +79,12 @@ function Flashcards() {
         let target = ''
         if (translation == '') {
             q = word
-            source = sourceLanguageCode
-            target = targetLanguageCode
+            source = flashcardSet.sourceLanguageCode
+            target = flashcardSet.targetLanguageCode
         } else if (word == '') {
             q = translation
-            source = targetLanguageCode
-            target = sourceLanguageCode
+            source = flashcardSet.targetLanguageCode
+            target = flashcardSet.sourceLanguageCode
         } else {
             console.log('Leave word or translation blank')
         }
@@ -228,6 +217,8 @@ function Flashcards() {
                             flashcard={editingCard}
                             onEdit={handleEdit}
                             onExit={() => setEditingCard(null)}
+                            sourceLanguageCode={flashcardSet.sourceLanguageCode}
+                            targetLanguageCode={flashcardSet.targetLanguageCode}
                         />
                     </div>
                 )}
