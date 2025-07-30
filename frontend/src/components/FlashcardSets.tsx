@@ -3,6 +3,8 @@ import '../App.css'
 import { useNavigate } from 'react-router'
 import withAuth from './withAuth'
 import FlashcardSetForm from './FlashcardSetForm'
+import Navbar from './Navbar'
+import { IoMdAddCircle } from 'react-icons/io'
 
 type FlashcardSet = {
     name: string
@@ -59,49 +61,27 @@ function FlashcardSets() {
     const navigate = useNavigate()
 
     return (
-        <div className="flex h-screen bg-blue-50 text-blue-900">
-            <div className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center">
-                <div className="space-y-6 w-3/5">
-                    <div className="w-full bg-burnt-orange p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">
-                            Welcome {username}
-                        </h3>
-                        <p className="text-base text-cream">
-                            Remember cosistency is important.
-                        </p>
-                    </div>
-                    <>
-                        <button
-                            className="w-full bg-burnt-orange p-6 rounded-lg shadow-md"
-                            onClick={() => setShowForm(true)}
-                        >
-                            <h3 className="text-xl mb-2 text-cream">
-                                Create a new set
-                            </h3>
-                            <p className="text-base text-cream"></p>
-                        </button>
-
-                        {showForm && (
-                            <div className="overlay">
-                                <FlashcardSetForm
-                                    userId={userId}
-                                    setflashcardSets={setflashcardSets}
-                                    setShowForm={setShowForm}
-                                />
-                            </div>
-                        )}
-                    </>
-
-                    <div className="w-full bg-burnt-orange p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">
-                            Your statistics:
-                        </h3>
-                        <p className="text-base text-cream"></p>
-                    </div>
+        <>
+        <Navbar userId={userId} username={username}/>
+            <div className="h-screen bg-cream  pt-10 overflow-auto">
+                <div className="grid grid-cols-2 md:grid-cols-4  gap-6 w-4/5 mx-auto">     
+                    <div className="bg-tan rounded-xl p-4 text-cream shadow-md hover:shadow-lg transition-shadow min-h-[200px] flex flex-col items-center justify-center space-y-2">
+                    <span className="text-lg font-semibold">Add New Set</span>
+                    <IoMdAddCircle className="text-5xl"  onClick={() => setShowForm(true)}/>
                 </div>
-            </div>
-            <div className="w-1/2 p-6 overflow-y-auto bg-cream">
-                <div className="grid grid-cols-1 md:grid-cols-2  gap-6 w-4/5 mx-auto">
+                {showForm && (
+                    <div className='overlay' >
+                        <FlashcardSetForm
+                            userId={userId}
+                            setflashcardSets={setflashcardSets}
+                            setShowForm={setShowForm} 
+                        />
+                    </div>
+                )}
+
+                    
+                    
+                    
                     {flashcardSets.map((flashcardSet, index) => (
                         <div
                             key={index}
@@ -151,7 +131,7 @@ function FlashcardSets() {
                     ))}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 export default withAuth(FlashcardSets)
