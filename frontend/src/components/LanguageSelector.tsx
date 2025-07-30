@@ -35,20 +35,21 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
                 value={selectedOption}
                 onChange={handleChange}
                 placeholder="Type to search or create..."
-                
                 styles={{
                     control: (base, state) => ({
                         ...base,
                         backgroundColor: '#fefae0',
                         borderColor: state.isFocused ? '#bc6c25' : '#ffffff', // olive on focus
-                        boxShadow: state.isFocused ? '0 0 0 2px #606c38' : 'none',
+                        boxShadow: state.isFocused
+                            ? '0 0 0 2px #606c38'
+                            : 'none',
                         '&:hover': {
                             borderColor: '#b5c99a',
                         },
                     }),
                     singleValue: (base) => ({
                         ...base,
-                        color: '#606c38', 
+                        color: '#606c38',
                     }),
                     placeholder: (base) => ({
                         ...base,
@@ -59,19 +60,16 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
                         backgroundColor: '#fff',
                         zIndex: 10,
                     }),
-                    
+
                     option: (base, state) => ({
                         ...base,
                         backgroundColor: state.isFocused ? '#dda15e' : '#fff',
                         color: state.isSelected ? '#606c38' : '#606c38',
                         '&:active': {
-                        backgroundColor: '#606c38',
-                        
+                            backgroundColor: '#606c38',
                         },
-                    })
-
+                    }),
                 }}
-
             />
         </div>
     )

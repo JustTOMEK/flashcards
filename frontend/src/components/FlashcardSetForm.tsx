@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import LanguageSelector from './LanguageSelector'
-import { IoMdCloseCircleOutline } from "react-icons/io";
+import { IoMdCloseCircleOutline } from 'react-icons/io'
 interface FlashcardSetFormProps {
     userId: string
     setflashcardSets?: React.Dispatch<React.SetStateAction<any[]>>
@@ -61,10 +61,12 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
     return (
         <div className="relative bg-tan p-8 rounded-lg shadow-lg w-full max-w-xl space-y-4">
             <button
-                onClick={() => {(setShowForm(false))}}
+                onClick={() => {
+                    setShowForm(false)
+                }}
                 className="absolute top-2 right-2 text-olive text-xl font-bold"
             >
-                <IoMdCloseCircleOutline className='text-3xl' />
+                <IoMdCloseCircleOutline className="text-3xl" />
             </button>
 
             <h2 className="text-2xl text-olive text-center font-semibold">
@@ -86,7 +88,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setDescription(e.target.value)}
             />
-            
+
             <label className="text-olive">Choose source language:</label>
             <LanguageSelector
                 onChange={(selected: LanguageOption | null) => {

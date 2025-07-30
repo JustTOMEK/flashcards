@@ -84,14 +84,12 @@ function FlashcardSets() {
                         {showForm && (
                             <div className="overlay">
                                 <FlashcardSetForm
-                                userId={userId}
-                                setflashcardSets={setflashcardSets}
-                                setShowForm={setShowForm}
+                                    userId={userId}
+                                    setflashcardSets={setflashcardSets}
+                                    setShowForm={setShowForm}
                                 />
                             </div>
-                            )}
-
-
+                        )}
                     </>
 
                     <div className="w-full bg-burnt-orange p-6 rounded-lg shadow-md">
@@ -105,7 +103,10 @@ function FlashcardSets() {
             <div className="w-1/2 p-6 overflow-y-auto bg-cream">
                 <div className="grid grid-cols-1 md:grid-cols-2  gap-6 w-4/5 mx-auto">
                     {flashcardSets.map((flashcardSet, index) => (
-                        <div key={index} className="bg-tan rounded-xl p-4  shadow-md hover:shadow-lg transition-shadow min-h-[200px]">
+                        <div
+                            key={index}
+                            className="bg-tan rounded-xl p-4  shadow-md hover:shadow-lg transition-shadow min-h-[200px]"
+                        >
                             <h3 className="text-lg font-semibold text-cream mb-2 text-center">
                                 {flashcardSet.name}
                             </h3>
@@ -115,18 +116,20 @@ function FlashcardSets() {
                             <div className="flex flex-wrap justify-center gap-4 mt-4 w-full">
                                 <button
                                     className="bg-olive px-4 py-2 rounded text-cream text-center whitespace-nowrap overflow-hidden text-ellipsis w-full sm:basis-1/3 min-w-[120px]"
-                                    onClick={() => handleDelete(flashcardSet.id)}
+                                    onClick={() =>
+                                        handleDelete(flashcardSet.id)
+                                    }
                                 >
                                     Delete
                                 </button>
                                 <button
                                     className="bg-olive px-4 py-2 rounded text-cream text-center whitespace-nowrap overflow-hidden text-ellipsis w-full sm:basis-1/3 min-w-[120px]"
                                     onClick={() =>
-                                    navigate('set', {
-                                        state: {
-                                        setId: flashcardSet.id,
-                                        },
-                                    })
+                                        navigate('set', {
+                                            state: {
+                                                setId: flashcardSet.id,
+                                            },
+                                        })
                                     }
                                 >
                                     Edit
@@ -134,16 +137,16 @@ function FlashcardSets() {
                                 <button
                                     className="bg-olive px-4 py-2 rounded text-cream text-center whitespace-nowrap overflow-hidden text-ellipsis w-full sm:basis-1/3 min-w-[120px]"
                                     onClick={() =>
-                                    navigate('practice', {
-                                        state: {
-                                            setId: flashcardSet.id,
-                                        },
-                                    })
+                                        navigate('practice', {
+                                            state: {
+                                                setId: flashcardSet.id,
+                                            },
+                                        })
                                     }
                                 >
                                     Practice
                                 </button>
-                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>

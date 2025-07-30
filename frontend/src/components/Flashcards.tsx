@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import withAuth from './withAuth'
-import { FaTrash } from "react-icons/fa6";
-import { MdModeEditOutline } from "react-icons/md";
-import EditFlashcardForm from './EditFlashcardForm';
-import { FaGlobe } from "react-icons/fa";
-import { IoMdAddCircle } from "react-icons/io";
-
-
+import { FaTrash } from 'react-icons/fa6'
+import { MdModeEditOutline } from 'react-icons/md'
+import EditFlashcardForm from './EditFlashcardForm'
+import { FaGlobe } from 'react-icons/fa'
+import { IoMdAddCircle } from 'react-icons/io'
 
 type Flashcard = {
     word: string
@@ -23,7 +21,7 @@ function Flashcards() {
     const setId = location.state.setId
     const [sourceLanguageCode, setsourceLanguageCode] = useState('')
     const [targetLanguageCode, settargetLanguageCode] = useState('')
-    const [editingCard, setEditingCard] = useState<Flashcard| null>(null)
+    const [editingCard, setEditingCard] = useState<Flashcard | null>(null)
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
 
@@ -132,23 +130,28 @@ function Flashcards() {
     }
 
     function handleEdit(editedCard: Flashcard): void {
-        setFlashcards(prev => prev.map(card => card.id === editedCard.id ? editedCard: card))
+        setFlashcards((prev) =>
+            prev.map((card) => (card.id === editedCard.id ? editedCard : card))
+        )
         setEditingCard(null)
     }
 
     return (
-    <div className="h-screen bg-cream  pt-10 overflow-auto">    
-        <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
+        <div className="h-screen bg-cream  pt-10 overflow-auto">
+            <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
                 {flashcards.map((card, index) => (
-                    <div key={index} className='min-h-[170px] bg-tan rounded-xl p-4 flex flex-col justify-between text-cream h-full w-full shadow-md hover:shadow-lg transition-shadow'>
-                        <div className='text-center text-xl font-bold '>
-                            {card.word} : {card.translation}    
+                    <div
+                        key={index}
+                        className="min-h-[170px] bg-tan rounded-xl p-4 flex flex-col justify-between text-cream h-full w-full shadow-md hover:shadow-lg transition-shadow"
+                    >
+                        <div className="text-center text-xl font-bold ">
+                            {card.word} : {card.translation}
                         </div>
 
-                        <div className='text-center text-md  '>
+                        <div className="text-center text-md  ">
                             Practiced : {card.repetitions}
                         </div>
-                        <div className='flex gap-2 justify-center' >
+                        <div className="flex gap-2 justify-center">
                             <button
                                 className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2 "
                                 onClick={() => handleDelete(card.id)}
@@ -161,63 +164,68 @@ function Flashcards() {
                                 className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2"
                                 onClick={() => setEditingCard(card)}
                             >
-                                <MdModeEditOutline  className='text-xl'/>
+                                <MdModeEditOutline className="text-xl" />
                                 Edit
                             </button>
                         </div>
                     </div>
                 ))}
                 {editingCard && (
-                    <div className='overlay' >
+                    <div className="overlay">
                         <EditFlashcardForm
-                        flashcard={editingCard}
-                        onEdit={handleEdit}
-                        onExit={() => setEditingCard(null)}
+                            flashcard={editingCard}
+                            onEdit={handleEdit}
+                            onExit={() => setEditingCard(null)}
                         />
                     </div>
                 )}
-        <div  className='h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow' >
-            <p className='flex items-center justify-center h-full'>  Word: </p>
-            <input
-                type="text"
-                value={word}
-                className="px-1 py-1 bg-cream text-olive rounded"
-                onChange={(e) => {
-                    const value = e.target.value
-                    setWord(value)
-                }}
-            />
-            <p className='flex items-center justify-center h-full'>  Translation: </p>
-            <input
-                type="text"
-                value={translation}
-                className="px-1 py-1 bg-cream text-olive rounded"
-                onChange={(e) => {
-                    const value = e.target.value
-                    setTranslation(value)
-                }}
-            />
-            <button
-                className="bg-olive rounded flex items-center justify-center gap-2"
-                onClick={() => {
-                    handleTranslate()
-                }}
-            >
-                <FaGlobe />
-                    Translate
-            </button>
-            
-            <button
-                className="px-4 py-2 bg-olive flex  items-center justify-center gap-2 rounded  "
-                onClick={handleAddFlashcard}
-            >
-                <IoMdAddCircle className='text-xl' />
-                Add 
-            </button>
+                <div className="h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
+                    <p className="flex items-center justify-center h-full">
+                        {' '}
+                        Word:{' '}
+                    </p>
+                    <input
+                        type="text"
+                        value={word}
+                        className="px-1 py-1 bg-cream text-olive rounded"
+                        onChange={(e) => {
+                            const value = e.target.value
+                            setWord(value)
+                        }}
+                    />
+                    <p className="flex items-center justify-center h-full">
+                        {' '}
+                        Translation:{' '}
+                    </p>
+                    <input
+                        type="text"
+                        value={translation}
+                        className="px-1 py-1 bg-cream text-olive rounded"
+                        onChange={(e) => {
+                            const value = e.target.value
+                            setTranslation(value)
+                        }}
+                    />
+                    <button
+                        className="bg-olive rounded flex items-center justify-center gap-2"
+                        onClick={() => {
+                            handleTranslate()
+                        }}
+                    >
+                        <FaGlobe />
+                        Translate
+                    </button>
 
+                    <button
+                        className="px-4 py-2 bg-olive flex  items-center justify-center gap-2 rounded  "
+                        onClick={handleAddFlashcard}
+                    >
+                        <IoMdAddCircle className="text-xl" />
+                        Add
+                    </button>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
     )
 }
 

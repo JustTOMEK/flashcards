@@ -29,11 +29,14 @@ const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
         }, [navigate])
 
         if (loading) {
-            return ( 
-                <div className='h-screen w-screen bg-cream flex justify-center items-center'> 
-                    <p className='text-4xl font-bold text-dark-olive'> Loading...</p>
-                 </div>
-            );
+            return (
+                <div className="h-screen w-screen bg-cream flex justify-center items-center">
+                    <p className="text-4xl font-bold text-dark-olive">
+                        {' '}
+                        Loading...
+                    </p>
+                </div>
+            )
         }
         return <WrappedComponent {...props} />
     }

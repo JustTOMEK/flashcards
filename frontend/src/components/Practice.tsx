@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
 import withAuth from './withAuth'
 import { useLocation, useNavigate } from 'react-router'
-import { FaThumbsDown, FaThumbsUp } from "react-icons/fa6";
-import { FaSync } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
-import { FaFlagCheckered } from "react-icons/fa";
-
-
+import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa6'
+import { FaSync } from 'react-icons/fa'
+import { FaArrowRight } from 'react-icons/fa'
+import { FaFlagCheckered } from 'react-icons/fa'
 
 type Flashcard = {
     word: string
@@ -33,9 +31,8 @@ function Practice() {
         })
             .then((res) => res.json())
             .then((data) => {
-                setFlashcards([...data].sort((a,b) => a.level - b.level))
+                setFlashcards([...data].sort((a, b) => a.level - b.level))
             })
-
     }, [])
 
     async function handleAnswer(answer: boolean) {
@@ -77,70 +74,65 @@ function Practice() {
     return (
         <div className="h-screen bg-dark-olive overflow-auto flex justify-center items-center">
             <div className="bg-tan w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-                
                 <div className="text-dark-olive text-sm font-medium">
-                {currentIndex + 1} / {flashcards.length}
+                    {currentIndex + 1} / {flashcards.length}
                 </div>
 
                 <div className="bg-cream w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-dark-olive">
-                {flashcards.length > 0 &&
-                    flashcards[currentIndex] &&
-                    (isFlipped
-                    ? flashcards[currentIndex].translation
-                    : flashcards[currentIndex].word)}
+                    {flashcards.length > 0 &&
+                        flashcards[currentIndex] &&
+                        (isFlipped
+                            ? flashcards[currentIndex].translation
+                            : flashcards[currentIndex].word)}
                 </div>
 
                 <div className="flex w-full justify-between space-x-4">
-                <button
-                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
-                    disabled={isAnswered}
-                    onClick={() => handleAnswer(true)}
-                >
-                    <FaThumbsUp />
+                    <button
+                        className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
+                        disabled={isAnswered}
+                        onClick={() => handleAnswer(true)}
+                    >
+                        <FaThumbsUp />I Know This
+                    </button>
 
-                    I Know This
-                </button>
-
-                <button
-                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
-                    disabled={isAnswered}
-                    onClick={() => handleAnswer(false)}
-                >
-                    <FaThumbsDown />
-                    I Don't Know This
-                </button>
+                    <button
+                        className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
+                        disabled={isAnswered}
+                        onClick={() => handleAnswer(false)}
+                    >
+                        <FaThumbsDown />I Don't Know This
+                    </button>
                 </div>
 
                 <div className="flex w-full justify-between space-x-2 pt-4">
-                <button
-                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
-                    disabled={!isAnswered}
-                    onClick={handleFlip}
-                >
-                    <FaSync />
-                    Flip
-                </button>
-                { currentIndex + 1 != flashcards.length && (<button 
-                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
-                    disabled={!isAnswered}
-                    onClick={handleNext}
-                >
-                    <FaArrowRight />
-                    Next
-                </button>)}
-                <button
-                    className="flex-1 bg-cream text-dark-olive py-2 rounded-md flex items-center justify-center gap-2"
-                    onClick={() =>
-                    navigate('/')
-                    }
-                >
-                    <FaFlagCheckered />
-                    Finish
-                </button>
+                    <button
+                        className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
+                        disabled={!isAnswered}
+                        onClick={handleFlip}
+                    >
+                        <FaSync />
+                        Flip
+                    </button>
+                    {currentIndex + 1 != flashcards.length && (
+                        <button
+                            className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
+                            disabled={!isAnswered}
+                            onClick={handleNext}
+                        >
+                            <FaArrowRight />
+                            Next
+                        </button>
+                    )}
+                    <button
+                        className="flex-1 bg-cream text-dark-olive py-2 rounded-md flex items-center justify-center gap-2"
+                        onClick={() => navigate('/')}
+                    >
+                        <FaFlagCheckered />
+                        Finish
+                    </button>
                 </div>
             </div>
-</div>
-
+        </div>
     )
 }
 
