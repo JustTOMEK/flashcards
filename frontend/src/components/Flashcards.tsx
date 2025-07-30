@@ -6,6 +6,7 @@ import { MdModeEditOutline } from 'react-icons/md'
 import EditFlashcardForm from './EditFlashcardForm'
 import { FaGlobe } from 'react-icons/fa'
 import { IoMdAddCircle } from 'react-icons/io'
+import Navbar from './Navbar'
 
 type Flashcard = {
     word: string
@@ -137,7 +138,9 @@ function Flashcards() {
     }
 
     return (
-        <div className="h-screen bg-cream  pt-10 overflow-auto">
+        <>
+        <Navbar userId={'blank'} username={'blank'}/>
+        <div className="min-h-screen bg-cream  pt-10 overflow-auto">
             <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
                 {flashcards.map((card, index) => (
                     <div
@@ -226,6 +229,7 @@ function Flashcards() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
