@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import withAuth from './withAuth'
 import { IoMdCloseCircleOutline } from 'react-icons/io'
-import { MdTranslate } from 'react-icons/md'
 import { FaGlobe } from 'react-icons/fa'
 import { FaCheckCircle } from 'react-icons/fa'
 
