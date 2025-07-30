@@ -1,4 +1,9 @@
 import withAuth from "./withAuth";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoStatsChart } from "react-icons/io5";
+import { IoLogOut } from "react-icons/io5";
+import { useNavigate } from "react-router";
+
 
 
 
@@ -10,11 +15,22 @@ type NavbarProps = {
 
 function Navbar({userId, username}: NavbarProps){
 
-
+    const navigate = useNavigate()
     return (
-        <div className="bg-dark-olive text-white px-4 py-3 flex justify-between items-center">
-        Welcome {username}
+        <div className="sticky top-0 bg-dark-olive text-white px-4 py-3 flex justify-between items-center">
+            <p className="text-2xl">Welcome {username} to Flashcards </p>
+            <div className="text-3xl flex justify-center items-center gap-3"> 
+                <IoStatsChart />
+                <FaRegUserCircle />
+                <p className="text-4xl">
+                    <IoLogOut onClick={() => {
+                    localStorage.removeItem('token')
+                    navigate('/login')}} />
+                </p>
+            </div>
         </div>
+        
+
     )
 }
 export default withAuth(Navbar)
