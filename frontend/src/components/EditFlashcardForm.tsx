@@ -44,38 +44,49 @@ const EditFlashcardForm: React.FC<{
     }
 
 
+    function handleTranslate(): void {
+        
+    }
+
     return (
-        <div className="relative bg-tan p-8 rounded-lg shadow-lg w-full max-w-xl space-y-4" >
+        <div className="relative h-1/4 w-1/4 bg-tan rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow" >
             
             <button
                             onClick={onExit}
-                            className="absolute top-2 right-2 text-olive text-xl font-bold"
+                            className="absolute top-1 right-1 text-olive text-xl font-bold"
                         >
                             <IoMdCloseCircleOutline className='text-3xl' />
             </button>
             
-            
+            <p className='flex items-center justify-center h-full'>  Word: </p>
             <input
                 type="text"
                 placeholder="Name"
                 value={word}
-                className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2 "
+                className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2 "
                 onChange={(e) => setWord(e.target.value)}
             />
-
+            <p className='flex items-center justify-center h-full'>  Translation: </p>
             <input
                 type="text"
                 placeholder="Description"
                 value={translation}
-                className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
+                className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setTranslation(e.target.value)}
             />
             <button
-                onClick={handleEdit}
-                className="bg-cream"
+                onClick={handleTranslate}
+                className="bg-olive px-4 py-2 rounded   items-center justify-center gap-2 "
             >
-                Edit Flashcard
+                Translate
             </button>
+            <button
+                onClick={handleEdit}
+                className="bg-olive px-4 py-2 rounded   items-center justify-center gap-2 "
+            >
+                Confirm
+            </button>
+            
         </div>
     )
 }
