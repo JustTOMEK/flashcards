@@ -63,7 +63,7 @@ function FlashcardSets() {
     return (
         <>
         <Navbar userId={userId} username={username}/>
-            <div className="h-screen bg-cream  pt-10 overflow-auto">
+            <div className="min-h-screen bg-cream  pt-10 overflow-auto">
                 <div className="grid grid-cols-2 md:grid-cols-4  gap-6 w-4/5 mx-auto">     
                     <div className="bg-tan rounded-xl p-4 text-cream shadow-md hover:shadow-lg transition-shadow min-h-[200px] flex flex-col items-center justify-center space-y-2">
                     <span className="text-lg font-semibold">Add New Set</span>
