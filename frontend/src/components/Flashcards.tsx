@@ -142,47 +142,8 @@ function Flashcards() {
         <Navbar userId={'blank'} username={'blank'}/>
         <div className="min-h-screen bg-cream  pt-10 overflow-auto">
             <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
-                {flashcards.map((card, index) => (
-                    <div
-                        key={index}
-                        className="min-h-[170px] bg-tan rounded-xl p-4 flex flex-col justify-between text-cream h-full w-full shadow-md hover:shadow-lg transition-shadow"
-                    >
-                        <div className="text-center text-xl font-bold ">
-                            {card.word} : {card.translation}
-                        </div>
-
-                        <div className="text-center text-md  ">
-                            Practiced : {card.repetitions}
-                        </div>
-                        <div className="flex gap-2 justify-center">
-                            <button
-                                className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2 "
-                                onClick={() => handleDelete(card.id)}
-                            >
-                                <FaTrash />
-                                Delete
-                            </button>
-
-                            <button
-                                className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2"
-                                onClick={() => setEditingCard(card)}
-                            >
-                                <MdModeEditOutline className="text-xl" />
-                                Edit
-                            </button>
-                        </div>
-                    </div>
-                ))}
-                {editingCard && (
-                    <div className="overlay">
-                        <EditFlashcardForm
-                            flashcard={editingCard}
-                            onEdit={handleEdit}
-                            onExit={() => setEditingCard(null)}
-                        />
-                    </div>
-                )}
-                <div className="h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
+                
+            <div className="h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
                     <p className="flex items-center justify-center h-full">
                         {' '}
                         Word:{' '}
@@ -227,6 +188,50 @@ function Flashcards() {
                         Add
                     </button>
                 </div>
+                
+                
+                
+                {flashcards.map((card, index) => (
+                    <div
+                        key={index}
+                        className="min-h-[170px] bg-tan rounded-xl p-4 flex flex-col justify-between text-cream h-full w-full shadow-md hover:shadow-lg transition-shadow"
+                    >
+                        <div className="text-center text-xl font-bold ">
+                            {card.word} : {card.translation}
+                        </div>
+
+                        <div className="text-center text-md  ">
+                            Practiced : {card.repetitions}
+                        </div>
+                        <div className="flex gap-2 justify-center">
+                            <button
+                                className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2 "
+                                onClick={() => handleDelete(card.id)}
+                            >
+                                <FaTrash />
+                                Delete
+                            </button>
+
+                            <button
+                                className="bg-olive px-4 py-2 rounded w-1/2 flex items-center justify-center gap-2"
+                                onClick={() => setEditingCard(card)}
+                            >
+                                <MdModeEditOutline className="text-xl" />
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                ))}
+                {editingCard && (
+                    <div className="overlay">
+                        <EditFlashcardForm
+                            flashcard={editingCard}
+                            onEdit={handleEdit}
+                            onExit={() => setEditingCard(null)}
+                        />
+                    </div>
+                )}
+                
             </div>
         </div>
         </>
