@@ -20,7 +20,6 @@ type Flashcard = {
 function Flashcards() {
     const location = useLocation()
     const flashcardSet = location.state.flashcardSet
-    console.log(flashcardSet)
     const [editingCard, setEditingCard] = useState<Flashcard | null>(null)
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([])
