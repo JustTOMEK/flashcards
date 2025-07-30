@@ -4,6 +4,10 @@ import withAuth from './withAuth'
 import { FaTrash } from "react-icons/fa6";
 import { MdModeEditOutline } from "react-icons/md";
 import EditFlashcardForm from './EditFlashcardForm';
+import { FaGlobe } from "react-icons/fa";
+import { IoMdAddCircle } from "react-icons/io";
+
+
 
 type Flashcard = {
     word: string
@@ -134,7 +138,7 @@ function Flashcards() {
 
     return (
     <div className="h-screen bg-cream  pt-10 overflow-auto">    
-        <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch  ">
+        <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
                 {flashcards.map((card, index) => (
                     <div key={index} className='min-h-[170px] bg-tan rounded-xl p-4 flex flex-col justify-between text-cream h-full w-full shadow-md hover:shadow-lg transition-shadow'>
                         <div className='text-center text-xl font-bold '>
@@ -194,19 +198,21 @@ function Flashcards() {
                 }}
             />
             <button
-                className="bg-olive rounded"
+                className="bg-olive rounded flex items-center justify-center gap-2"
                 onClick={() => {
                     handleTranslate()
                 }}
             >
+                <FaGlobe />
                     Translate
             </button>
             
             <button
-                className="px-4 py-2 bg-olive text-white rounded hover:bg-blue-600 transition"
+                className="px-4 py-2 bg-olive flex  items-center justify-center gap-2 rounded  "
                 onClick={handleAddFlashcard}
             >
-                Add Flashcard
+                <IoMdAddCircle className='text-xl' />
+                Add 
             </button>
 
         </div>
