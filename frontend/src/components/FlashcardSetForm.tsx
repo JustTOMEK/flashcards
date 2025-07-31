@@ -50,6 +50,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
 
             setName('')
             setDescription('')
+            setShowForm(false)
         } catch (error) {
             console.error('Error creating flashcard set:', error)
         }
