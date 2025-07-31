@@ -8,6 +8,7 @@ import Register from './components/Register'
 import Practice from './components/Practice'
 import Welcome from './components/Welcome'
 import Navbar from './components/Navbar'
+import Statistics from './components/Statistics'
 function AppContent() {
     const location = useLocation();
     const noNavbarPaths = ["/login", "/register", "/welcome"]
@@ -29,6 +30,8 @@ function AppContent() {
                     <Route path="/register" element={<Register />} />
 
                     <Route path="/practice" element={<Practice />} />
+
+                    <Route path="/statistics" element={<Statistics />} />
                 </Routes>
             </div>
     )
