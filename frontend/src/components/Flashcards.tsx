@@ -126,7 +126,7 @@ function Flashcards() {
     }
 
     return (
-        <div className="min-h-screen bg-cream  pt-10 overflow-auto">
+        <div className="bg-cream  pt-10 overflow-auto">
             <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
                 
             <div className="h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">

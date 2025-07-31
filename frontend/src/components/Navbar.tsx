@@ -10,7 +10,7 @@ function Navbar(){
 
     const navigate = useNavigate()
     return (
-        <div className="sticky top-0 bg-dark-olive text-white px-4 py-3 flex justify-between items-center z-[2116]">
+        <div className="sticky top-0 bg-olive text-white px-4 py-3 flex justify-between items-center z-[2116]">
             <p className="text-2xl">Welcome debilu to Flashcards </p>
             <div className="text-3xl flex justify-center items-center gap-3"> 
                 <IoStatsChart />

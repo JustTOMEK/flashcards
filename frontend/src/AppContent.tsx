@@ -13,7 +13,7 @@ function AppContent() {
     const noNavbarPaths = ["/login", "/register", "/welcome"]
     const shouldHideNavbar = noNavbarPaths.includes(location.pathname);
     return (
-            <div className="App">
+            <div className="bg-cream min-h-screen">
                 {!shouldHideNavbar && <Navbar />}
                 <Routes>
                     <Route path="/welcome" element={<Welcome />} />
