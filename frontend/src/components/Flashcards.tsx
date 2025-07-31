@@ -6,7 +6,6 @@ import { MdModeEditOutline } from 'react-icons/md'
 import EditFlashcardForm from './EditFlashcardForm'
 import { FaGlobe } from 'react-icons/fa'
 import { IoMdAddCircle } from 'react-icons/io'
-import Navbar from './Navbar'
 
 type Flashcard = {
     word: string
@@ -27,6 +26,7 @@ function Flashcards() {
     const token = localStorage.getItem('token')
 
     useEffect(() => {
+        console.log(flashcardSet.id)
         fetch(`http://localhost:3000/flashcardSets/set/${flashcardSet.id}`, {
             headers: {
                 token: token ?? '',
@@ -49,7 +49,7 @@ function Flashcards() {
                     token: token ?? '',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ word, translation, setId: flashcardSet?.setId || "" }),
+                body: JSON.stringify({ word, translation, setId: flashcardSet?.id || "" }),
             })
             const newFlashcard = await addRes.json()
 
