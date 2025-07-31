@@ -6,6 +6,7 @@ const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
 const authenticateRouter = require('./routes/authenticate')
 const meRouter = require('./routes/me')
+const statisticsRouter = require('./routes/statistics')
 
 const app = express()
 
@@ -17,5 +18,6 @@ app.use('/register', registerRouter)
 app.use('/login', loginRouter)
 app.use('/authenticate', authenticateRouter)
 app.use('/me', meRouter)
+app.use('/statistics', statisticsRouter)
 
 module.exports = app
