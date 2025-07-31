@@ -19,7 +19,13 @@ const EditFlashcardForm: React.FC<{
     onExit: () => void
     sourceLanguageCode: string
     targetLanguageCode: string
-}> = ({ flashcard, onEdit, onExit, sourceLanguageCode, targetLanguageCode }) => {
+}> = ({
+    flashcard,
+    onEdit,
+    onExit,
+    sourceLanguageCode,
+    targetLanguageCode,
+}) => {
     const [word, setWord] = useState(flashcard.word)
     const [translation, setTranslation] = useState(flashcard.translation)
 
@@ -39,7 +45,7 @@ const EditFlashcardForm: React.FC<{
         onEdit(editedCard)
     }
 
-    const handleTranslate = async() =>{
+    const handleTranslate = async () => {
         let q = ''
         let source = ''
         let target = ''

@@ -49,7 +49,11 @@ function Flashcards() {
                     token: token ?? '',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ word, translation, setId: flashcardSet?.id || "" }),
+                body: JSON.stringify({
+                    word,
+                    translation,
+                    setId: flashcardSet?.id || '',
+                }),
             })
             const newFlashcard = await addRes.json()
 
@@ -127,12 +131,10 @@ function Flashcards() {
 
     return (
         <div className="bg-cream  pt-10 overflow-auto">
-            <div className="grid grid-cols-2 md:grid-cols-5  gap-6 w-5/6 mx-auto place-items-stretch   ">
-                
-            <div className="h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
+            <div className="grid grid-cols-2 md:grid-cols-4  gap-6 w-5/6 mx-auto place-items-stretch   ">
+                <div className="h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
                     <p className="flex items-center justify-center h-full">
-                        {' '}
-                        Word:{' '}
+                        Word:
                     </p>
                     <input
                         type="text"
@@ -144,8 +146,7 @@ function Flashcards() {
                         }}
                     />
                     <p className="flex items-center justify-center h-full">
-                        {' '}
-                        Translation:{' '}
+                        Translation:
                     </p>
                     <input
                         type="text"
@@ -174,9 +175,7 @@ function Flashcards() {
                         Add
                     </button>
                 </div>
-                
-                
-                
+
                 {flashcards.map((card, index) => (
                     <div
                         key={index}
@@ -219,7 +218,6 @@ function Flashcards() {
                         />
                     </div>
                 )}
-                
             </div>
         </div>
     )

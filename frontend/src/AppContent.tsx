@@ -1,5 +1,5 @@
 import './App.css'
-import {Routes, Route, useLocation } from 'react-router'
+import { Routes, Route, useLocation } from 'react-router'
 import Flashcards from './components/Flashcards'
 import Translation from './components/Translation'
 import FlashcardSets from './components/FlashcardSets'
@@ -10,30 +10,30 @@ import Welcome from './components/Welcome'
 import Navbar from './components/Navbar'
 import Statistics from './components/Statistics'
 function AppContent() {
-    const location = useLocation();
-    const noNavbarPaths = ["/login", "/register", "/welcome"]
-    const shouldHideNavbar = noNavbarPaths.includes(location.pathname);
+    const location = useLocation()
+    const noNavbarPaths = ['/login', '/register', '/welcome']
+    const shouldHideNavbar = noNavbarPaths.includes(location.pathname)
     return (
-            <div className="bg-cream min-h-screen">
-                {!shouldHideNavbar && <Navbar />}
-                <Routes>
-                    <Route path="/welcome" element={<Welcome />} />
+        <div className="bg-cream min-h-screen">
+            {!shouldHideNavbar && <Navbar />}
+            <Routes>
+                <Route path="/welcome" element={<Welcome />} />
 
-                    <Route path="/" element={<FlashcardSets />} />
+                <Route path="/" element={<FlashcardSets />} />
 
-                    <Route path="/set" element={<Flashcards />} />
+                <Route path="/set" element={<Flashcards />} />
 
-                    <Route path="/translation" element={<Translation />} />
+                <Route path="/translation" element={<Translation />} />
 
-                    <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login />} />
 
-                    <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<Register />} />
 
-                    <Route path="/practice" element={<Practice />} />
+                <Route path="/practice" element={<Practice />} />
 
-                    <Route path="/statistics" element={<Statistics />} />
-                </Routes>
-            </div>
+                <Route path="/statistics" element={<Statistics />} />
+            </Routes>
+        </div>
     )
 }
 
