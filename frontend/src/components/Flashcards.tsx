@@ -214,6 +214,8 @@ function Flashcards() {
                             flashcard={editingCard}
                             onEdit={handleEdit}
                             onExit={() => setEditingCard(null)}
+                            sourceLanguageCode={flashcardSet.sourceLanguageCode}
+                            targetLanguageCode={flashcardSet.targetLanguageCode}
                         />
                     </div>
                 )}
