@@ -17,7 +17,9 @@ const EditFlashcardForm: React.FC<{
     flashcard: Flashcard
     onEdit: (edited: Flashcard) => void
     onExit: () => void
-}> = ({ flashcard, onEdit, onExit }) => {
+    sourceLanguageCode: string
+    targetLanguageCode: string
+}> = ({ flashcard, onEdit, onExit, sourceLanguageCode, targetLanguageCode }) => {
     const [word, setWord] = useState(flashcard.word)
     const [translation, setTranslation] = useState(flashcard.translation)
 
@@ -37,7 +39,51 @@ const EditFlashcardForm: React.FC<{
         onEdit(editedCard)
     }
 
-    function handleTranslate(): void {}
+    const handleTranslate = async() =>{
+        let q = ''
+        let source = ''
+        let target = ''
+        if (translation == '') {
+            q = word
+            source = sourceLanguageCode
+            target = targetLanguageCode
+        } else if (word == '') {
+            q = translation
+            source = targetLanguageCode
+            target = sourceLanguageCode
+        } else {
+            console.log('Leave word or translation blank')
+        }
+
+        const translateResponse = await fetch(
+            'http://127.0.0.1:5000/translate',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    q: q,
+                    source: source,
+                    target: target,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+        console.log('Odpowiedz: ', translateResponse)
+        if (!translateResponse.ok) {
+            console.log('No translation available for custom languages')
+            return
+        }
+
+        const response = await translateResponse.json()
+        const translatedText = response.translatedText
+
+        if (translation == '') {
+            setTranslation(translatedText)
+        } else if (word == '') {
+            setWord(translatedText)
+        }
+    }
 
     return (
         <div className="overflow-auto relative h-1/3 w-1/3 bg-olive rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
