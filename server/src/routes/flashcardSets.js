@@ -25,7 +25,7 @@ router.get('/set/:setId', authenticate, async (req, res) => {
     const flashcards =
         db.data?.flashcards.filter((card) => card.setId === setId) || []
 
-    res.json(flashcards)
+    res.status(200).json(flashcards)
 })
 
 // this is to get all sets that an userowns
