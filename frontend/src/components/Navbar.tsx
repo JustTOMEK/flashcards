@@ -11,13 +11,15 @@ function Navbar() {
             <p className="text-2xl">Welcome debilu to Flashcards </p>
             <div className="text-3xl flex justify-center items-center gap-3">
                 <IoStatsChart
+                aria-label='Statistics'
                     onClick={() => {
                         navigate('/statistics')
                     }}
                 />
-                <FaRegUserCircle />
+                <FaRegUserCircle aria-label='Profile' />
                 <p className="text-4xl">
                     <IoLogOut
+                    aria-label='Logout'
                         onClick={() => {
                             localStorage.removeItem('token')
                             navigate('/login')
