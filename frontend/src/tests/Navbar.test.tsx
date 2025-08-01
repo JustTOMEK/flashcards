@@ -86,7 +86,7 @@ describe('Navbar Component (withAuth)', () => {
       expect(screen.getByText(/Welcome.*to Flashcards/i)).toBeInTheDocument()
     })
 
-    const statsIcon = screen.getByRole('img', { hidden: true }) 
+    const statsIcon = screen.getByLabelText('Statistics')
     await userEvent.click(statsIcon)
 
     expect(mockNavigate).toHaveBeenCalledWith('/statistics')
@@ -109,8 +109,9 @@ describe('Navbar Component (withAuth)', () => {
       expect(screen.getByText(/Welcome.*to Flashcards/i)).toBeInTheDocument()
     })
 
-    const logoutIcon = screen.getAllByRole('img', { hidden: true }).at(-1)!
+    const logoutIcon = screen.getByLabelText('Logout')
     await userEvent.click(logoutIcon)
+
 
     expect(localStorage.getItem('token')).toBeNull()
     expect(mockNavigate).toHaveBeenCalledWith('/login')
