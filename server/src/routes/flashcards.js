@@ -15,12 +15,6 @@ type Flashcard = {
 }
 */
 
-//Get is never used, all flashcards are never displayed
-router.get('/', authenticate, async (req, res) => {
-    await db.read()
-    const flashcards = db.data?.flashcards || []
-    res.status(200).json(flashcards)
-})
 
 router.post('/', authenticate, async (req, res) => {
     const { word, translation, setId } = req.body
