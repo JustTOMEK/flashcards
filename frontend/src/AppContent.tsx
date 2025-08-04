@@ -1,7 +1,6 @@
 import './App.css'
 import { Routes, Route, useLocation } from 'react-router'
 import Flashcards from './components/Flashcards'
-import Translation from './components/Translation'
 import FlashcardSets from './components/FlashcardSets'
 import Login from './components/Login'
 import Register from './components/Register'
@@ -22,8 +21,6 @@ function AppContent() {
                 <Route path="/" element={<FlashcardSets />} />
 
                 <Route path="/set" element={<Flashcards />} />
-
-                <Route path="/translation" element={<Translation />} />
 
                 <Route path="/login" element={<Login />} />
 
