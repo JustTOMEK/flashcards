@@ -103,7 +103,7 @@ const EditFlashcardForm: React.FC<{
             <p className="flex items-center justify-center h-full"> Word: </p>
             <input
                 type="text"
-                placeholder="Name"
+                placeholder="Word"
                 value={word}
                 className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2 "
                 onChange={(e) => setWord(e.target.value)}
@@ -114,7 +114,7 @@ const EditFlashcardForm: React.FC<{
             </p>
             <input
                 type="text"
-                placeholder="Description"
+                placeholder="Translation"
                 value={translation}
                 className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setTranslation(e.target.value)}
