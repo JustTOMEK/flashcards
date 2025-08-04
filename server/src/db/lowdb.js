@@ -1,5 +1,5 @@
-const { Low } = require('lowdb')
-const { JSONFile, Memory } = require('lowdb/node')
+const { LowSync, MemorySync } = require('lowdb')
+const { JSONFileSync } = require('lowdb/node')
 
 const defaultData = {
   flashcards: [],
@@ -8,20 +8,22 @@ const defaultData = {
 }
 
 const createDB = (adapterType = 'json', filePath = 'db.json') => {
-    const adapter =
+  const adapter =
     adapterType === 'memory'
-        ? new Memory()
-        : new JSONFile(filePath)
+      ? new MemorySync()
+      : new JSONFileSync(filePath)
 
-    const db = new Low(adapter, defaultData)
+  console.log(adapter)
 
-    const initDB = async () => {
-    await db.read()
+  const db = new LowSync(adapter, defaultData)
+
+  const initDB = () => {
+    db.read()
     db.data ||= { ...defaultData }
-    await db.write()
-    }
+    db.write()
+  }
 
-    return { db, initDB }
+  return { db, initDB }
 }
 
 module.exports = { createDB }
