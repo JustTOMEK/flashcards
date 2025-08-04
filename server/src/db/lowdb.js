@@ -1,19 +1,27 @@
-const { JSONFile } = require('lowdb/node')
 const { Low } = require('lowdb')
+const { JSONFile, Memory } = require('lowdb/node')
 
 const defaultData = {
-    flashcards: [],
-    flashcardSets: [],
-    users: [],
+  flashcards: [],
+  flashcardSets: [],
+  users: [],
 }
 
-const adapter = new JSONFile('db.json')
-const db = new Low(adapter, defaultData)
+const createDB = (adapterType = 'json', filePath = 'db.json') => {
+    const adapter =
+    adapterType === 'memory'
+        ? new Memory()
+        : new JSONFile(filePath)
 
-const initDB = async () => {
+    const db = new Low(adapter, defaultData)
+
+    const initDB = async () => {
     await db.read()
-    db.data ||= defaultData()
+    db.data ||= { ...defaultData }
     await db.write()
+    }
+
+    return { db, initDB }
 }
 
-module.exports = { db, initDB }
+module.exports = { createDB }
