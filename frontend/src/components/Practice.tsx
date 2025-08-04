@@ -36,9 +36,6 @@ function Practice() {
     }, [])
 
     async function handleAnswer(answer: boolean) {
-        if (isAnswered) {
-            return
-        }
         let updatedLevel = flashcards[currentIndex].level
         if (answer && updatedLevel < 3) {
             updatedLevel = updatedLevel + 1
