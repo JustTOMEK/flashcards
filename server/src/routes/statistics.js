@@ -1,63 +1,64 @@
-require('dotenv').config()
-const jwt = require('jsonwebtoken')
-const { db } = require('../db/lowdb')
 const express = require('express')
 const { authenticate } = require('./authenticateMid')
 const router = express.Router()
 
-router.get('/percentage', authenticate, async (req, res) => {
-    const userId = req.userId
-    await db.read()
-    const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
+function createStatisticsRouter(db) {
+  const router = express.Router()
+    router.get('/percentage', authenticate, async (req, res) => {
+        const userId = req.userId
+        await db.read()
+        const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
 
-    const result = sets.map((set) => {
-        const flashcardsForSet = db.data.flashcards.filter(
-            (card) => card.setId === set.id
-        )
-        const total = flashcardsForSet.length
+        const result = sets.map((set) => {
+            const flashcardsForSet = db.data.flashcards.filter(
+                (card) => card.setId === set.id
+            )
+            const total = flashcardsForSet.length
 
-        const level3Count = flashcardsForSet.reduce((count, card) => {
-            return card.level === 3 ? count + 1 : count
-        }, 0)
+            const level3Count = flashcardsForSet.reduce((count, card) => {
+                return card.level === 3 ? count + 1 : count
+            }, 0)
 
-        const level3Percentage = total > 0 ? (level3Count / total) * 100 : 0
+            const level3Percentage = total > 0 ? (level3Count / total) * 100 : 0
 
-        return {
-            setName: set.name,
-            level3Percentage: level3Percentage.toFixed(2) + '%',
-        }
+            return {
+                setName: set.name,
+                level3Percentage: level3Percentage.toFixed(2) + '%',
+            }
+        })
+        res.json(result)
     })
-    res.json(result)
-})
 
-router.get('/completed', authenticate, async (req, res) => {
-    const userId = req.userId
-    await db.read()
-    const sets =
-        db.data?.flashcardSets.filter((set) => set.userId === userId) || []
+    router.get('/completed', authenticate, async (req, res) => {
+        const userId = req.userId
+        await db.read()
+        const sets =
+            db.data?.flashcardSets.filter((set) => set.userId === userId) || []
 
-    const flashcards = db.data?.flashcards || []
+        const flashcards = db.data?.flashcards || []
 
-    const userSetIds = sets.map((set) => set.id)
+        const userSetIds = sets.map((set) => set.id)
 
-    const userFlashcards = flashcards.filter((card) =>
-        userSetIds.includes(card.setId)
-    )
+        const userFlashcards = flashcards.filter((card) =>
+            userSetIds.includes(card.setId)
+        )
 
-    let completed = 0
-    let notCompleted = 0
-    let repetitions = 0
+        let completed = 0
+        let notCompleted = 0
+        let repetitions = 0
 
-    for (const card of userFlashcards) {
-        repetitions += card.repetitions
-        if (card.level === 3) {
-            completed++
-        } else {
-            notCompleted++
+        for (const card of userFlashcards) {
+            repetitions += card.repetitions
+            if (card.level === 3) {
+                completed++
+            } else {
+                notCompleted++
+            }
         }
-    }
 
-    res.json({ completed, notCompleted, repetitions })
-})
+        res.json({ completed, notCompleted, repetitions })
+    })
+    return router
+}
 
-module.exports = router
+module.exports = {createStatisticsRouter}

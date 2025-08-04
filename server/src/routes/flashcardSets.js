@@ -1,8 +1,7 @@
 const express = require('express')
-const { db } = require('../db/lowdb')
 const { v4: uuidv4 } = require('uuid')
 const { authenticate } = require('./authenticateMid')
-const router = express.Router()
+
 
 /*
 type FlashcardSet = {
@@ -16,95 +15,97 @@ type FlashcardSet = {
     targetLanguageCode: string
 }
 */
+function createFlashcardSetsRouter(db){
+    const router = express.Router()
+    // this is to get flashcards of specific flascardSet
+    router.get('/set/:setId', authenticate, async (req, res) => {
+        const { setId } = req.params
+        await db.read()
+        const flashcards =
+            db.data?.flashcards.filter((card) => card.setId === setId) || []
 
-// this is to get flashcards of specific flascardSet
-router.get('/set/:setId', authenticate, async (req, res) => {
-    const { setId } = req.params
-    await db.read()
-
-    const flashcards =
-        db.data?.flashcards.filter((card) => card.setId === setId) || []
-
-    res.status(200).json(flashcards)
-})
-
-// this is to get all sets that an userowns
-router.get('/', authenticate, async (req, res) => {
-    const userId = req.userId
-    await db.read()
-
-    const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
-
-    res.json(sets)
-})
-
-router.get(`/languagecodes/:setId`, authenticate, async (req, res) => {
-    const { setId } = req.params
-    await db.read()
-    const set = db.data?.flashcardSets.find((set) => set.id === setId)
-
-    res.status(201).json({
-        sourceLanguageCode: set.sourceLanguageCode,
-        targetLanguageCode: set.targetLanguageCode,
+        res.status(200).json(flashcards)
     })
-})
 
-router.post('/', authenticate, async (req, res) => {
-    const {
-        name,
-        description,
-        sourceLanguage,
-        targetLanguage,
-        sourceLanguageCode,
-        targetLanguageCode,
-    } = req.body
+    // this is to get all sets that an userowns
+    router.get('/', authenticate, async (req, res) => {
+        const userId = req.userId
+        await db.read()
 
-    const userId = req.userId
-    const id = uuidv4()
+        const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
 
-    const newFlashcardSet = {
-        id,
-        name,
-        description,
-        userId,
-        sourceLanguage,
-        targetLanguage,
-        sourceLanguageCode,
-        targetLanguageCode,
-    }
+        res.json(sets)
+    })
 
-    if (!db.data.flashcardSets) {
-        db.data.flashcardSets = []
-    }
+    router.get(`/languagecodes/:setId`, authenticate, async (req, res) => {
+        const { setId } = req.params
+        await db.read()
+        const set = db.data?.flashcardSets.find((set) => set.id === setId)
 
-    db.data.flashcardSets.push(newFlashcardSet)
+        res.status(201).json({
+            sourceLanguageCode: set.sourceLanguageCode,
+            targetLanguageCode: set.targetLanguageCode,
+        })
+    })
 
-    await db.write()
+    router.post('/', authenticate, async (req, res) => {
+        const {
+            name,
+            description,
+            sourceLanguage,
+            targetLanguage,
+            sourceLanguageCode,
+            targetLanguageCode,
+        } = req.body
 
-    res.status(201).json(newFlashcardSet)
-})
+        const userId = req.userId
+        const id = uuidv4()
 
-router.delete('/:id', authenticate, async (req, res) => {
-    const { id } = req.params
-    await db.read()
-
-    const flashcardSets = db.data?.flashcardSets || []
-
-    const index = flashcardSets.findIndex((card) => card.id === id)
-
-    flashcardSets.splice(index, 1)
-
-    const flashcards = db.data?.flashcards || []
-
-    for (let i = flashcards.length - 1; i >= 0; i--) {
-        if (flashcards[i].setId === id) {
-            flashcards.splice(i, 1)
+        const newFlashcardSet = {
+            id,
+            name,
+            description,
+            userId,
+            sourceLanguage,
+            targetLanguage,
+            sourceLanguageCode,
+            targetLanguageCode,
         }
-    }
 
-    await db.write()
+        if (!db.data.flashcardSets) {
+            db.data.flashcardSets = []
+        }
 
-    res.status(200).json()
-})
+        db.data.flashcardSets.push(newFlashcardSet)
 
-module.exports = router
+        await db.write()
+
+        res.status(201).json(newFlashcardSet)
+    })
+
+    router.delete('/:id', authenticate, async (req, res) => {
+        const { id } = req.params
+        await db.read()
+
+        const flashcardSets = db.data?.flashcardSets || []
+
+        const index = flashcardSets.findIndex((card) => card.id === id)
+
+        flashcardSets.splice(index, 1)
+
+        const flashcards = db.data?.flashcards || []
+
+        for (let i = flashcards.length - 1; i >= 0; i--) {
+            if (flashcards[i].setId === id) {
+                flashcards.splice(i, 1)
+            }
+        }
+
+        await db.write()
+
+        res.status(200).json()
+    })
+    return router
+}
+
+module.exports = {createFlashcardSetsRouter}

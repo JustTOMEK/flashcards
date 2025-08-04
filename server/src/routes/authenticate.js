@@ -3,15 +3,19 @@ const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 
-//This is for the withAuth wrapper to use
-router.post('/', async (req, res) => {
-    const token = req.headers['token']
-    try {
-        jwt.verify(token, process.env.JWT_SECRET)
-        return res.status(200).json({ message: 'Token is ok' })
-    } catch (error) {
-        return res.status(401).json({ error: 'Invalid token' })
-    }
-})
+function createAuthenticateRouter(db){
 
-module.exports = router
+    
+    router.post('/', async (req, res) => {
+        const token = req.headers['token']
+        try {
+            jwt.verify(token, process.env.JWT_SECRET)
+            return res.status(200).json({ message: 'Token is ok' })
+        } catch (error) {
+            return res.status(401).json({ error: 'Invalid token' })
+        }
+    })
+    return router
+}
+
+module.exports = {createAuthenticateRouter}

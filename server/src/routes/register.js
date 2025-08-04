@@ -1,31 +1,32 @@
 const express = require('express')
-const { db } = require('../db/lowdb')
 const bcrypt = require('bcrypt')
 const { v4: uuidv4 } = require('uuid')
 
-const router = express.Router()
 
-router.post('/', async (req, res) => {
+function createRegisterRouter(db) {
+  const router = express.Router()
+
+  router.post('/', async (req, res) => {
     const { username, password } = req.body
     const id = uuidv4()
 
-    //Checking whether user with this username already exists
-    const existingUser = db.data.users.find(
-        (user) => user.username === username
-    )
+    await db.read()
+
+    const existingUser = db.data.users.find(user => user.username === username)
     if (existingUser) {
-        return res.status(409).json({ message: 'Username already taken.' })
+      return res.status(409).json({ message: 'Username already taken.' })
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
-
     const newUser = { username, hashedPassword, id }
 
     db.data.users.push(newUser)
-
     await db.write()
 
-    res.status(201).json({ message: 'User created sucessfully' })
-})
+    res.status(201).json({ message: 'User created successfully' })
+  })
 
-module.exports = router
+  return router
+}
+
+module.exports = { createRegisterRouter }
