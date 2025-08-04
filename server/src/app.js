@@ -1,6 +1,5 @@
 const cors = require('cors')
 const express = require('express')
-const { createDB } = require('./db/lowdb')
 const { createRegisterRouter } = require('./routes/register')
 const { createLoginRouter } = require('./routes/login')
 const { createFlashcardsRouter } = require('./routes/flashcards')
@@ -14,9 +13,15 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const initApp = async () => {
-  const { db, initDB } = createDB('json', 'db.json')
-  await initDB()
+const initApp = async (dbInstance = null) => {
+  let db = dbInstance
+
+  if (!db) {
+    const { createDB } = require('./db/lowdb')
+    const result = createDB('json', 'db.json')
+    db = result.db
+    await result.initDB()
+  }
 
   app.locals.db = db
 
