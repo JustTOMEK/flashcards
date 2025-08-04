@@ -15,87 +15,85 @@ type Flashcard = {
 }
 */
 
-function createFlashcardsRouter(db){
-  router.post('/', authenticate, async (req, res) => {
-      try {
-        const { word, translation, setId } = req.body
-        const id = uuidv4()
-    
-        const newFlashcard = {
-          word,
-          translation,
-          id,
-          setId,
-          level: 0,
-          repetitions: 0,
+function createFlashcardsRouter(db) {
+    router.post('/', authenticate, async (req, res) => {
+        try {
+            const { word, translation, setId } = req.body
+            const id = uuidv4()
+
+            const newFlashcard = {
+                word,
+                translation,
+                id,
+                setId,
+                level: 0,
+                repetitions: 0,
+            }
+
+            if (!db.data.flashcards) {
+                db.data.flashcards = []
+            }
+
+            db.data.flashcards.push(newFlashcard)
+
+            await db.write()
+
+            res.status(201).json(newFlashcard)
+        } catch (err) {
+            console.error('Error creating flashcard:', err)
+            res.status(500).json({ error: 'Internal Server Error' })
         }
-    
-        if (!db.data.flashcards) {
-          db.data.flashcards = []
-        }
-    
-        db.data.flashcards.push(newFlashcard)
-    
-        await db.write()
-        
-        res.status(201).json(newFlashcard)
-      } catch (err) {
-        console.error('Error creating flashcard:', err)
-        res.status(500).json({ error: 'Internal Server Error' })
-      }
     })
-    
 
-  router.patch('/level/:id', authenticate, async (req, res) => {
-      const { id } = req.params
-      const { updatedLevel } = req.body
-      await db.read()
+    router.patch('/level/:id', authenticate, async (req, res) => {
+        const { id } = req.params
+        const { updatedLevel } = req.body
+        await db.read()
 
-      const flashcards = db.data?.flashcards || []
+        const flashcards = db.data?.flashcards || []
 
-      const index = flashcards.findIndex((card) => card.id === id)
+        const index = flashcards.findIndex((card) => card.id === id)
 
-      flashcards[index].level = updatedLevel
-      flashcards[index].repetitions = flashcards[index].repetitions + 1
+        flashcards[index].level = updatedLevel
+        flashcards[index].repetitions = flashcards[index].repetitions + 1
 
-      await db.write()
+        await db.write()
 
-      res.status(200).json({ message: 'Flashcard updated' })
-  })
+        res.status(200).json({ message: 'Flashcard updated' })
+    })
 
-  router.patch('/edit/:id', authenticate, async (req, res) => {
-      const { id } = req.params
-      const { word, translation } = req.body
-      await db.read()
+    router.patch('/edit/:id', authenticate, async (req, res) => {
+        const { id } = req.params
+        const { word, translation } = req.body
+        await db.read()
 
-      const flashcards = db.data?.flashcards || []
+        const flashcards = db.data?.flashcards || []
 
-      const index = flashcards.findIndex((card) => card.id === id)
+        const index = flashcards.findIndex((card) => card.id === id)
 
-      flashcards[index].word = word
-      flashcards[index].translation = translation
+        flashcards[index].word = word
+        flashcards[index].translation = translation
 
-      await db.write()
+        await db.write()
 
-      res.status(200).json({ message: 'Flashcard updated' })
-  })
+        res.status(200).json({ message: 'Flashcard updated' })
+    })
 
+    router.delete('/:id', authenticate, async (req, res) => {
+        const { id } = req.params
+        await db.read()
 
-  router.delete('/:id', authenticate, async (req, res) => {
-      const { id } = req.params
-      await db.read()
+        const flashcards = db.data?.flashcards || []
 
-      const flashcards = db.data?.flashcards || []
+        const index = flashcards.findIndex((card) => card.id === id)
 
-      const index = flashcards.findIndex((card) => card.id === id)
+        flashcards.splice(index, 1)
 
-      flashcards.splice(index, 1)
+        await db.write()
 
-      await db.write()
-
-      res.status(200).json()
-  })
-  return router
+        res.status(200).json()
+    })
+    return router
 }
 
-module.exports = {createFlashcardsRouter}
+module.exports = { createFlashcardsRouter }

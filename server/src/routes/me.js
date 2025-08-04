@@ -2,7 +2,7 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const express = require('express')
 
-function createMeRouter(db){
+function createMeRouter(db) {
     const router = express.Router()
 
     router.get('/', async (req, res) => {
@@ -21,4 +21,4 @@ function createMeRouter(db){
     return router
 }
 
-module.exports = {createMeRouter}
+module.exports = { createMeRouter }

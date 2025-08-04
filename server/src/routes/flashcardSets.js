@@ -2,7 +2,6 @@ const express = require('express')
 const { v4: uuidv4 } = require('uuid')
 const { authenticate } = require('./authenticateMid')
 
-
 /*
 type FlashcardSet = {
     name: string
@@ -15,7 +14,7 @@ type FlashcardSet = {
     targetLanguageCode: string
 }
 */
-function createFlashcardSetsRouter(db){
+function createFlashcardSetsRouter(db) {
     const router = express.Router()
     // this is to get flashcards of specific flascardSet
     router.get('/set/:setId', authenticate, async (req, res) => {
@@ -32,7 +31,9 @@ function createFlashcardSetsRouter(db){
         const userId = req.userId
         await db.read()
 
-        const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
+        const sets = db.data?.flashcardSets.filter(
+            (set) => set.userId === userId
+        )
 
         res.json(sets)
     })
@@ -108,4 +109,4 @@ function createFlashcardSetsRouter(db){
     return router
 }
 
-module.exports = {createFlashcardSetsRouter}
+module.exports = { createFlashcardSetsRouter }

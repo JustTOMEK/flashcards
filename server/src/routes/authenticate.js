@@ -3,9 +3,7 @@ const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 
-function createAuthenticateRouter(db){
-
-    
+function createAuthenticateRouter(db) {
     router.post('/', async (req, res) => {
         const token = req.headers['token']
         try {
@@ -18,4 +16,4 @@ function createAuthenticateRouter(db){
     return router
 }
 
-module.exports = {createAuthenticateRouter}
+module.exports = { createAuthenticateRouter }

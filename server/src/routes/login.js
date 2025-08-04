@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 function createLoginRouter(db) {
-  const router = express.Router()
+    const router = express.Router()
 
     router.post('/', async (req, res) => {
         await db.read()
@@ -15,13 +15,16 @@ function createLoginRouter(db) {
                 .status(400)
                 .json({ message: 'Username and password cannot be empty' })
         }
-        
+
         const user = db.data.users.find((user) => user.username === username)
         if (!user) {
             return res.status(401).json({ message: 'Invalid username' })
         }
 
-        const password_good = await bcrypt.compare(password, user.hashedPassword)
+        const password_good = await bcrypt.compare(
+            password,
+            user.hashedPassword
+        )
 
         if (!password_good) {
             return res.status(401).json({ message: 'Invalid password' })
@@ -36,4 +39,4 @@ function createLoginRouter(db) {
     return router
 }
 
-module.exports = {createLoginRouter}
+module.exports = { createLoginRouter }

@@ -4,100 +4,108 @@ import { describe, test, vi, beforeEach, expect } from 'vitest'
 import FlashcardSetForm from '../components/FlashcardSetForm'
 
 describe('FlashcardSetForm Component', () => {
-  const mockSetShowForm = vi.fn()
-  const mockSetFlashcardSets = vi.fn()
+    const mockSetShowForm = vi.fn()
+    const mockSetFlashcardSets = vi.fn()
 
-  beforeEach(() => {
-    vi.resetAllMocks()
-    localStorage.clear()
-  })
+    beforeEach(() => {
+        vi.resetAllMocks()
+        localStorage.clear()
+    })
 
-  test('renders form inputs and buttons', () => {
-    render(
-      <FlashcardSetForm
-        setShowForm={mockSetShowForm}
-        setflashcardSets={mockSetFlashcardSets}
-      />
-    )
+    test('renders form inputs and buttons', () => {
+        render(
+            <FlashcardSetForm
+                setShowForm={mockSetShowForm}
+                setflashcardSets={mockSetFlashcardSets}
+            />
+        )
 
-    expect(screen.getByText('Create a New Flashcard Set')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Name')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Description')).toBeInTheDocument()
-    expect(screen.getByText('Choose source language:')).toBeInTheDocument()
-    expect(screen.getByText('Choose target language:')).toBeInTheDocument()
-    expect(screen.getByText('Add Set')).toBeInTheDocument()
-  })
+        expect(
+            screen.getByText('Create a New Flashcard Set')
+        ).toBeInTheDocument()
+        expect(screen.getByPlaceholderText('Name')).toBeInTheDocument()
+        expect(screen.getByPlaceholderText('Description')).toBeInTheDocument()
+        expect(screen.getByText('Choose source language:')).toBeInTheDocument()
+        expect(screen.getByText('Choose target language:')).toBeInTheDocument()
+        expect(screen.getByText('Add Set')).toBeInTheDocument()
+    })
 
-  test('updates name and description inputs', async () => {
-    render(<FlashcardSetForm setShowForm={mockSetShowForm} />)
+    test('updates name and description inputs', async () => {
+        render(<FlashcardSetForm setShowForm={mockSetShowForm} />)
 
-    const nameInput = screen.getByPlaceholderText('Name')
-    const descriptionInput = screen.getByPlaceholderText('Description')
+        const nameInput = screen.getByPlaceholderText('Name')
+        const descriptionInput = screen.getByPlaceholderText('Description')
 
-    await userEvent.type(nameInput, 'My Flashcards')
-    await userEvent.type(descriptionInput, 'Some description')
+        await userEvent.type(nameInput, 'My Flashcards')
+        await userEvent.type(descriptionInput, 'Some description')
 
-    expect(nameInput).toHaveValue('My Flashcards')
-    expect(descriptionInput).toHaveValue('Some description')
-  })
+        expect(nameInput).toHaveValue('My Flashcards')
+        expect(descriptionInput).toHaveValue('Some description')
+    })
 
-  test('closes form when close button is clicked', async () => {
-    render(<FlashcardSetForm setShowForm={mockSetShowForm} />)
+    test('closes form when close button is clicked', async () => {
+        render(<FlashcardSetForm setShowForm={mockSetShowForm} />)
 
-    const closeButton = screen.getByRole('button', { name: '' })
-    await userEvent.click(closeButton)
+        const closeButton = screen.getByRole('button', { name: '' })
+        await userEvent.click(closeButton)
 
-    expect(mockSetShowForm).toHaveBeenCalledWith(false)
-  })
+        expect(mockSetShowForm).toHaveBeenCalledWith(false)
+    })
 
-  test('submits form and updates flashcard sets', async () => {
-    const mockResponse = {
-      id: 1,
-      name: 'Test Set',
-      description: 'Test Description',
-      sourceLanguage: 'English',
-      targetLanguage: 'Spanish',
-      sourceLanguageCode: 'en',
-      targetLanguageCode: 'es',
-    }
+    test('submits form and updates flashcard sets', async () => {
+        const mockResponse = {
+            id: 1,
+            name: 'Test Set',
+            description: 'Test Description',
+            sourceLanguage: 'English',
+            targetLanguage: 'Spanish',
+            sourceLanguageCode: 'en',
+            targetLanguageCode: 'es',
+        }
 
-    localStorage.setItem('token', 'test-token')
+        localStorage.setItem('token', 'test-token')
 
-    vi.stubGlobal('fetch', vi.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(mockResponse),
-      })
-    ) as any)
+        vi.stubGlobal(
+            'fetch',
+            vi.fn(() =>
+                Promise.resolve({
+                    json: () => Promise.resolve(mockResponse),
+                })
+            ) as any
+        )
 
-    render(
-      <FlashcardSetForm
-        setShowForm={mockSetShowForm}
-        setflashcardSets={mockSetFlashcardSets}
-      />
-    )
+        render(
+            <FlashcardSetForm
+                setShowForm={mockSetShowForm}
+                setflashcardSets={mockSetFlashcardSets}
+            />
+        )
 
-    await userEvent.type(screen.getByPlaceholderText('Name'), 'Test Set')
-    await userEvent.type(screen.getByPlaceholderText('Description'), 'Test Description')
+        await userEvent.type(screen.getByPlaceholderText('Name'), 'Test Set')
+        await userEvent.type(
+            screen.getByPlaceholderText('Description'),
+            'Test Description'
+        )
 
-    const languageComboboxes = screen.getAllByRole('combobox')
-    await userEvent.click(languageComboboxes[0])
-    await userEvent.type(languageComboboxes[0], 'English')
-    await userEvent.click(await screen.findByText('English'))
+        const languageComboboxes = screen.getAllByRole('combobox')
+        await userEvent.click(languageComboboxes[0])
+        await userEvent.type(languageComboboxes[0], 'English')
+        await userEvent.click(await screen.findByText('English'))
 
-    await userEvent.click(languageComboboxes[1])
-    await userEvent.type(languageComboboxes[1], 'Spanish')
-    await userEvent.click(await screen.findByText('Spanish'))
+        await userEvent.click(languageComboboxes[1])
+        await userEvent.type(languageComboboxes[1], 'Spanish')
+        await userEvent.click(await screen.findByText('Spanish'))
 
-    await userEvent.click(screen.getByText('Add Set'))
+        await userEvent.click(screen.getByText('Add Set'))
 
-    await waitFor(() => {
-        expect(mockSetFlashcardSets).toHaveBeenCalled()
-      })
-      
-      const updateFn = mockSetFlashcardSets.mock.calls[0][0]
-      const result = updateFn([])
-      
-      expect(result).toEqual([mockResponse])
-      expect(mockSetShowForm).toHaveBeenCalledWith(false)      
-  })
+        await waitFor(() => {
+            expect(mockSetFlashcardSets).toHaveBeenCalled()
+        })
+
+        const updateFn = mockSetFlashcardSets.mock.calls[0][0]
+        const result = updateFn([])
+
+        expect(result).toEqual([mockResponse])
+        expect(mockSetShowForm).toHaveBeenCalledWith(false)
+    })
 })

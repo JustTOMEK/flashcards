@@ -3,11 +3,13 @@ const { authenticate } = require('./authenticateMid')
 const router = express.Router()
 
 function createStatisticsRouter(db) {
-  const router = express.Router()
+    const router = express.Router()
     router.get('/percentage', authenticate, async (req, res) => {
         const userId = req.userId
         await db.read()
-        const sets = db.data?.flashcardSets.filter((set) => set.userId === userId)
+        const sets = db.data?.flashcardSets.filter(
+            (set) => set.userId === userId
+        )
 
         const result = sets.map((set) => {
             const flashcardsForSet = db.data.flashcards.filter(
@@ -61,4 +63,4 @@ function createStatisticsRouter(db) {
     return router
 }
 
-module.exports = {createStatisticsRouter}
+module.exports = { createStatisticsRouter }
