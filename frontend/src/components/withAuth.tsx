@@ -32,7 +32,6 @@ const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
             return (
                 <div className="h-screen w-screen bg-cream flex justify-center items-center">
                     <p className="text-4xl font-bold text-dark-olive">
-                        {' '}
                         Loading...
                     </p>
                 </div>
