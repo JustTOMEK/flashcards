@@ -38,7 +38,7 @@ function createLoginRouter(db) {
         }
 
         const user = db.data.users.find((user) => user.username === username)
-        
+
         if (!user) {
             return res.status(401).json({ message: 'Invalid username' })
         }
