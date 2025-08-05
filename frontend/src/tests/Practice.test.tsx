@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi, describe, beforeEach, test, expect } from 'vitest'
 import { MemoryRouter } from 'react-router'
