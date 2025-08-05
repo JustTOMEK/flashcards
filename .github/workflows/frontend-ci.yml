@@ -25,15 +25,14 @@ jobs:
         cd frontend
         npm install
 
-
-    - name: Test frontend
+    - name: Test frontend with coverage
       run: |
         cd frontend
-        npm test
+        npm coverage
 
     - name: Format with prettier
       run: |
-        cd frontened
+        cd frontend
         npm format
         
     - name: Build frontend
