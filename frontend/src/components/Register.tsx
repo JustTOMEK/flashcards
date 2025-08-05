@@ -30,7 +30,7 @@ function Register() {
                 console.log('Register unsucessful')
             }
         } catch (error) {
-            console.error('Error tu jesstt: ', error)
+            console.error('Error tu jest: ', error)
         }
     }
 
