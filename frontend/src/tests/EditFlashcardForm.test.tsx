@@ -112,15 +112,13 @@ describe('EditFlashcardForm Component', () => {
     })
 
     test('calls translation API and updates translation', async () => {
-        vi.stubGlobal(
-            'fetch',
-            vi.fn(() =>
-                Promise.resolve({
-                    ok: true,
-                    json: () => Promise.resolve({ translatedText: 'bonjour' }),
-                })
-            ) as any
-        )
+        vi.stubGlobal('fetch', vi.fn(() =>
+            Promise.resolve({
+              ok: true,
+              json: () => Promise.resolve({ translatedText: 'bonjour' }),
+            })
+          ) as unknown as typeof fetch)
+          
 
         render(
             <MemoryRouter>
