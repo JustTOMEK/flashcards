@@ -39,8 +39,7 @@ function createLoginRouter(db) {
         }
 
         const user = db.data.users.find((user) => user.username === username)
-        updateStreak(user)
-        await db.write()
+        
         if (!user) {
             return res.status(401).json({ message: 'Invalid username' })
         }
@@ -54,6 +53,8 @@ function createLoginRouter(db) {
         const token = sign({ id: user.id }, process.env.JWT_SECRET, {
             expiresIn: '1h',
         })
+        updateStreak(user)
+        await db.write()
 
         return res.status(200).json({ message: 'Login successful', token })
     })
