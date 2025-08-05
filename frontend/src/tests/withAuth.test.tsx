@@ -59,8 +59,14 @@ describe('withAuth HOC', () => {
 
         vi.stubGlobal(
             'fetch',
-            vi.fn(() => Promise.resolve({ ok: false })) as any
-        )
+            vi.fn(() =>
+              Promise.resolve({
+                ok: false,
+                json: () => Promise.resolve({}),
+              })
+            ) as unknown as typeof fetch
+          )
+          
 
         render(
             <MemoryRouter>
