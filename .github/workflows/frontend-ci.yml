@@ -33,7 +33,7 @@ jobs:
     - name: Format with prettier
       run: |
         cd frontend
-        npm format
+        npm run format
         
     - name: Build frontend
       run: |
