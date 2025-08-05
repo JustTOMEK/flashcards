@@ -38,10 +38,17 @@ describe('withAuth HOC', () => {
     test('renders wrapped component when authenticated', async () => {
         localStorage.setItem('token', 'valid-token')
 
+        
         vi.stubGlobal(
             'fetch',
-            vi.fn(() => Promise.resolve({ ok: true })) as any
+            vi.fn(() =>
+            Promise.resolve({
+                ok: true,
+                json: () => Promise.resolve({}),
+            })
+            ) as unknown as typeof fetch
         )
+  
 
         render(
             <MemoryRouter>
