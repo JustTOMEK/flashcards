@@ -6,7 +6,7 @@ import withAuth from '../components/withAuth'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<any>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -24,7 +24,11 @@ describe('withAuth HOC', () => {
     })
 
     test('renders loading screen initially', () => {
-        vi.stubGlobal('fetch', vi.fn(() => new Promise(() => {})) as any)
+        vi.stubGlobal(
+            'fetch',
+            vi.fn(() => new Promise(() => {})) as unknown as typeof fetch
+          )
+          
 
         render(
             <MemoryRouter>
