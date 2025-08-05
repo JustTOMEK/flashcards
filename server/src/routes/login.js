@@ -6,10 +6,30 @@ import jwt from 'jsonwebtoken';
 const { sign } = jwt;
 
 
+
+function updateStreak(user) {
+    const today = new Date().toISOString().split('T')[0];
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+
+    if (user.lastLoginDate === today) {
+        return;
+    }
+
+    if (user.lastLoginDate === yesterday) {
+        user.dailyStreak += 1;
+    } else {
+        user.dailyStreak = 1;
+    }
+
+    user.lastLoginDate = today;
+}
+
+
 function createLoginRouter(db) {
     const router = Router()
 
     router.post('/', async (req, res) => {
+        
         await db.read()
         const { username, password } = req.body
 
@@ -20,6 +40,8 @@ function createLoginRouter(db) {
         }
 
         const user = db.data.users.find((user) => user.username === username)
+        updateStreak(user)
+        await db.write()
         if (!user) {
             return res.status(401).json({ message: 'Invalid username' })
         }

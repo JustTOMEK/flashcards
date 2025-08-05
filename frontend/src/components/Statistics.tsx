@@ -20,6 +20,7 @@ interface DoughnutResponse {
     repetitions: number
     completed: number
     notCompleted: number
+    dailyStreak: number
 }
 
 interface BarResponse {
@@ -71,7 +72,7 @@ function Statistics() {
             },
         ],
     }
-
+    const dailyStreak = doughnutResponse?.dailyStreak ?? 0
     const totalRepetitions = doughnutResponse?.repetitions ?? 0
     const completedCount = doughnutResponse?.completed ?? 0
     const notCompletedCount = doughnutResponse?.notCompleted ?? 0
@@ -99,7 +100,7 @@ function Statistics() {
                 </p>
 
                 <p className="flex justify-center items-center gap-2">
-                    Daily Streak: <span className="font-bold ml-1">5 days</span>{' '}
+                    Daily Streak: <span className="font-bold ml-1">{dailyStreak} days</span>
                     <FaFire className="text-burnt-orange" />
                 </p>
             </div>

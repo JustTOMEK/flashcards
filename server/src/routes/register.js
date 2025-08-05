@@ -19,7 +19,7 @@ function createRegisterRouter(db) {
         }
 
         const hashedPassword = await hash(password, 10)
-        const newUser = { username, hashedPassword, id }
+        const newUser = { username, hashedPassword, id, lastLoginDate: null, dailyStreak: 0 }
 
         db.data.users.push(newUser)
         await db.write()
