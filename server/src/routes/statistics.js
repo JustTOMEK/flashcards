@@ -1,6 +1,5 @@
 const express = require('express')
 const { authenticate } = require('./authenticateMid')
-const router = express.Router()
 
 function createStatisticsRouter(db) {
     const router = express.Router()
