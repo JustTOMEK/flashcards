@@ -1,0 +1,49 @@
+on:
+  push:
+    paths:
+      - 'frontend/**'
+  pull_request:
+    paths:
+      - 'frontend/**'
+
+jobs:
+  build_test:
+    runs-on: windows-latest
+
+    steps:
+    
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '23.11'
+
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Lint frontend
+      run: |
+        cd frontend
+        npm run lint
+
+    - name: Test frontend
+      run: |
+        cd frontend
+        npm test
+
+    - name: Format with prettier
+      run: |
+        cd frontened
+        npm format
+        
+    - name: Build frontend
+      run: |
+        cd frontend
+        npm run dev
+
+    
+    
