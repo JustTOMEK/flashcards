@@ -1,10 +1,9 @@
 import { Router } from 'express'
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config()
 import { compare } from 'bcrypt'
-import jwt from 'jsonwebtoken';
-const { sign } = jwt;
-
+import jwt from 'jsonwebtoken'
+const { sign } = jwt
 
 function createLoginRouter(db) {
     const router = Router()
@@ -24,10 +23,7 @@ function createLoginRouter(db) {
             return res.status(401).json({ message: 'Invalid username' })
         }
 
-        const password_good = await compare(
-            password,
-            user.hashedPassword
-        )
+        const password_good = await compare(password, user.hashedPassword)
 
         if (!password_good) {
             return res.status(401).json({ message: 'Invalid password' })

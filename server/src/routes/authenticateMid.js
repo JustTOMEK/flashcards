@@ -1,8 +1,7 @@
-import dotenv from 'dotenv';
-dotenv.config();
-import jwt from 'jsonwebtoken';
-const { verify } = jwt;
-
+import dotenv from 'dotenv'
+dotenv.config()
+import jwt from 'jsonwebtoken'
+const { verify } = jwt
 
 //This is the middleware to authenticate whether user has right to use specific request
 
