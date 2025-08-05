@@ -1,16 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import {test, vi, expect } from 'vitest'
+import { test, vi, expect } from 'vitest'
 import FlashcardSets from '../components/FlashcardSets'
 import { MemoryRouter } from 'react-router'
-import type { ReactElement, ComponentType } from 'react';
-
-
+import type { ReactElement, ComponentType } from 'react'
 
 vi.mock('../components/withAuth', () => ({
-    default: <P extends object>(Component: ComponentType<P>) =>
-      (props: P): ReactElement => <Component {...props} />,
-  }));
-  
+    default:
+        <P extends object>(Component: ComponentType<P>) =>
+        (props: P): ReactElement => <Component {...props} />,
+}))
 
 const mockSets = [
     {
@@ -47,5 +45,3 @@ test('renders flashcard sets from API', async () => {
         expect(screen.getByText('Basic greetings')).toBeInTheDocument()
     })
 })
-
-

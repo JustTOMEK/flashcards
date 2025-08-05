@@ -6,7 +6,8 @@ import withAuth from '../components/withAuth'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<typeof import('react-router')>('react-router')
+    const actual =
+        await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -27,8 +28,7 @@ describe('withAuth HOC', () => {
         vi.stubGlobal(
             'fetch',
             vi.fn(() => new Promise(() => {})) as unknown as typeof fetch
-          )
-          
+        )
 
         render(
             <MemoryRouter>
@@ -42,17 +42,15 @@ describe('withAuth HOC', () => {
     test('renders wrapped component when authenticated', async () => {
         localStorage.setItem('token', 'valid-token')
 
-        
         vi.stubGlobal(
             'fetch',
             vi.fn(() =>
-            Promise.resolve({
-                ok: true,
-                json: () => Promise.resolve({}),
-            })
+                Promise.resolve({
+                    ok: true,
+                    json: () => Promise.resolve({}),
+                })
             ) as unknown as typeof fetch
         )
-  
 
         render(
             <MemoryRouter>
@@ -71,13 +69,12 @@ describe('withAuth HOC', () => {
         vi.stubGlobal(
             'fetch',
             vi.fn(() =>
-              Promise.resolve({
-                ok: false,
-                json: () => Promise.resolve({}),
-              })
+                Promise.resolve({
+                    ok: false,
+                    json: () => Promise.resolve({}),
+                })
             ) as unknown as typeof fetch
-          )
-          
+        )
 
         render(
             <MemoryRouter>

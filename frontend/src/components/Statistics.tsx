@@ -16,22 +16,21 @@ import withAuth from './withAuth'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 ChartJS.register(ArcElement)
 
-
 interface DoughnutResponse {
-    repetitions: number;
-    completed: number;
-    notCompleted: number;
-  }
+    repetitions: number
+    completed: number
+    notCompleted: number
+}
 
 interface BarResponse {
     setName: string
     level3Percentage: string
-  }
-  
+}
 
 function Statistics() {
     const [barResponse, setBarResponse] = useState<BarResponse[]>([])
-    const [doughnutResponse, setDougnutResponse] = useState<DoughnutResponse | null>()
+    const [doughnutResponse, setDougnutResponse] =
+        useState<DoughnutResponse | null>()
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -73,10 +72,9 @@ function Statistics() {
         ],
     }
 
-    
-    const totalRepetitions = doughnutResponse?.repetitions ?? 0;
-    const completedCount = doughnutResponse?.completed ?? 0;
-    const notCompletedCount = doughnutResponse?.notCompleted ?? 0;
+    const totalRepetitions = doughnutResponse?.repetitions ?? 0
+    const completedCount = doughnutResponse?.completed ?? 0
+    const notCompletedCount = doughnutResponse?.notCompleted ?? 0
 
     console.log(doughnutResponse)
     const doughnutData = {
@@ -125,6 +123,5 @@ function Statistics() {
     )
 }
 
-
-const AuthStatistics = withAuth(Statistics);
-export default AuthStatistics;
+const AuthStatistics = withAuth(Statistics)
+export default AuthStatistics
