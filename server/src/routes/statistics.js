@@ -1,8 +1,8 @@
-const express = require('express')
-const { authenticate } = require('./authenticateMid')
+import { Router } from 'express'
+import { authenticate } from './authenticateMid.js'
 
 function createStatisticsRouter(db) {
-    const router = express.Router()
+    const router = Router()
     router.get('/percentage', authenticate, async (req, res) => {
         const userId = req.userId
         await db.read()
@@ -62,4 +62,4 @@ function createStatisticsRouter(db) {
     return router
 }
 
-module.exports = { createStatisticsRouter }
+export { createStatisticsRouter }

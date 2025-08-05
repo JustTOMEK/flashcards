@@ -1,6 +1,6 @@
-const express = require('express')
-const { v4: uuidv4 } = require('uuid')
-const { authenticate } = require('./authenticateMid')
+import { Router } from 'express'
+import { v4 as uuidv4 } from 'uuid'
+import { authenticate } from './authenticateMid.js'
 
 /*
 type FlashcardSet = {
@@ -15,7 +15,7 @@ type FlashcardSet = {
 }
 */
 function createFlashcardSetsRouter(db) {
-    const router = express.Router()
+    const router = Router()
     // this is to get flashcards of specific flascardSet
     router.get('/set/:setId', authenticate, async (req, res) => {
         const { setId } = req.params
@@ -109,4 +109,4 @@ function createFlashcardSetsRouter(db) {
     return router
 }
 
-module.exports = { createFlashcardSetsRouter }
+export { createFlashcardSetsRouter }

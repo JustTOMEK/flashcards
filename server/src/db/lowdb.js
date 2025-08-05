@@ -1,5 +1,5 @@
-const { LowSync, MemorySync } = require('lowdb')
-const { JSONFileSync } = require('lowdb/node')
+import { LowSync, MemorySync } from 'lowdb'
+import { JSONFileSync } from 'lowdb/node'
 
 const defaultData = {
     flashcards: [],
@@ -24,4 +24,4 @@ const createDB = (adapterType = 'json', filePath = 'db.json') => {
     return { db, initDB }
 }
 
-module.exports = { createDB }
+export { createDB }

@@ -1,8 +1,7 @@
-const express = require('express')
-const { db } = require('../db/lowdb')
-const { v4: uuidv4 } = require('uuid')
-const { authenticate } = require('./authenticateMid')
-const router = express.Router()
+import { Router } from 'express'
+import { v4 as uuidv4 } from 'uuid'
+import { authenticate } from './authenticateMid.js'
+const router = Router()
 
 /*
 type Flashcard = {
@@ -96,4 +95,4 @@ function createFlashcardsRouter(db) {
     return router
 }
 
-module.exports = { createFlashcardsRouter }
+export { createFlashcardsRouter }

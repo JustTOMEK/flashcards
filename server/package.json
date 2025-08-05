@@ -2,11 +2,13 @@
     "name": "server",
     "version": "1.0.0",
     "main": "index.js",
+    "type": "module",
     "scripts": {
         "devStart": "nodemon --ignore db.json src/server.js",
         "test": "vitest",
         "coverage": "vitest run --coverage",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "lint": "eslint ."
     },
     "keywords": [],
     "author": "",
@@ -23,7 +25,11 @@
         "uuid": "^11.1.0"
     },
     "devDependencies": {
+        "@eslint/js": "^9.32.0",
         "@vitest/coverage-v8": "^3.2.4",
+        "eslint": "^9.32.0",
+        "eslint-plugin-react": "^7.37.5",
+        "globals": "^16.3.0",
         "nodemon": "^2.0.7",
         "prettier": "^3.6.2",
         "ts-node": "^10.9.1",

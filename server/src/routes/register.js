@@ -1,9 +1,9 @@
-const express = require('express')
-const bcrypt = require('bcrypt')
-const { v4: uuidv4 } = require('uuid')
+import { Router } from 'express'
+import { hash } from 'bcrypt'
+import { v4 as uuidv4 } from 'uuid'
 
 function createRegisterRouter(db) {
-    const router = express.Router()
+    const router = Router()
 
     router.post('/', async (req, res) => {
         const { username, password } = req.body
@@ -18,7 +18,7 @@ function createRegisterRouter(db) {
             return res.status(409).json({ message: 'Username already taken.' })
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await hash(password, 10)
         const newUser = { username, hashedPassword, id }
 
         db.data.users.push(newUser)
@@ -30,4 +30,4 @@ function createRegisterRouter(db) {
     return router
 }
 
-module.exports = { createRegisterRouter }
+export { createRegisterRouter }

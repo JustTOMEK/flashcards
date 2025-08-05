@@ -1,10 +1,13 @@
-const express = require('express')
-require('dotenv').config()
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+import { Router } from 'express'
+import dotenv from 'dotenv';
+dotenv.config();
+import { compare } from 'bcrypt'
+import jwt from 'jsonwebtoken';
+const { sign } = jwt;
+
 
 function createLoginRouter(db) {
-    const router = express.Router()
+    const router = Router()
 
     router.post('/', async (req, res) => {
         await db.read()
@@ -21,7 +24,7 @@ function createLoginRouter(db) {
             return res.status(401).json({ message: 'Invalid username' })
         }
 
-        const password_good = await bcrypt.compare(
+        const password_good = await compare(
             password,
             user.hashedPassword
         )
@@ -30,7 +33,7 @@ function createLoginRouter(db) {
             return res.status(401).json({ message: 'Invalid password' })
         }
 
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        const token = sign({ id: user.id }, process.env.JWT_SECRET, {
             expiresIn: '1h',
         })
 
@@ -39,4 +42,4 @@ function createLoginRouter(db) {
     return router
 }
 
-module.exports = { createLoginRouter }
+export { createLoginRouter }
