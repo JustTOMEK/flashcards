@@ -6,12 +6,13 @@ on:
     paths:
       - 'frontend/**'
 
+permissions:
+  contents: write
 jobs:
   build_test:
     runs-on: windows-latest
 
     steps:
-    
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -25,25 +26,32 @@ jobs:
         cd frontend
         npm install
 
+    - name: Format with Prettier
+      run: |
+        cd frontend
+        npm run format
+
+    - name: Commit Prettier changes
+      run: |
+        cd frontend
+        git config --global user.name 'tomek-actions'
+        git config --global user.email 'tomek-actions@github.com'
+        git add .
+        git diff --cached --quiet || git commit -m "chore: format code with Prettier"
+        git push
+      continue-on-error: true
+
     - name: Test frontend with coverage
       run: |
         cd frontend
         npm run coverage
 
-    - name: Format with prettier
-      run: |
-        cd frontend
-        npm run format
-      
     - name: Lint frontend
       run: |
         cd frontend
         npm run lint
-        
+
     - name: Build frontend
       run: |
         cd frontend
         npm run build
-
-    
-    
