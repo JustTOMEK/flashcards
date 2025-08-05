@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, test, vi, beforeEach, expect } from 'vitest'
 import EditFlashcardForm from '../components/EditFlashcardForm'
 import { MemoryRouter } from 'react-router'
+import type { ReactElement, ComponentType } from 'react';
 
 const mockFlashcard = {
     word: 'hello',
@@ -14,8 +15,9 @@ const mockFlashcard = {
 }
 
 vi.mock('../components/withAuth', () => ({
-    default: (Component: React.FC<any>) => Component,
-}))
+    default: <P extends object>(Component: ComponentType<P>) =>
+      (props: P): ReactElement => <Component {...props} />,
+  }));
 
 describe('EditFlashcardForm Component', () => {
     const mockOnEdit = vi.fn()
@@ -76,7 +78,7 @@ describe('EditFlashcardForm Component', () => {
     test('calls onEdit with updated flashcard on confirm', async () => {
         vi.stubGlobal(
             'fetch',
-            vi.fn(() => Promise.resolve({ ok: true })) as any
+            vi.fn(() => Promise.resolve({ ok: true })) as unknown as typeof fetch
         )
 
         render(

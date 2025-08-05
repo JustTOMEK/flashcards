@@ -7,7 +7,7 @@ import Login from '../components/Login'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<any>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -80,7 +80,7 @@ describe('Login Component', () => {
                     ok: true,
                     json: () => Promise.resolve({ token: fakeToken }),
                 })
-            ) as any
+            ) as unknown as typeof fetch
         )
 
         render(
@@ -108,7 +108,7 @@ describe('Login Component', () => {
                     json: () =>
                         Promise.resolve({ message: 'Invalid credentials' }),
                 })
-            ) as any
+            ) as unknown as typeof fetch
         )
 
         render(
@@ -134,7 +134,7 @@ describe('Login Component', () => {
             'fetch',
             vi.fn(() => {
                 throw new Error('Network failure')
-            }) as any
+            }) as typeof fetch
         )
 
         render(

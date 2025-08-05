@@ -7,7 +7,7 @@ import Practice from '../components/Practice'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<any>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,

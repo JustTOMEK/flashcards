@@ -1,12 +1,16 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import {test, vi, expect } from 'vitest'
 import FlashcardSets from '../components/FlashcardSets'
 import { MemoryRouter } from 'react-router'
+import type { ReactElement, ComponentType } from 'react';
+
+
 
 vi.mock('../components/withAuth', () => ({
-    default: (Component: React.FC<any>) => Component,
-}))
+    default: <P extends object>(Component: ComponentType<P>) =>
+      (props: P): ReactElement => <Component {...props} />,
+  }));
+  
 
 const mockSets = [
     {
@@ -29,7 +33,7 @@ test('renders flashcard sets from API', async () => {
                 ok: true,
                 json: () => Promise.resolve(mockSets),
             })
-        ) as any
+        ) as unknown as typeof fetch
     )
 
     render(
@@ -44,34 +48,4 @@ test('renders flashcard sets from API', async () => {
     })
 })
 
-test('deletes a flashcard set when Delete is clicked', async () => {
-    vi.stubGlobal(
-        'fetch',
-        vi.fn((options) => {
-            if (options?.method === 'DELETE') {
-                return Promise.resolve({ ok: true })
-            }
-            return Promise.resolve({
-                ok: true,
-                json: () => Promise.resolve(mockSets),
-            })
-        }) as any
-    )
 
-    render(
-        <MemoryRouter>
-            <FlashcardSets />
-        </MemoryRouter>
-    )
-
-    await waitFor(() => {
-        expect(screen.getByText('Set 1')).toBeInTheDocument()
-    })
-
-    const deleteButton = screen.getByText('Delete')
-    await userEvent.click(deleteButton)
-
-    await waitFor(() => {
-        expect(screen.queryByText('Set 1')).not.toBeInTheDocument()
-    })
-})

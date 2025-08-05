@@ -33,9 +33,8 @@ function Statistics() {
     const [barResponse, setBarResponse] = useState<BarResponse[]>([])
     const [doughnutResponse, setDougnutResponse] = useState<DoughnutResponse | null>()
 
-    const token = localStorage.getItem('token')
-
     useEffect(() => {
+        const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/statistics/percentage`, {
             headers: {
                 token: token ?? '',
@@ -54,7 +53,7 @@ function Statistics() {
             .then((data) => {
                 setDougnutResponse(data)
             })
-    }, [])
+    })
 
     const labels = barResponse.map((item) => item.setName)
     const percentages = barResponse.map((item) =>
@@ -126,4 +125,6 @@ function Statistics() {
     )
 }
 
-export default withAuth(Statistics)
+
+const AuthStatistics = withAuth(Statistics);
+export default AuthStatistics;

@@ -20,10 +20,11 @@ function Practice() {
     const [currentIndex, setcurrentIndex] = useState(0)
     const [isAnswered, setisAnswered] = useState(false)
     const [isFlipped, setisFlipped] = useState(false)
+    const token = localStorage.getItem('token')
     const location = useLocation()
     const setId = location.state.setId
-    const token = localStorage.getItem('token')
     useEffect(() => {
+        const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/flashcardSets/set/${setId}`, {
             headers: {
                 token: token ?? '',
@@ -33,7 +34,7 @@ function Practice() {
             .then((data) => {
                 setFlashcards([...data].sort((a, b) => a.level - b.level))
             })
-    }, [])
+    })
 
     async function handleAnswer(answer: boolean) {
         let updatedLevel = flashcards[currentIndex].level
@@ -133,4 +134,5 @@ function Practice() {
     )
 }
 
-export default withAuth(Practice)
+const AuthPractice = withAuth(Practice)
+export default AuthPractice

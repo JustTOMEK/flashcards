@@ -71,7 +71,7 @@ describe('FlashcardSetForm Component', () => {
                 Promise.resolve({
                     json: () => Promise.resolve(mockResponse),
                 })
-            ) as any
+            ) as unknown as typeof fetch
         )
 
         render(

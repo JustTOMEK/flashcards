@@ -30,4 +30,6 @@ function Navbar() {
         </div>
     )
 }
-export default withAuth(Navbar)
+
+const AuthNavbar = withAuth(Navbar)
+export default AuthNavbar

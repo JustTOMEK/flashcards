@@ -3,7 +3,7 @@ import { useLocation } from 'react-router'
 import withAuth from './withAuth'
 import { FaTrash } from 'react-icons/fa6'
 import { MdModeEditOutline } from 'react-icons/md'
-import EditFlashcardForm from './EditFlashcardForm'
+import AuthEditFlashcardForm from './EditFlashcardForm'
 import { FaGlobe } from 'react-icons/fa'
 import { IoMdAddCircle } from 'react-icons/io'
 
@@ -26,7 +26,7 @@ function Flashcards() {
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        console.log(flashcardSet.id)
+        const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/flashcardSets/set/${flashcardSet.id}`, {
             headers: {
                 token: token ?? '',
@@ -36,7 +36,7 @@ function Flashcards() {
             .then((data) => {
                 setFlashcards(data)
             })
-    }, [])
+    })
 
     const [word, setWord] = useState('')
     const [translation, setTranslation] = useState('')
@@ -209,7 +209,7 @@ function Flashcards() {
                 ))}
                 {editingCard && (
                     <div className="overlay">
-                        <EditFlashcardForm
+                        <AuthEditFlashcardForm
                             flashcard={editingCard}
                             onEdit={handleEdit}
                             onExit={() => setEditingCard(null)}
@@ -222,5 +222,5 @@ function Flashcards() {
         </div>
     )
 }
-
-export default withAuth(Flashcards)
+const AuthFlashcards = withAuth(Flashcards)
+export default AuthFlashcards

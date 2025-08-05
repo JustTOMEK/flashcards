@@ -7,7 +7,7 @@ import Register from '../components/Register'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<any>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -78,7 +78,7 @@ describe('Register Component', () => {
                     ok: true,
                     json: () => Promise.resolve({}),
                 })
-            ) as any
+            ) as unknown as typeof fetch
         )
 
         render(
@@ -104,7 +104,7 @@ describe('Register Component', () => {
                     ok: false,
                     json: () => Promise.resolve({}),
                 })
-            ) as any
+            ) as unknown as typeof fetch
         )
 
         render(
@@ -136,7 +136,7 @@ describe('Register Component', () => {
             'fetch',
             vi.fn(() => {
                 throw new Error('Network error')
-            }) as any
+            }) as typeof fetch
         )
 
         render(

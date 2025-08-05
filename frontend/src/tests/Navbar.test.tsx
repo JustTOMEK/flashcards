@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<any>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -22,7 +22,7 @@ describe('Navbar Component (withAuth)', () => {
     })
 
     test('shows loading screen initially', () => {
-        vi.stubGlobal('fetch', vi.fn(() => new Promise(() => {})) as any)
+        vi.stubGlobal('fetch', vi.fn(() => new Promise(() => {})) as typeof fetch)
 
         render(
             <MemoryRouter>
@@ -38,7 +38,7 @@ describe('Navbar Component (withAuth)', () => {
 
         vi.stubGlobal(
             'fetch',
-            vi.fn(() => Promise.resolve({ ok: true })) as any
+            vi.fn(() => Promise.resolve({ ok: true })) as unknown as typeof fetch
         )
 
         render(
@@ -59,7 +59,7 @@ describe('Navbar Component (withAuth)', () => {
 
         vi.stubGlobal(
             'fetch',
-            vi.fn(() => Promise.resolve({ ok: false })) as any
+            vi.fn(() => Promise.resolve({ ok: false })) as unknown as typeof fetch
         )
 
         render(
@@ -78,7 +78,7 @@ describe('Navbar Component (withAuth)', () => {
 
         vi.stubGlobal(
             'fetch',
-            vi.fn(() => Promise.resolve({ ok: true })) as any
+            vi.fn(() => Promise.resolve({ ok: true })) as unknown as typeof fetch
         )
 
         render(
@@ -104,7 +104,7 @@ describe('Navbar Component (withAuth)', () => {
 
         vi.stubGlobal(
             'fetch',
-            vi.fn(() => Promise.resolve({ ok: true })) as any
+            vi.fn(() => Promise.resolve({ ok: true })) as unknown as typeof fetch
         )
 
         render(
