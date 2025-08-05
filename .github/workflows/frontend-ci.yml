@@ -28,7 +28,7 @@ jobs:
     - name: Test frontend with coverage
       run: |
         cd frontend
-        npm coverage
+        npm run coverage
 
     - name: Format with prettier
       run: |
