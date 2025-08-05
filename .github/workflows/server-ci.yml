@@ -1,0 +1,52 @@
+on:
+  push:
+    paths:
+      - 'server/**'
+  pull_request:
+    paths:
+      - 'server/**'
+
+permissions:
+  contents: write
+jobs:
+  build_test:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '23.11'
+
+    - name: Install server dependencies
+      run: |
+        cd server
+        npm install
+
+    - name: Format with Prettier
+      run: |
+        cd server
+        npm run format
+
+    - name: Commit Prettier changes
+      run: |
+        cd server
+        git config --global user.name 'tomek-actions'
+        git config --global user.email 'tomek-actions@github.com'
+        git add .
+        git diff --cached --quiet || git commit -m "chore: format code with Prettier"
+        git push
+      continue-on-error: true
+
+    - name: Test server with coverage
+      run: |
+        cd server
+        npm run coverage
+
+    - name: Lint server
+      run: |
+        cd server
+        npm run lint
