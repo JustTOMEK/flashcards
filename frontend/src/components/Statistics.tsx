@@ -16,9 +16,22 @@ import withAuth from './withAuth'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 ChartJS.register(ArcElement)
 
+
+interface DoughnutResponse {
+    repetitions: number;
+    completed: number;
+    notCompleted: number;
+  }
+
+interface BarResponse {
+    setName: string
+    level3Percentage: string
+  }
+  
+
 function Statistics() {
-    const [barResponse, setBarResponse] = useState([])
-    const [doughnutResponse, setDougnutResponse] = useState([])
+    const [barResponse, setBarResponse] = useState<BarResponse[]>([])
+    const [doughnutResponse, setDougnutResponse] = useState<DoughnutResponse | null>()
 
     const token = localStorage.getItem('token')
 
@@ -61,9 +74,11 @@ function Statistics() {
         ],
     }
 
-    const totalRepetitions = doughnutResponse.repetitions
-    const completedCount = doughnutResponse.completed // Replace with actual count
-    const notCompletedCount = doughnutResponse.notCompleted // Replace with actual count
+    
+    const totalRepetitions = doughnutResponse?.repetitions ?? 0;
+    const completedCount = doughnutResponse?.completed ?? 0;
+    const notCompletedCount = doughnutResponse?.notCompleted ?? 0;
+
     console.log(doughnutResponse)
     const doughnutData = {
         labels: ['Completed', 'Not Completed'],

@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, test, vi, beforeEach, expect } from 'vitest'
+import {test, vi, expect } from 'vitest'
 import FlashcardSets from '../components/FlashcardSets'
 import { MemoryRouter } from 'react-router'
 
@@ -47,7 +47,7 @@ test('renders flashcard sets from API', async () => {
 test('deletes a flashcard set when Delete is clicked', async () => {
     vi.stubGlobal(
         'fetch',
-        vi.fn((url, options) => {
+        vi.fn((options) => {
             if (options?.method === 'DELETE') {
                 return Promise.resolve({ ok: true })
             }

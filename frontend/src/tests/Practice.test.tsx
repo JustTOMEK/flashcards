@@ -25,7 +25,8 @@ describe('Practice Component', () => {
     beforeEach(() => {
         vi.clearAllMocks()
 
-        fetch.mockResolvedValue({
+        
+        globalThis.fetch = vi.fn().mockResolvedValue({
             ok: true,
             json: async () => [
                 {
