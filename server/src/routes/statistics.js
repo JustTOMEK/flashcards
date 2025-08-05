@@ -58,7 +58,12 @@ function createStatisticsRouter(db) {
         }
         const user = db.data.users.find((user) => user.id === userId)
 
-        res.json({ completed, notCompleted, repetitions, dailyStreak: user.dailyStreak  })
+        res.json({
+            completed,
+            notCompleted,
+            repetitions,
+            dailyStreak: user.dailyStreak,
+        })
     })
     return router
 }
