@@ -136,5 +136,5 @@ const EditFlashcardForm: React.FC<{
         </div>
     )
 }
-const AuthEditFlashcardForm =  withAuth(EditFlashcardForm)
+const AuthEditFlashcardForm = withAuth(EditFlashcardForm)
 export default AuthEditFlashcardForm

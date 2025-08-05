@@ -19,7 +19,7 @@ type FlashcardSet = {
 function FlashcardSets() {
     const [flashcardSets, setflashcardSets] = useState<FlashcardSet[]>([])
     const [showForm, setShowForm] = useState(false)
-    
+
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/flashcardSets`, {
@@ -31,7 +31,7 @@ function FlashcardSets() {
             .then((data) => {
                 setflashcardSets(data)
             })
-    },)
+    })
 
     const handleDelete = async (id: string) => {
         const token = localStorage.getItem('token')
