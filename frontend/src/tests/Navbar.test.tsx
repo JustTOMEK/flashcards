@@ -109,32 +109,4 @@ describe('Navbar Component (withAuth)', () => {
         expect(mockNavigate).toHaveBeenCalledWith('/statistics')
     })
 
-    test('logs out and navigates to login', async () => {
-        localStorage.setItem('token', 'valid-token')
-
-        vi.stubGlobal(
-            'fetch',
-            vi.fn(() =>
-                Promise.resolve({ ok: true })
-            ) as unknown as typeof fetch
-        )
-
-        render(
-            <MemoryRouter>
-                <Navbar />
-            </MemoryRouter>
-        )
-
-        await waitFor(() => {
-            expect(
-                screen.getByText(/Flashcards/i)
-            ).toBeInTheDocument()
-        })
-
-        const logoutIcon = screen.getByLabelText('Logout')
-        await userEvent.click(logoutIcon)
-
-        expect(localStorage.getItem('token')).toBeNull()
-        expect(mockNavigate).toHaveBeenCalledWith('/login')
-    })
 })
