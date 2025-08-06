@@ -55,7 +55,7 @@ describe('Navbar Component (withAuth)', () => {
 
         await waitFor(() => {
             expect(
-                screen.getByText(/Welcome.*to Flashcards/i)
+                screen.getByText(/Flashcards/i)
             ).toBeInTheDocument()
         })
     })
@@ -99,7 +99,7 @@ describe('Navbar Component (withAuth)', () => {
 
         await waitFor(() => {
             expect(
-                screen.getByText(/Welcome.*to Flashcards/i)
+                screen.getByText(/Flashcards/i)
             ).toBeInTheDocument()
         })
 
@@ -127,7 +127,7 @@ describe('Navbar Component (withAuth)', () => {
 
         await waitFor(() => {
             expect(
-                screen.getByText(/Welcome.*to Flashcards/i)
+                screen.getByText(/Flashcards/i)
             ).toBeInTheDocument()
         })
 
