@@ -8,6 +8,7 @@ import { createAuthenticateRouter } from './routes/authenticate.js'
 import { createMeRouter } from './routes/me.js'
 import { createStatisticsRouter } from './routes/statistics.js'
 import { createDB } from './db/lowdb.js'
+import { createChangePasswordRouter } from './routes/changePassword.js'
 
 const app = express()
 
@@ -32,6 +33,7 @@ const initApp = async (dbInstance = null) => {
     app.use('/authenticate', createAuthenticateRouter())
     app.use('/me', createMeRouter(db))
     app.use('/statistics', createStatisticsRouter(db))
+    app.use('/change-password', createChangePasswordRouter(db))
 }
 
 export { app, initApp }
