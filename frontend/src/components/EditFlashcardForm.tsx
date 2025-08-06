@@ -92,7 +92,7 @@ const EditFlashcardForm: React.FC<{
     }
 
     return (
-        <div className="overflow-auto relative h-1/3 w-1/3 bg-olive rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
+        <div className="overflow-auto relative h-2/5 w-1/3 bg-olive rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2 text-xl  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
             <button
                 onClick={onExit}
                 className="absolute top-1 right-1 text-tan text-xl font-bold"
@@ -100,7 +100,7 @@ const EditFlashcardForm: React.FC<{
                 <IoMdCloseCircleOutline className="text-3xl" />
             </button>
 
-            <p className="flex items-center justify-center h-full"> Word: </p>
+            <p className="flex items-center justify-center h-full "> Word: </p>
             <input
                 type="text"
                 placeholder="Word"
@@ -109,8 +109,7 @@ const EditFlashcardForm: React.FC<{
                 onChange={(e) => setWord(e.target.value)}
             />
             <p className="flex items-center justify-center h-full">
-                {' '}
-                Translation:{' '}
+                Translation:
             </p>
             <input
                 type="text"
