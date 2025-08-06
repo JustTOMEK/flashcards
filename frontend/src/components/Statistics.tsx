@@ -100,7 +100,8 @@ function Statistics() {
                 </p>
 
                 <p className="flex justify-center items-center gap-2">
-                    Daily Streak: <span className="font-bold ml-1">{dailyStreak} days</span>
+                    Daily Streak:{' '}
+                    <span className="font-bold ml-1">{dailyStreak} days</span>
                     <FaFire className="text-burnt-orange" />
                 </p>
             </div>
