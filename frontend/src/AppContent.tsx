@@ -8,6 +8,7 @@ import AuthPractice from './components/Practice'
 import Welcome from './components/Welcome'
 import AuthNavbar from './components/Navbar'
 import AuthStatistics from './components/Statistics'
+import AuthChangePasswordForm from './components/ChangePasswordForm'
 function AppContent() {
     const location = useLocation()
     const noNavbarPaths = ['/login', '/register', '/welcome']
@@ -30,6 +31,8 @@ function AppContent() {
                     <Route path="/practice" element={<AuthPractice />} />
 
                     <Route path="/statistics" element={<AuthStatistics />} />
+
+                    <Route path="/changePassword" element={<AuthChangePasswordForm />} />
                 </Routes>
             </div>
         </div>
