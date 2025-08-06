@@ -104,5 +104,4 @@ describe('Navbar Component (withAuth)', () => {
 
         expect(mockNavigate).toHaveBeenCalledWith('/statistics')
     })
-
 })
