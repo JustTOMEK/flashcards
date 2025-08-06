@@ -54,9 +54,7 @@ describe('Navbar Component (withAuth)', () => {
         )
 
         await waitFor(() => {
-            expect(
-                screen.getByText(/Flashcards/i)
-            ).toBeInTheDocument()
+            expect(screen.getByText(/Flashcards/i)).toBeInTheDocument()
         })
     })
 
@@ -98,9 +96,7 @@ describe('Navbar Component (withAuth)', () => {
         )
 
         await waitFor(() => {
-            expect(
-                screen.getByText(/Flashcards/i)
-            ).toBeInTheDocument()
+            expect(screen.getByText(/Flashcards/i)).toBeInTheDocument()
         })
 
         const statsIcon = screen.getByLabelText('Statistics')
