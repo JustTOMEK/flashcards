@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import withAuth from './withAuth'
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 function ChangePasswordForm() {
     const [currentPassword, setCurrentPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
-    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+    const [showNewPassword, setShowNewPassword] = useState(false)
 
     const navigate = useNavigate()
 
@@ -48,45 +48,51 @@ function ChangePasswordForm() {
                 onSubmit={handleSubmit}
                 className="bg-tan p-6 rounded-xl shadow-lg w-full max-w-md space-y-4"
             >
+                <div className="relative">
+                    <input
+                        type={showCurrentPassword ? 'text' : 'password'}
+                        placeholder="Current Password"
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        className="w-full px-4 py-2 rounded bg-cream text-dark-olive focus:outline-none focus:ring-2 pr-10"
+                        required
+                    />
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setShowCurrentPassword(!showCurrentPassword)
+                        }
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-olive"
+                    >
+                        {showCurrentPassword ? (
+                            <FaEyeSlash className="text-dark-olive" />
+                        ) : (
+                            <FaEye className="text-dark-olive" />
+                        )}
+                    </button>
+                </div>
 
-
-                
-            <div className="relative">
-                <input
-                    type={showCurrentPassword ? "text" : "password"}
-                    placeholder="Current Password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    className="w-full px-4 py-2 rounded bg-cream text-dark-olive focus:outline-none focus:ring-2 pr-10"
-                    required
-                />
-                <button
-                    type="button"
-                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-olive"
-                >
-                    {showCurrentPassword ? <FaEyeSlash className='text-dark-olive'/> : <FaEye className='text-dark-olive' />}
-                </button>
-            </div>
-
-            <div className="relative">
-                <input
-                    type={showNewPassword ? "text" : "password"}
-                    placeholder="New Password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-4 py-2 rounded bg-cream text-dark-olive focus:outline-none focus:ring-2 pr-10"
-                    required
-                />
-                <button
-                    type="button"
-                    onClick={() => setShowNewPassword(!showNewPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-olive"
-                >
-                    {showNewPassword ? <FaEyeSlash className='text-dark-olive'  /> : <FaEye className='text-dark-olive' />}
-                </button>
-            </div>
-
+                <div className="relative">
+                    <input
+                        type={showNewPassword ? 'text' : 'password'}
+                        placeholder="New Password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="w-full px-4 py-2 rounded bg-cream text-dark-olive focus:outline-none focus:ring-2 pr-10"
+                        required
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-olive"
+                    >
+                        {showNewPassword ? (
+                            <FaEyeSlash className="text-dark-olive" />
+                        ) : (
+                            <FaEye className="text-dark-olive" />
+                        )}
+                    </button>
+                </div>
 
                 {error && <p className="text-burnt-orange">{error}</p>}
                 {success && <p className="text-olive">{success}</p>}

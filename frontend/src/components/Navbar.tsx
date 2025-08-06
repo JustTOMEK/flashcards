@@ -37,13 +37,14 @@ function Navbar() {
                     {open && (
                         <ul className="absolute right-0 mt-1 w-48  rounded shadow-lg z-50 ">
                             <li>
-                                <button className="bg-cream  w-full text-left px-4 py-2 text-olive text-xl cursor-pointer "
-                                        onClick={() => {
-                                            setOpen(false)
-                                            navigate('/changePassword')}}
-                                >                 
-                                   Change password
-                                    
+                                <button
+                                    className="bg-cream  w-full text-left px-4 py-2 text-olive text-xl cursor-pointer "
+                                    onClick={() => {
+                                        setOpen(false)
+                                        navigate('/changePassword')
+                                    }}
+                                >
+                                    Change password
                                 </button>
                             </li>
                             <li>
@@ -56,7 +57,6 @@ function Navbar() {
                                     }}
                                 >
                                     Logout
-                                   
                                 </button>
                             </li>
                         </ul>

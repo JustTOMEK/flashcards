@@ -32,7 +32,10 @@ function AppContent() {
 
                     <Route path="/statistics" element={<AuthStatistics />} />
 
-                    <Route path="/changePassword" element={<AuthChangePasswordForm />} />
+                    <Route
+                        path="/changePassword"
+                        element={<AuthChangePasswordForm />}
+                    />
                 </Routes>
             </div>
         </div>
