@@ -38,6 +38,12 @@
 .border-dark-olive {
     border-color: #283618;
 }
+
+.focus\:ring-dark-olive:focus {
+    --tw-ring-color: #283618;
+    box-shadow: 0 0 0 2px var(--tw-ring-color);
+}
+
 .overlay {
     position: fixed;
     top: 0;
