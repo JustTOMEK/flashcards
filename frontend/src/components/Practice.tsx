@@ -70,7 +70,7 @@ function Practice() {
     const navigate = useNavigate()
 
     return (
-        <div className="h-screen bg-dark-olive overflow-auto flex justify-center items-center">
+        <div className="h-full flex justify-center items-center">
             <div className="bg-tan w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
                 <div className="text-dark-olive text-sm font-medium">
                     {currentIndex + 1} / {flashcards.length}

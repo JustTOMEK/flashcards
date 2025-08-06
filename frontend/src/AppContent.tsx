@@ -13,23 +13,25 @@ function AppContent() {
     const noNavbarPaths = ['/login', '/register', '/welcome']
     const shouldHideNavbar = noNavbarPaths.includes(location.pathname)
     return (
-        <div className="bg-cream min-h-screen">
+        <div className="bg-cream h-screen flex flex-col">
             {!shouldHideNavbar && <AuthNavbar />}
-            <Routes>
-                <Route path="/welcome" element={<Welcome />} />
+            <div className="flex-1 overflow-auto">
+                <Routes>
+                    <Route path="/welcome" element={<Welcome />} />
 
-                <Route path="/" element={<AuthFlashcardSets />} />
+                    <Route path="/" element={<AuthFlashcardSets />} />
 
-                <Route path="/set" element={<AuthFlashcards />} />
+                    <Route path="/set" element={<AuthFlashcards />} />
 
-                <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<Login />} />
 
-                <Route path="/register" element={<Register />} />
+                    <Route path="/register" element={<Register />} />
 
-                <Route path="/practice" element={<AuthPractice />} />
+                    <Route path="/practice" element={<AuthPractice />} />
 
-                <Route path="/statistics" element={<AuthStatistics />} />
-            </Routes>
+                    <Route path="/statistics" element={<AuthStatistics />} />
+                </Routes>
+            </div>
         </div>
     )
 }
