@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 function Register() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
 
@@ -79,7 +81,7 @@ function Register() {
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="w-full p-2 rounded border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
                     />
                 </label>
 
@@ -87,12 +89,21 @@ function Register() {
                     <span className="block mb-1 text-sm font-medium text-dark-olive">
                         Password
                     </span>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-2 rounded border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
+                    <div className="relative w-full">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-olive"
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </div>
                 </label>
 
                 <div className="w-full max-w-sm space-y-4">
