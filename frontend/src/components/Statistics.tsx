@@ -66,7 +66,7 @@ function Statistics() {
             {
                 label: 'Percentage of learned flashcards',
                 data: percentages,
-                backgroundColor: '#bc6c25',
+                backgroundColor: '#606c38',
                 borderColor: '#dda15e',
                 borderWidth: 1,
             },
@@ -95,12 +95,12 @@ function Statistics() {
             <div className="p-4 text-center">
                 <h2 className="text-2xl font-semibold"> Practice Summary</h2>
                 <p className="text-lg mt-2">
-                    Total Practiced Cards:{' '}
+                    Total Practiced Cards:
                     <span className="font-bold">{totalRepetitions}</span>
                 </p>
 
                 <p className="flex justify-center items-center gap-2">
-                    Daily Streak:{' '}
+                    Daily Streak:
                     <span className="font-bold ml-1">{dailyStreak} days</span>
                     <FaFire className="text-burnt-orange" />
                 </p>
