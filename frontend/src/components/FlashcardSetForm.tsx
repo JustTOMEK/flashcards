@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import LanguageSelector from './LanguageSelector'
 import { IoMdCloseCircleOutline } from 'react-icons/io'
+import { useTranslation } from 'react-i18next'
 
 type FlashcardSet = {
     name: string
@@ -33,6 +34,8 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
     const [targetLanguage, setTargetLanguage] = useState<string>('')
     const [sourceLanguageCode, setSourceLanguageCode] = useState<string>('')
     const [targetLanguageCode, setTargetLanguageCode] = useState<string>('')
+
+    const {t} = useTranslation()
 
     const handleAddSet = async () => {
         try {
@@ -80,12 +83,12 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
             </button>
 
             <h2 className="text-2xl text-olive text-center font-semibold">
-                Create a New Flashcard Set
+                {t("set_form_1")}
             </h2>
 
             <input
                 type="text"
-                placeholder="Name"
+                placeholder={t("name")}
                 value={name}
                 className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setName(e.target.value)}
@@ -93,13 +96,13 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
 
             <input
                 type="text"
-                placeholder="Description"
+                placeholder={t("description")}
                 value={description}
                 className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setDescription(e.target.value)}
             />
 
-            <label className="text-olive">Choose source language:</label>
+            <label className="text-olive">{t("set_form_2")}:</label>
             <LanguageSelector
                 onChange={(selected: LanguageOption | null) => {
                     setSourceLanguage(selected?.label || '')
@@ -107,7 +110,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 }}
             />
 
-            <label className="text-olive">Choose target language:</label>
+            <label className="text-olive">{t("set_form_3")}</label>
             <LanguageSelector
                 onChange={(selected: LanguageOption | null) => {
                     setTargetLanguage(selected?.label || '')
@@ -119,7 +122,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 onClick={handleAddSet}
                 className="w-full px-4 py-2 bg-cream text-olive rounded hover:bg-blue-600 transition"
             >
-                Add Set
+                {t("set_form_4")}
             </button>
         </div>
     )

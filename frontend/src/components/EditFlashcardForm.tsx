@@ -3,6 +3,7 @@ import withAuth from './withAuth'
 import { IoMdCloseCircleOutline } from 'react-icons/io'
 import { FaGlobe } from 'react-icons/fa'
 import { FaCheckCircle } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 type Flashcard = {
     word: string
@@ -91,6 +92,8 @@ const EditFlashcardForm: React.FC<{
         }
     }
 
+    const {t} = useTranslation()
+
     return (
         <div className="overflow-auto relative h-2/5 w-1/3 bg-olive rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2 text-xl  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
             <button
@@ -100,20 +103,18 @@ const EditFlashcardForm: React.FC<{
                 <IoMdCloseCircleOutline className="text-3xl" />
             </button>
 
-            <p className="flex items-center justify-center h-full "> Word: </p>
+            <p className="flex items-center justify-center h-full "> {t("flashcards_1")} </p>
             <input
                 type="text"
-                placeholder="Word"
                 value={word}
                 className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2 "
                 onChange={(e) => setWord(e.target.value)}
             />
             <p className="flex items-center justify-center h-full">
-                Translation:
+                {t("flashcards_2")}
             </p>
             <input
                 type="text"
-                placeholder="Translation"
                 value={translation}
                 className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setTranslation(e.target.value)}
@@ -123,14 +124,14 @@ const EditFlashcardForm: React.FC<{
                 className="bg-tan px-4 py-2 rounded flex  items-center justify-center gap-2 "
             >
                 <FaGlobe />
-                Translate
+                {t("flashcards_3")}
             </button>
             <button
                 onClick={handleEdit}
                 className="bg-tan px-4 py-2 rounded  flex items-center justify-center gap-2 "
             >
                 <FaCheckCircle />
-                Confirm
+                {t("flashcards_5")}
             </button>
         </div>
     )

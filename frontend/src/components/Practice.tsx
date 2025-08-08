@@ -5,6 +5,7 @@ import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa6'
 import { FaSync } from 'react-icons/fa'
 import { FaArrowRight } from 'react-icons/fa'
 import { FaFlagCheckered } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 type Flashcard = {
     word: string
@@ -23,6 +24,7 @@ function Practice() {
     const token = localStorage.getItem('token')
     const location = useLocation()
     const setId = location.state.setId
+    const {t} = useTranslation()
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/flashcardSets/set/${setId}`, {
@@ -90,7 +92,7 @@ function Practice() {
                         disabled={isAnswered}
                         onClick={() => handleAnswer(true)}
                     >
-                        <FaThumbsUp />I Know This
+                        <FaThumbsUp />{t("practice_1")}
                     </button>
 
                     <button
@@ -98,7 +100,7 @@ function Practice() {
                         disabled={isAnswered}
                         onClick={() => handleAnswer(false)}
                     >
-                        <FaThumbsDown />I Don't Know This
+                        <FaThumbsDown />{t("practice_2")}
                     </button>
                 </div>
 
@@ -109,7 +111,7 @@ function Practice() {
                         onClick={handleFlip}
                     >
                         <FaSync />
-                        Flip
+                        {t("practice_3")}
                     </button>
                     {currentIndex + 1 != flashcards.length && (
                         <button
@@ -118,7 +120,7 @@ function Practice() {
                             onClick={handleNext}
                         >
                             <FaArrowRight />
-                            Next
+                            {t("practice_4")}
                         </button>
                     )}
                     <button
@@ -126,7 +128,7 @@ function Practice() {
                         onClick={() => navigate('/')}
                     >
                         <FaFlagCheckered />
-                        Finish
+                        {t("practice_5")}
                     </button>
                 </div>
             </div>

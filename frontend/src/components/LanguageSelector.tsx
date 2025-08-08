@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CreatableSelect from 'react-select/creatable'
 import languages from '../filtered_languages.json'
+import { useTranslation } from 'react-i18next'
 
 interface LanguageOption {
     value: string
@@ -25,6 +26,7 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
         setSelectedOption(newValue)
         onChange(newValue)
     }
+    const {t} = useTranslation()
 
     return (
         <div>
@@ -34,7 +36,7 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
                 options={options}
                 value={selectedOption}
                 onChange={handleChange}
-                placeholder="Type to search or create..."
+                placeholder= {t("language_selector_1")}
                 styles={{
                     control: (base, state) => ({
                         ...base,

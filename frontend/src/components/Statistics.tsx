@@ -12,6 +12,7 @@ import {
     ArcElement,
 } from 'chart.js'
 import withAuth from './withAuth'
+import { useTranslation } from 'react-i18next'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 ChartJS.register(ArcElement)
@@ -32,7 +33,7 @@ function Statistics() {
     const [barResponse, setBarResponse] = useState<BarResponse[]>([])
     const [doughnutResponse, setDougnutResponse] =
         useState<DoughnutResponse | null>()
-
+    const {t} = useTranslation()
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/statistics/percentage`, {
@@ -64,7 +65,7 @@ function Statistics() {
         labels,
         datasets: [
             {
-                label: 'Percentage of learned flashcards',
+                label: t("statistics_4"),
                 data: percentages,
                 backgroundColor: '#606c38',
                 borderColor: '#dda15e',
@@ -79,7 +80,7 @@ function Statistics() {
 
     console.log(doughnutResponse)
     const doughnutData = {
-        labels: ['Completed', 'Not Completed'],
+        labels: [t("completed"), t("not_completed")],
         datasets: [
             {
                 data: [completedCount, notCompletedCount],
@@ -93,15 +94,15 @@ function Statistics() {
     return (
         <>
             <div className="p-4 text-center">
-                <h2 className="text-2xl font-semibold"> Practice Summary</h2>
+                <h2 className="text-2xl font-semibold"> {t("statistics_1")}</h2>
                 <p className="text-lg mt-2">
-                    Total Practiced Cards:
-                    <span className="font-bold">{totalRepetitions}</span>
+                        {t("statistics_2")} {' '}
+                     <span className="font-bold">{totalRepetitions}</span>
                 </p>
 
                 <p className="flex justify-center items-center gap-2">
-                    Daily Streak:
-                    <span className="font-bold ml-1">{dailyStreak} days</span>
+                    {t("statistics_3")}
+                    <span className="font-bold ml-1">{dailyStreak} {t("days")}</span>
                     <FaFire className="text-burnt-orange" />
                 </p>
             </div>

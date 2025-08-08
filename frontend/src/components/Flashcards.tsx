@@ -6,6 +6,7 @@ import { MdModeEditOutline } from 'react-icons/md'
 import AuthEditFlashcardForm from './EditFlashcardForm'
 import { FaGlobe } from 'react-icons/fa'
 import { IoMdAddCircle } from 'react-icons/io'
+import { useTranslation } from 'react-i18next'
 
 type Flashcard = {
     word: string
@@ -120,7 +121,9 @@ function Flashcards() {
         } else if (word == '') {
             setWord(translatedText)
         }
+
     }
+
 
     function handleEdit(editedCard: Flashcard): void {
         setFlashcards((prev) =>
@@ -129,12 +132,14 @@ function Flashcards() {
         setEditingCard(null)
     }
 
+    const {t} = useTranslation()
+
     return (
         <div className="bg-cream  pt-10 overflow-auto">
             <div className="grid grid-cols-2 md:grid-cols-4  gap-6 w-5/6 mx-auto place-items-stretch   ">
                 <div className="h-full w-full bg-tan rounded-xl gap-4 p-4 text-cream grid md:grid-cols-2  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
                     <p className="flex items-center justify-center h-full">
-                        Word:
+                        {t("flashcards_1")}
                     </p>
                     <input
                         type="text"
@@ -146,7 +151,7 @@ function Flashcards() {
                         }}
                     />
                     <p className="flex items-center justify-center h-full">
-                        Translation:
+                        {t("flashcards_2")}
                     </p>
                     <input
                         type="text"
@@ -164,7 +169,7 @@ function Flashcards() {
                         }}
                     >
                         <FaGlobe />
-                        Translate
+                        {t("flashcards_3")}
                     </button>
 
                     <button
@@ -172,7 +177,7 @@ function Flashcards() {
                         onClick={handleAddFlashcard}
                     >
                         <IoMdAddCircle className="text-xl" />
-                        Add
+                        {t("flashcards_4")}
                     </button>
                 </div>
 
@@ -186,7 +191,7 @@ function Flashcards() {
                         </div>
 
                         <div className="text-center text-md  ">
-                            Practiced : {card.repetitions}
+                            {t("practiced")} : {card.repetitions}
                         </div>
                         <div className="flex gap-2 justify-center">
                             <button
@@ -194,7 +199,7 @@ function Flashcards() {
                                 onClick={() => handleDelete(card.id)}
                             >
                                 <FaTrash />
-                                Delete
+                                {t("delete")}
                             </button>
 
                             <button
@@ -202,7 +207,7 @@ function Flashcards() {
                                 onClick={() => setEditingCard(card)}
                             >
                                 <MdModeEditOutline className="text-xl" />
-                                Edit
+                                {t("edit")}
                             </button>
                         </div>
                     </div>

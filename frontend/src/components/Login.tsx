@@ -2,11 +2,13 @@ import { useState } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+    const {t} = useTranslation()
 
     const navigate = useNavigate()
 
@@ -40,38 +42,35 @@ function Login() {
                 <div className="space-y-6">
                     <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
                         <h3 className="text-xl mb-2 text-cream">
-                            Create Flashcard Sets
+                            {t("welcome_1")}
                         </h3>
                         <p className="text-base text-cream">
-                            Build your own flashcard sets to study and review
-                            topics effectively.
+                            {t("welcome_2")}
                         </p>
                     </div>
                     <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">Practice</h3>
+                        <h3 className="text-xl mb-2 text-cream">{t("practice")}</h3>
                         <p className="text-base text-cream">
-                            Test your knowledge by practicing with flashcards
-                            created by you.
+                            {t("welcome_3")}
                         </p>
                     </div>
                     <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
                         <h3 className="text-xl mb-2 text-cream">
-                            Track Your Progress
+                            {t("welcome_4")}
                         </h3>
                         <p className="text-base text-cream">
-                            Monitor your learning journey and improve your
-                            retention over time.
+                            {t("welcome_5")}
                         </p>
                     </div>
                 </div>
             </div>
             <div className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md">
                 <h2 className="text-2xl font-semibold mb-6 text-dark-olive">
-                    Log in
+                    {t("login")}
                 </h2>
                 <label className="w-full max-w-sm mb-4">
                     <span className="block mb-1 text-sm font-medium text-dark-olive">
-                        Username
+                        {(t("username"))}
                     </span>
                     <input
                         type="text"
@@ -86,7 +85,7 @@ function Login() {
 
                 <label className="w-full max-w-sm mb-6">
                     <span className="block mb-1 text-sm font-medium text-dark-olive">
-                        Password
+                        {t("password")}
                     </span>
 
                     <div className="relative w-full">
@@ -111,7 +110,7 @@ function Login() {
                         onClick={handleLogin}
                         className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
                     >
-                        Log in
+                        {t("login")}
                     </button>
 
                     <button
@@ -120,7 +119,7 @@ function Login() {
                         }}
                         className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
                     >
-                        New to Flashcards? Create an account
+                        {t("login_1")}
                     </button>
                 </div>
             </div>
