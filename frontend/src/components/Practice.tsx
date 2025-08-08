@@ -24,7 +24,7 @@ function Practice() {
     const token = localStorage.getItem('token')
     const location = useLocation()
     const setId = location.state.setId
-    const {t} = useTranslation()
+    const { t } = useTranslation()
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/flashcardSets/set/${setId}`, {
@@ -92,7 +92,8 @@ function Practice() {
                         disabled={isAnswered}
                         onClick={() => handleAnswer(true)}
                     >
-                        <FaThumbsUp />{t("practice_1")}
+                        <FaThumbsUp />
+                        {t('practice_1')}
                     </button>
 
                     <button
@@ -100,7 +101,8 @@ function Practice() {
                         disabled={isAnswered}
                         onClick={() => handleAnswer(false)}
                     >
-                        <FaThumbsDown />{t("practice_2")}
+                        <FaThumbsDown />
+                        {t('practice_2')}
                     </button>
                 </div>
 
@@ -111,7 +113,7 @@ function Practice() {
                         onClick={handleFlip}
                     >
                         <FaSync />
-                        {t("practice_3")}
+                        {t('practice_3')}
                     </button>
                     {currentIndex + 1 != flashcards.length && (
                         <button
@@ -120,7 +122,7 @@ function Practice() {
                             onClick={handleNext}
                         >
                             <FaArrowRight />
-                            {t("practice_4")}
+                            {t('practice_4')}
                         </button>
                     )}
                     <button
@@ -128,7 +130,7 @@ function Practice() {
                         onClick={() => navigate('/')}
                     >
                         <FaFlagCheckered />
-                        {t("practice_5")}
+                        {t('practice_5')}
                     </button>
                 </div>
             </div>

@@ -26,7 +26,7 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
         setSelectedOption(newValue)
         onChange(newValue)
     }
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     return (
         <div>
@@ -36,7 +36,7 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
                 options={options}
                 value={selectedOption}
                 onChange={handleChange}
-                placeholder= {t("language_selector_1")}
+                placeholder={t('language_selector_1')}
                 styles={{
                     control: (base, state) => ({
                         ...base,

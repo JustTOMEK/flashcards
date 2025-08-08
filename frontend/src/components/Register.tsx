@@ -11,7 +11,7 @@ function Register() {
 
     const navigate = useNavigate()
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     function handleLogin() {
         navigate('/login')
@@ -45,37 +45,33 @@ function Register() {
                 <div className="space-y-6">
                     <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
                         <h3 className="text-xl mb-2 text-cream">
-                            {t("welcome_1")}
+                            {t('welcome_1')}
                         </h3>
-                        <p className="text-base text-cream">
-                            {t("welcome_2")}
-                        </p>
-                    </div>
-                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">{t("practice")}</h3>
-                        <p className="text-base text-cream">
-                            {t("welcome_3")}
-                        </p>
+                        <p className="text-base text-cream">{t('welcome_2')}</p>
                     </div>
                     <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
                         <h3 className="text-xl mb-2 text-cream">
-                            {t("welcome_4")}
+                            {t('practice')}
                         </h3>
-                        <p className="text-base text-cream">
-                            {t("welcome_5")}
-                        </p>
+                        <p className="text-base text-cream">{t('welcome_3')}</p>
+                    </div>
+                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl mb-2 text-cream">
+                            {t('welcome_4')}
+                        </h3>
+                        <p className="text-base text-cream">{t('welcome_5')}</p>
                     </div>
                 </div>
             </div>
 
             <div className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md">
                 <h2 className="text-2xl font-semibold mb-6 text-dark-olive">
-                    {t("register")}
+                    {t('register')}
                 </h2>
 
                 <label className="w-full max-w-sm mb-4">
                     <span className="block mb-1 text-sm font-medium text-dark-olive">
-                        {t("username")}
+                        {t('username')}
                     </span>
                     <input
                         type="text"
@@ -87,7 +83,7 @@ function Register() {
 
                 <label className="w-full max-w-sm mb-6">
                     <span className="block mb-1 text-sm font-medium text-dark-olive">
-                        {t("password")}
+                        {t('password')}
                     </span>
                     <div className="relative w-full">
                         <input
@@ -111,14 +107,14 @@ function Register() {
                         onClick={handleRegister}
                         className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
                     >
-                        {t("register")}
+                        {t('register')}
                     </button>
 
                     <button
                         onClick={handleLogin}
                         className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
                     >
-                        {t("register_1")}
+                        {t('register_1')}
                     </button>
                 </div>
             </div>

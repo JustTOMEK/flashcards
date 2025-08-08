@@ -9,11 +9,11 @@
     "practice": "Practice",
     "register_1": "Already have an account? Log in",
     "register": "Register",
-    "username": "Username", 
+    "username": "Username",
     "password": "Password",
     "login": "Login",
     "statistics_1": "Practice Summary",
-    "statistics_2": "Total Practiced Cards:", 
+    "statistics_2": "Total Practiced Cards:",
     "statistics_3": "Daily Streak:",
     "statistics_4": "Percentage of learned flashcards",
     "days": "days",
@@ -49,5 +49,4 @@
     "lang_1": "English",
     "lang_2": "German",
     "lang_3": "Polish"
-  } 
-  
+}

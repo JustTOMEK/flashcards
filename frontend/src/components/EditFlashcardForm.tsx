@@ -92,7 +92,7 @@ const EditFlashcardForm: React.FC<{
         }
     }
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     return (
         <div className="overflow-auto relative h-2/5 w-1/3 bg-olive rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2 text-xl  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
@@ -103,7 +103,10 @@ const EditFlashcardForm: React.FC<{
                 <IoMdCloseCircleOutline className="text-3xl" />
             </button>
 
-            <p className="flex items-center justify-center h-full "> {t("flashcards_1")} </p>
+            <p className="flex items-center justify-center h-full ">
+                {' '}
+                {t('flashcards_1')}{' '}
+            </p>
             <input
                 type="text"
                 value={word}
@@ -111,7 +114,7 @@ const EditFlashcardForm: React.FC<{
                 onChange={(e) => setWord(e.target.value)}
             />
             <p className="flex items-center justify-center h-full">
-                {t("flashcards_2")}
+                {t('flashcards_2')}
             </p>
             <input
                 type="text"
@@ -124,14 +127,14 @@ const EditFlashcardForm: React.FC<{
                 className="bg-tan px-4 py-2 rounded flex  items-center justify-center gap-2 "
             >
                 <FaGlobe />
-                {t("flashcards_3")}
+                {t('flashcards_3')}
             </button>
             <button
                 onClick={handleEdit}
                 className="bg-tan px-4 py-2 rounded  flex items-center justify-center gap-2 "
             >
                 <FaCheckCircle />
-                {t("flashcards_5")}
+                {t('flashcards_5')}
             </button>
         </div>
     )
