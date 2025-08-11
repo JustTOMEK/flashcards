@@ -39,31 +39,63 @@ function Register() {
     }
 
     return (
-        <div className="flex h-screen bg-blue-50 text-blue-900" data-testid="register-page">
-            <div className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center" data-testid="register-left-panel">
+        <div
+            className="flex h-screen bg-blue-50 text-blue-900"
+            data-testid="register-page"
+        >
+            <div
+                className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center"
+                data-testid="register-left-panel"
+            >
                 <div className="space-y-6">
-                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md" data-testid="register-card-1">
-                        <h3 className="text-xl mb-2 text-cream">{t('welcome_1')}</h3>
+                    <div
+                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
+                        data-testid="register-card-1"
+                    >
+                        <h3 className="text-xl mb-2 text-cream">
+                            {t('welcome_1')}
+                        </h3>
                         <p className="text-base text-cream">{t('welcome_2')}</p>
                     </div>
-                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md" data-testid="register-card-2">
-                        <h3 className="text-xl mb-2 text-cream">{t('practice')}</h3>
+                    <div
+                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
+                        data-testid="register-card-2"
+                    >
+                        <h3 className="text-xl mb-2 text-cream">
+                            {t('practice')}
+                        </h3>
                         <p className="text-base text-cream">{t('welcome_3')}</p>
                     </div>
-                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md" data-testid="register-card-3">
-                        <h3 className="text-xl mb-2 text-cream">{t('welcome_4')}</h3>
+                    <div
+                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
+                        data-testid="register-card-3"
+                    >
+                        <h3 className="text-xl mb-2 text-cream">
+                            {t('welcome_4')}
+                        </h3>
                         <p className="text-base text-cream">{t('welcome_5')}</p>
                     </div>
                 </div>
             </div>
 
-            <div className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md" data-testid="register-right-panel">
-                <h2 className="text-2xl font-semibold mb-6 text-dark-olive" data-testid="register-title">
+            <div
+                className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md"
+                data-testid="register-right-panel"
+            >
+                <h2
+                    className="text-2xl font-semibold mb-6 text-dark-olive"
+                    data-testid="register-title"
+                >
                     {t('register')}
                 </h2>
 
-                <label className="w-full max-w-sm mb-4" data-testid="username-label">
-                    <span className="block mb-1 text-sm font-medium text-dark-olive">{t('username')}</span>
+                <label
+                    className="w-full max-w-sm mb-4"
+                    data-testid="username-label"
+                >
+                    <span className="block mb-1 text-sm font-medium text-dark-olive">
+                        {t('username')}
+                    </span>
                     <input
                         type="text"
                         value={username}
@@ -73,8 +105,13 @@ function Register() {
                     />
                 </label>
 
-                <label className="w-full max-w-sm mb-6" data-testid="password-label">
-                    <span className="block mb-1 text-sm font-medium text-dark-olive">{t('password')}</span>
+                <label
+                    className="w-full max-w-sm mb-6"
+                    data-testid="password-label"
+                >
+                    <span className="block mb-1 text-sm font-medium text-dark-olive">
+                        {t('password')}
+                    </span>
                     <div className="relative w-full">
                         <input
                             type={showPassword ? 'text' : 'password'}
@@ -94,7 +131,10 @@ function Register() {
                     </div>
                 </label>
 
-                <div className="w-full max-w-sm space-y-4" data-testid="register-buttons">
+                <div
+                    className="w-full max-w-sm space-y-4"
+                    data-testid="register-buttons"
+                >
                     <button
                         onClick={handleRegister}
                         className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"

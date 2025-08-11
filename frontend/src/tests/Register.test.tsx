@@ -7,7 +7,8 @@ import Register from '../components/Register'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<typeof import('react-router')>('react-router')
+    const actual =
+        await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -81,7 +82,10 @@ describe('Register Component', () => {
         )
 
         await userEvent.type(screen.getByTestId('username-input'), 'newuser')
-        await userEvent.type(screen.getByTestId('password-input'), 'newpassword')
+        await userEvent.type(
+            screen.getByTestId('password-input'),
+            'newpassword'
+        )
         await userEvent.click(screen.getByTestId('submit-register'))
 
         await waitFor(() => {
@@ -121,7 +125,9 @@ describe('Register Component', () => {
     })
 
     test('handles network error gracefully', async () => {
-        const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+        const consoleErrorSpy = vi
+            .spyOn(console, 'error')
+            .mockImplementation(() => {})
 
         vi.stubGlobal(
             'fetch',

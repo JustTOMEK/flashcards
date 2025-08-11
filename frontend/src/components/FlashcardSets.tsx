@@ -44,12 +44,20 @@ function FlashcardSets() {
                 token: token ?? '',
             },
         })
-        setflashcardSets((previous) => previous.filter((card) => card.id !== id))
+        setflashcardSets((previous) =>
+            previous.filter((card) => card.id !== id)
+        )
     }
 
     return (
-        <div className="h-full bg-cream pt-10 overflow-auto" data-testid="flashcard-sets-page">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 w-4/5 mx-auto" data-testid="flashcard-sets-grid">
+        <div
+            className="h-full bg-cream pt-10 overflow-auto"
+            data-testid="flashcard-sets-page"
+        >
+            <div
+                className="grid grid-cols-2 md:grid-cols-3 gap-6 w-4/5 mx-auto"
+                data-testid="flashcard-sets-grid"
+            >
                 <div
                     className="bg-tan rounded-xl p-4 text-cream shadow-md hover:shadow-lg transition-shadow min-h-[200px] flex flex-col items-center justify-center space-y-2"
                     data-testid="add-set-card"
@@ -77,13 +85,22 @@ function FlashcardSets() {
                         className="bg-tan rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow min-h-[200px]"
                         data-testid={`flashcard-set-${index}`}
                     >
-                        <h3 className="text-lg font-semibold text-cream mb-2 text-center" data-testid={`set-name-${index}`}>
+                        <h3
+                            className="text-lg font-semibold text-cream mb-2 text-center"
+                            data-testid={`set-name-${index}`}
+                        >
                             {flashcardSet.name}
                         </h3>
-                        <p className="text-cream mb-1 text-center" data-testid={`set-description-${index}`}>
+                        <p
+                            className="text-cream mb-1 text-center"
+                            data-testid={`set-description-${index}`}
+                        >
                             {flashcardSet.description}
                         </p>
-                        <div className="flex flex-wrap justify-center gap-4 mt-4 w-full" data-testid={`set-actions-${index}`}>
+                        <div
+                            className="flex flex-wrap justify-center gap-4 mt-4 w-full"
+                            data-testid={`set-actions-${index}`}
+                        >
                             <button
                                 className="bg-olive px-4 py-2 rounded text-cream text-center w-full sm:basis-1/3 min-w-[120px]"
                                 onClick={() => handleDelete(flashcardSet.id)}
