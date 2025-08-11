@@ -41,7 +41,8 @@ test('renders flashcard sets from API', async () => {
     )
 
     await waitFor(() => {
-        expect(screen.getByText('Set 1')).toBeInTheDocument()
-        expect(screen.getByText('Basic greetings')).toBeInTheDocument()
+        expect(screen.getByTestId('flashcard-set-0')).toBeInTheDocument()
+        expect(screen.getByTestId('set-name-0')).toHaveTextContent('Set 1')
+        expect(screen.getByTestId('set-description-0')).toHaveTextContent('Basic greetings')
     })
 })

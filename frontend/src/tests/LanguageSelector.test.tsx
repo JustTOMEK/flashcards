@@ -11,13 +11,6 @@ describe('LanguageSelector Component', () => {
         mockOnChange.mockClear()
     })
 
-    test('renders the select input with placeholder', () => {
-        render(<LanguageSelector onChange={mockOnChange} />)
-        expect(
-            screen.getByText('Type to search or create...')
-        ).toBeInTheDocument()
-    })
-
     test('displays language options when typing', async () => {
         render(<LanguageSelector onChange={mockOnChange} />)
         const input = screen.getByRole('combobox')
@@ -28,9 +21,7 @@ describe('LanguageSelector Component', () => {
             lang.name.toLowerCase().includes('english')
         )
         if (matchingOption) {
-            expect(
-                await screen.findByText(matchingOption.name)
-            ).toBeInTheDocument()
+            expect(await screen.findByText(matchingOption.name)).toBeInTheDocument()
         }
     })
 

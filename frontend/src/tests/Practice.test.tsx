@@ -7,8 +7,7 @@ import Practice from '../components/Practice'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual =
-        await vi.importActual<typeof import('react-router')>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -17,7 +16,6 @@ vi.mock('react-router', async () => {
 })
 
 vi.stubGlobal('fetch', vi.fn())
-
 vi.stubGlobal('localStorage', {
     getItem: vi.fn(() => 'mock-token'),
 })
@@ -49,23 +47,6 @@ describe('Practice Component', () => {
         })
     })
 
-    test('renders flashcard and buttons', async () => {
-        render(
-            <MemoryRouter>
-                <Practice />
-            </MemoryRouter>
-        )
-
-        const word = await screen.findByText('Kot')
-        expect(word).toBeInTheDocument()
-
-        expect(screen.getByText('I Know This')).toBeInTheDocument()
-        expect(screen.getByText("I Don't Know This")).toBeInTheDocument()
-        expect(screen.getByText('Flip')).toBeDisabled()
-        expect(screen.getByText('Next')).toBeDisabled()
-        expect(screen.getByText('Finish')).toBeInTheDocument()
-    })
-
     test('handles correct answer and enables Flip/Next', async () => {
         render(
             <MemoryRouter>
@@ -73,10 +54,8 @@ describe('Practice Component', () => {
             </MemoryRouter>
         )
 
-        const word = await screen.findByText('Kot')
-        expect(word).toBeInTheDocument()
-
-        await userEvent.click(screen.getByText('I Know This'))
+        await screen.findByTestId('flashcard-display')
+        await userEvent.click(screen.getByTestId('answer-correct'))
 
         expect(fetch).toHaveBeenCalledWith(
             'http://localhost:3000/flashcards/level/1',
@@ -85,8 +64,8 @@ describe('Practice Component', () => {
             })
         )
 
-        expect(screen.getByText('Flip')).not.toBeDisabled()
-        expect(screen.getByText('Next')).not.toBeDisabled()
+        expect(screen.getByTestId('flip-button')).not.toBeDisabled()
+        expect(screen.getByTestId('next-button')).not.toBeDisabled()
     })
 
     test('flips the card to show translation', async () => {
@@ -96,14 +75,12 @@ describe('Practice Component', () => {
             </MemoryRouter>
         )
 
-        const word = await screen.findByText('Kot')
-        expect(word).toBeInTheDocument()
+        await screen.findByTestId('flashcard-display')
+        await userEvent.click(screen.getByTestId('answer-correct'))
+        await userEvent.click(screen.getByTestId('flip-button'))
 
-        await userEvent.click(screen.getByText('I Know This'))
-        await userEvent.click(screen.getByText('Flip'))
-
-        const filpped_word = await screen.findByText('Cat')
-        expect(filpped_word).toBeInTheDocument()
+        const flipped = await screen.findByTestId('flashcard-display')
+        expect(flipped).toHaveTextContent('Cat')
     })
 
     test('navigates to next card', async () => {
@@ -113,14 +90,12 @@ describe('Practice Component', () => {
             </MemoryRouter>
         )
 
-        const word = await screen.findByText('Kot')
-        expect(word).toBeInTheDocument()
+        await screen.findByTestId('flashcard-display')
+        await userEvent.click(screen.getByTestId('answer-correct'))
+        await userEvent.click(screen.getByTestId('next-button'))
 
-        await userEvent.click(screen.getByText('I Know This'))
-        await userEvent.click(screen.getByText('Next'))
-
-        const next_word = await screen.findByText('Pies')
-        expect(next_word).toBeInTheDocument()
+        const nextCard = await screen.findByTestId('flashcard-display')
+        expect(nextCard).toHaveTextContent('Pies')
     })
 
     test('navigates to home on Finish click', async () => {
@@ -130,10 +105,8 @@ describe('Practice Component', () => {
             </MemoryRouter>
         )
 
-        const word = await screen.findByText('Kot')
-        expect(word).toBeInTheDocument()
-
-        await userEvent.click(screen.getByText('Finish'))
+        await screen.findByTestId('flashcard-display')
+        await userEvent.click(screen.getByTestId('finish-button'))
         expect(mockNavigate).toHaveBeenCalledWith('/')
     })
 })

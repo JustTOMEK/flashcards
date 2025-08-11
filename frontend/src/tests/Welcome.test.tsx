@@ -7,8 +7,7 @@ import Welcome from '../components/Welcome'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual =
-        await vi.importActual<typeof import('react-router')>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -20,16 +19,20 @@ describe('Welcome Component', () => {
         mockNavigate.mockClear()
     })
 
-    test('renders welcome text and buttons', () => {
+    test('renders welcome page structure', () => {
         render(
             <MemoryRouter>
                 <Welcome />
             </MemoryRouter>
         )
 
-        expect(screen.getByText('Welcome to Flashcards!')).toBeInTheDocument()
-        expect(screen.getByText('Login')).toBeInTheDocument()
-        expect(screen.getByText('Register')).toBeInTheDocument()
+        expect(screen.getByTestId('welcome-page')).toBeInTheDocument()
+        expect(screen.getByTestId('left-panel')).toBeInTheDocument()
+        expect(screen.getByTestId('right-panel')).toBeInTheDocument()
+        expect(screen.getByTestId('main-title')).toBeInTheDocument()
+        expect(screen.getByTestId('main-description')).toBeInTheDocument()
+        expect(screen.getByTestId('login-button')).toBeInTheDocument()
+        expect(screen.getByTestId('register-button')).toBeInTheDocument()
     })
 
     test('navigates to login when Login button is clicked', async () => {
@@ -39,7 +42,7 @@ describe('Welcome Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.click(screen.getByText('Login'))
+        await userEvent.click(screen.getByTestId('login-button'))
         expect(mockNavigate).toHaveBeenCalledWith('/login')
     })
 
@@ -50,7 +53,7 @@ describe('Welcome Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.click(screen.getByText('Register'))
+        await userEvent.click(screen.getByTestId('register-button'))
         expect(mockNavigate).toHaveBeenCalledWith('/register')
     })
 })

@@ -7,8 +7,7 @@ import Login from '../components/Login'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual =
-        await vi.importActual<typeof import('react-router')>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -19,6 +18,7 @@ describe('Login Component', () => {
     beforeEach(() => {
         mockNavigate.mockClear()
         vi.resetAllMocks()
+        localStorage.clear()
     })
 
     test('renders login form elements', () => {
@@ -27,19 +27,12 @@ describe('Login Component', () => {
                 <Login />
             </MemoryRouter>
         )
-        expect(
-            screen.getByRole('heading', { name: 'Log in' })
-        ).toBeInTheDocument()
 
-        expect(screen.getByLabelText('Username')).toBeInTheDocument()
-        expect(screen.getByLabelText('Password')).toBeInTheDocument()
-
-        expect(
-            screen.getByRole('button', { name: 'Log in' })
-        ).toBeInTheDocument()
-        expect(
-            screen.getByRole('button', { name: /create an account/i })
-        ).toBeInTheDocument()
+        expect(screen.getByTestId('login-title')).toBeInTheDocument()
+        expect(screen.getByTestId('username-input')).toBeInTheDocument()
+        expect(screen.getByTestId('password-input')).toBeInTheDocument()
+        expect(screen.getByTestId('submit-login')).toBeInTheDocument()
+        expect(screen.getByTestId('go-to-register')).toBeInTheDocument()
     })
 
     test('allows user to type into inputs', async () => {
@@ -49,8 +42,8 @@ describe('Login Component', () => {
             </MemoryRouter>
         )
 
-        const usernameInput = screen.getByLabelText('Username')
-        const passwordInput = screen.getByLabelText('Password')
+        const usernameInput = screen.getByTestId('username-input')
+        const passwordInput = screen.getByTestId('password-input')
 
         await userEvent.type(usernameInput, 'testuser')
         await userEvent.type(passwordInput, 'password123')
@@ -66,9 +59,7 @@ describe('Login Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.click(
-            screen.getByRole('button', { name: /create an account/i })
-        )
+        await userEvent.click(screen.getByTestId('go-to-register'))
         expect(mockNavigate).toHaveBeenCalledWith('/register')
     })
 
@@ -90,9 +81,9 @@ describe('Login Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.type(screen.getByLabelText('Username'), 'testuser')
-        await userEvent.type(screen.getByLabelText('Password'), 'password123')
-        await userEvent.click(screen.getByRole('button', { name: 'Log in' }))
+        await userEvent.type(screen.getByTestId('username-input'), 'testuser')
+        await userEvent.type(screen.getByTestId('password-input'), 'password123')
+        await userEvent.click(screen.getByTestId('submit-login'))
 
         await waitFor(() => {
             expect(localStorage.getItem('token')).toBe(fakeToken)
@@ -106,8 +97,7 @@ describe('Login Component', () => {
             vi.fn(() =>
                 Promise.resolve({
                     ok: false,
-                    json: () =>
-                        Promise.resolve({ message: 'Invalid credentials' }),
+                    json: () => Promise.resolve({ message: 'Invalid credentials' }),
                 })
             ) as unknown as typeof fetch
         )
@@ -118,18 +108,17 @@ describe('Login Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.type(screen.getByLabelText('Username'), 'wronguser')
-        await userEvent.type(screen.getByLabelText('Password'), 'wrongpass')
-        await userEvent.click(screen.getByRole('button', { name: 'Log in' }))
+        await userEvent.type(screen.getByTestId('username-input'), 'wronguser')
+        await userEvent.type(screen.getByTestId('password-input'), 'wrongpass')
+        await userEvent.click(screen.getByTestId('submit-login'))
 
         await waitFor(() => {
             expect(mockNavigate).not.toHaveBeenCalled()
         })
     })
+
     test('handles network error gracefully', async () => {
-        const consoleErrorSpy = vi
-            .spyOn(console, 'error')
-            .mockImplementation(() => {})
+        const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
         vi.stubGlobal(
             'fetch',
@@ -144,9 +133,9 @@ describe('Login Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.type(screen.getByLabelText('Username'), 'testuser')
-        await userEvent.type(screen.getByLabelText('Password'), 'password123')
-        await userEvent.click(screen.getByRole('button', { name: 'Log in' }))
+        await userEvent.type(screen.getByTestId('username-input'), 'testuser')
+        await userEvent.type(screen.getByTestId('password-input'), 'password123')
+        await userEvent.click(screen.getByTestId('submit-login'))
 
         await waitFor(() => {
             expect(consoleErrorSpy).toHaveBeenCalledWith(

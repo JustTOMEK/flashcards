@@ -44,10 +44,10 @@ describe('EditFlashcardForm Component', () => {
             </MemoryRouter>
         )
 
-        expect(screen.getByPlaceholderText('Word')).toHaveValue('hello')
-        expect(screen.getByPlaceholderText('Translation')).toHaveValue('hola')
-        expect(screen.getByText('Translate')).toBeInTheDocument()
-        expect(screen.getByText('Confirm')).toBeInTheDocument()
+        expect(screen.getByTestId('word-input')).toHaveValue('hello')
+        expect(screen.getByTestId('translation-input')).toHaveValue('hola')
+        expect(screen.getByTestId('translate-button')).toBeInTheDocument()
+        expect(screen.getByTestId('save-button')).toBeInTheDocument()
     })
 
     test('updates word and translation inputs', async () => {
@@ -63,8 +63,8 @@ describe('EditFlashcardForm Component', () => {
             </MemoryRouter>
         )
 
-        const wordInput = screen.getByPlaceholderText('Word')
-        const translationInput = screen.getByPlaceholderText('Translation')
+        const wordInput = screen.getByTestId('word-input')
+        const translationInput = screen.getByTestId('translation-input')
 
         await userEvent.clear(wordInput)
         await userEvent.type(wordInput, 'hi')
@@ -96,8 +96,8 @@ describe('EditFlashcardForm Component', () => {
             </MemoryRouter>
         )
 
-        const wordInput = screen.getByPlaceholderText('Word')
-        const translationInput = screen.getByPlaceholderText('Translation')
+        const wordInput = screen.getByTestId('word-input')
+        const translationInput = screen.getByTestId('translation-input')
 
         await userEvent.clear(wordInput)
         await userEvent.type(wordInput, 'hi')
@@ -105,7 +105,7 @@ describe('EditFlashcardForm Component', () => {
         await userEvent.clear(translationInput)
         await userEvent.type(translationInput, 'salut')
 
-        await userEvent.click(screen.getByText('Confirm'))
+        await userEvent.click(screen.getByTestId('save-button'))
 
         await waitFor(() => {
             expect(mockOnEdit).toHaveBeenCalledWith({
@@ -139,14 +139,14 @@ describe('EditFlashcardForm Component', () => {
             </MemoryRouter>
         )
 
-        const translationInput = screen.getByPlaceholderText('Translation')
+        const translationInput = screen.getByTestId('translation-input')
 
         await userEvent.clear(translationInput)
 
-        await userEvent.click(screen.getByText('Translate'))
+        await userEvent.click(screen.getByTestId('translate-button'))
 
         await waitFor(() => {
-            expect(screen.getByPlaceholderText('Translation')).toHaveValue(
+            expect(screen.getByTestId('translation-input')).toHaveValue(
                 'bonjour'
             )
         })
@@ -165,7 +165,7 @@ describe('EditFlashcardForm Component', () => {
             </MemoryRouter>
         )
 
-        const closeButton = screen.getByRole('button', { name: '' })
+        const closeButton = screen.getByTestId('exit-button')
         await userEvent.click(closeButton)
 
         expect(mockOnExit).toHaveBeenCalled()

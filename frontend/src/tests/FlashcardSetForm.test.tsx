@@ -20,21 +20,19 @@ describe('FlashcardSetForm Component', () => {
             />
         )
 
-        expect(
-            screen.getByText('Create a New Flashcard Set')
-        ).toBeInTheDocument()
-        expect(screen.getByPlaceholderText('Name')).toBeInTheDocument()
-        expect(screen.getByPlaceholderText('Description')).toBeInTheDocument()
-        expect(screen.getByText('Choose source language:')).toBeInTheDocument()
-        expect(screen.getByText('Choose target language:')).toBeInTheDocument()
-        expect(screen.getByText('Add Set')).toBeInTheDocument()
+        expect(screen.getByTestId('form-title')).toBeInTheDocument()
+        expect(screen.getByTestId('input-name')).toBeInTheDocument()
+        expect(screen.getByTestId('input-description')).toBeInTheDocument()
+        expect(screen.getByTestId('label-source-language')).toBeInTheDocument()
+        expect(screen.getByTestId('label-target-language')).toBeInTheDocument()
+        expect(screen.getByTestId('submit-set-button')).toBeInTheDocument()
     })
 
     test('updates name and description inputs', async () => {
         render(<FlashcardSetForm setShowForm={mockSetShowForm} />)
 
-        const nameInput = screen.getByPlaceholderText('Name')
-        const descriptionInput = screen.getByPlaceholderText('Description')
+        const nameInput = screen.getByTestId('input-name')
+        const descriptionInput = screen.getByTestId('input-description')
 
         await userEvent.type(nameInput, 'My Flashcards')
         await userEvent.type(descriptionInput, 'Some description')
@@ -46,7 +44,7 @@ describe('FlashcardSetForm Component', () => {
     test('closes form when close button is clicked', async () => {
         render(<FlashcardSetForm setShowForm={mockSetShowForm} />)
 
-        const closeButton = screen.getByRole('button', { name: '' })
+        const closeButton = screen.getByTestId('close-form-button')
         await userEvent.click(closeButton)
 
         expect(mockSetShowForm).toHaveBeenCalledWith(false)
@@ -81,11 +79,8 @@ describe('FlashcardSetForm Component', () => {
             />
         )
 
-        await userEvent.type(screen.getByPlaceholderText('Name'), 'Test Set')
-        await userEvent.type(
-            screen.getByPlaceholderText('Description'),
-            'Test Description'
-        )
+        await userEvent.type(screen.getByTestId('input-name'), 'Test Set')
+        await userEvent.type(screen.getByTestId('input-description'), 'Test Description')
 
         const languageComboboxes = screen.getAllByRole('combobox')
         await userEvent.click(languageComboboxes[0])
@@ -96,7 +91,7 @@ describe('FlashcardSetForm Component', () => {
         await userEvent.type(languageComboboxes[1], 'Spanish')
         await userEvent.click(await screen.findByText('Spanish'))
 
-        await userEvent.click(screen.getByText('Add Set'))
+        await userEvent.click(screen.getByTestId('submit-set-button'))
 
         await waitFor(() => {
             expect(mockSetFlashcardSets).toHaveBeenCalled()

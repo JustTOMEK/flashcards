@@ -7,8 +7,7 @@ import Register from '../components/Register'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual =
-        await vi.importActual<typeof import('react-router')>('react-router')
+    const actual = await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -28,17 +27,12 @@ describe('Register Component', () => {
             </MemoryRouter>
         )
 
-        expect(
-            screen.getByRole('heading', { name: 'Register' })
-        ).toBeInTheDocument()
-        expect(screen.getByLabelText('Username')).toBeInTheDocument()
-        expect(screen.getByLabelText('Password')).toBeInTheDocument()
-        expect(
-            screen.getByRole('button', { name: 'Register' })
-        ).toBeInTheDocument()
-        expect(
-            screen.getByRole('button', { name: /already have an account/i })
-        ).toBeInTheDocument()
+        expect(screen.getByTestId('register-page')).toBeInTheDocument()
+        expect(screen.getByTestId('register-title')).toBeInTheDocument()
+        expect(screen.getByTestId('username-input')).toBeInTheDocument()
+        expect(screen.getByTestId('password-input')).toBeInTheDocument()
+        expect(screen.getByTestId('submit-register')).toBeInTheDocument()
+        expect(screen.getByTestId('go-to-login')).toBeInTheDocument()
     })
 
     test('allows user to type into inputs', async () => {
@@ -48,8 +42,8 @@ describe('Register Component', () => {
             </MemoryRouter>
         )
 
-        const usernameInput = screen.getByLabelText('Username')
-        const passwordInput = screen.getByLabelText('Password')
+        const usernameInput = screen.getByTestId('username-input')
+        const passwordInput = screen.getByTestId('password-input')
 
         await userEvent.type(usernameInput, 'newuser')
         await userEvent.type(passwordInput, 'newpassword')
@@ -65,9 +59,7 @@ describe('Register Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.click(
-            screen.getByRole('button', { name: /already have an account/i })
-        )
+        await userEvent.click(screen.getByTestId('go-to-login'))
         expect(mockNavigate).toHaveBeenCalledWith('/login')
     })
 
@@ -88,9 +80,9 @@ describe('Register Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.type(screen.getByLabelText('Username'), 'newuser')
-        await userEvent.type(screen.getByLabelText('Password'), 'newpassword')
-        await userEvent.click(screen.getByRole('button', { name: 'Register' }))
+        await userEvent.type(screen.getByTestId('username-input'), 'newuser')
+        await userEvent.type(screen.getByTestId('password-input'), 'newpassword')
+        await userEvent.click(screen.getByTestId('submit-register'))
 
         await waitFor(() => {
             expect(mockNavigate).toHaveBeenCalledWith('/login')
@@ -114,12 +106,12 @@ describe('Register Component', () => {
             </MemoryRouter>
         )
 
-        const usernameInput = screen.getByLabelText('Username')
-        const passwordInput = screen.getByLabelText('Password')
+        const usernameInput = screen.getByTestId('username-input')
+        const passwordInput = screen.getByTestId('password-input')
 
         await userEvent.type(usernameInput, 'baduser')
         await userEvent.type(passwordInput, 'badpassword')
-        await userEvent.click(screen.getByRole('button', { name: 'Register' }))
+        await userEvent.click(screen.getByTestId('submit-register'))
 
         await waitFor(() => {
             expect(usernameInput).toHaveValue('')
@@ -129,9 +121,7 @@ describe('Register Component', () => {
     })
 
     test('handles network error gracefully', async () => {
-        const consoleErrorSpy = vi
-            .spyOn(console, 'error')
-            .mockImplementation(() => {})
+        const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
         vi.stubGlobal(
             'fetch',
@@ -146,9 +136,9 @@ describe('Register Component', () => {
             </MemoryRouter>
         )
 
-        await userEvent.type(screen.getByLabelText('Username'), 'erroruser')
-        await userEvent.type(screen.getByLabelText('Password'), 'errorpass')
-        await userEvent.click(screen.getByRole('button', { name: 'Register' }))
+        await userEvent.type(screen.getByTestId('username-input'), 'erroruser')
+        await userEvent.type(screen.getByTestId('password-input'), 'errorpass')
+        await userEvent.click(screen.getByTestId('submit-register'))
 
         await waitFor(() => {
             expect(consoleErrorSpy).toHaveBeenCalledWith(
