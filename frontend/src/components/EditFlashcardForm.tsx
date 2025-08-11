@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import withAuth from './withAuth'
 import { IoMdCloseCircleOutline } from 'react-icons/io'
-import { FaGlobe } from 'react-icons/fa'
-import { FaCheckCircle } from 'react-icons/fa'
+import { FaGlobe, FaCheckCircle } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
 
 type Flashcard = {
@@ -50,11 +49,11 @@ const EditFlashcardForm: React.FC<{
         let q = ''
         let source = ''
         let target = ''
-        if (translation == '') {
+        if (translation === '') {
             q = word
             source = sourceLanguageCode
             target = targetLanguageCode
-        } else if (word == '') {
+        } else if (word === '') {
             q = translation
             source = targetLanguageCode
             target = sourceLanguageCode
@@ -66,17 +65,12 @@ const EditFlashcardForm: React.FC<{
             'http://127.0.0.1:5000/translate',
             {
                 method: 'POST',
-                body: JSON.stringify({
-                    q: q,
-                    source: source,
-                    target: target,
-                }),
+                body: JSON.stringify({ q, source, target }),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
         )
-        console.log('Odpowiedz: ', translateResponse)
         if (!translateResponse.ok) {
             console.log('No translation available for custom languages')
             return
@@ -85,9 +79,9 @@ const EditFlashcardForm: React.FC<{
         const response = await translateResponse.json()
         const translatedText = response.translatedText
 
-        if (translation == '') {
+        if (translation === '') {
             setTranslation(translatedText)
-        } else if (word == '') {
+        } else if (word === '') {
             setWord(translatedText)
         }
     }
@@ -95,23 +89,27 @@ const EditFlashcardForm: React.FC<{
     const { t } = useTranslation()
 
     return (
-        <div className="overflow-auto relative h-2/5 w-1/3 bg-olive rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2 text-xl  grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow">
+        <div
+            className="overflow-auto relative h-2/5 w-1/3 bg-olive rounded-xl gap-4 p-7 text-cream grid md:grid-cols-2 text-xl grid-cols-1 whitespace-nowrap shadow-md hover:shadow-lg transition-shadow"
+            data-testid="edit-flashcard-form"
+        >
             <button
                 onClick={onExit}
                 className="absolute top-1 right-1 text-tan text-xl font-bold"
+                data-testid="exit-button"
             >
                 <IoMdCloseCircleOutline className="text-3xl" />
             </button>
 
-            <p className="flex items-center justify-center h-full ">
-                {' '}
-                {t('flashcards_1')}{' '}
+            <p className="flex items-center justify-center h-full">
+                {t('flashcards_1')}
             </p>
             <input
                 type="text"
                 value={word}
-                className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2 "
+                className="px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setWord(e.target.value)}
+                data-testid="word-input"
             />
             <p className="flex items-center justify-center h-full">
                 {t('flashcards_2')}
@@ -119,19 +117,22 @@ const EditFlashcardForm: React.FC<{
             <input
                 type="text"
                 value={translation}
-                className=" px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
+                className="px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setTranslation(e.target.value)}
+                data-testid="translation-input"
             />
             <button
                 onClick={handleTranslate}
-                className="bg-tan px-4 py-2 rounded flex  items-center justify-center gap-2 "
+                className="bg-tan px-4 py-2 rounded flex items-center justify-center gap-2"
+                data-testid="translate-button"
             >
                 <FaGlobe />
                 {t('flashcards_3')}
             </button>
             <button
                 onClick={handleEdit}
-                className="bg-tan px-4 py-2 rounded  flex items-center justify-center gap-2 "
+                className="bg-tan px-4 py-2 rounded flex items-center justify-center gap-2"
+                data-testid="save-button"
             >
                 <FaCheckCircle />
                 {t('flashcards_5')}
@@ -139,5 +140,6 @@ const EditFlashcardForm: React.FC<{
         </div>
     )
 }
+
 const AuthEditFlashcardForm = withAuth(EditFlashcardForm)
 export default AuthEditFlashcardForm

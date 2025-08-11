@@ -13,9 +13,8 @@ interface LanguageSelectorProps {
 }
 
 const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
-    const [selectedOption, setSelectedOption] = useState<LanguageOption | null>(
-        null
-    )
+    const [selectedOption, setSelectedOption] = useState<LanguageOption | null>(null)
+    const { t } = useTranslation()
 
     const options: LanguageOption[] = languages.map((lang) => ({
         value: lang.code,
@@ -26,25 +25,23 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
         setSelectedOption(newValue)
         onChange(newValue)
     }
-    const { t } = useTranslation()
 
     return (
-        <div>
+        <div data-testid="language-selector">
             <CreatableSelect
-                id="languageSelect"
+                inputId="languageSelect"
                 isClearable
                 options={options}
                 value={selectedOption}
                 onChange={handleChange}
                 placeholder={t('language_selector_1')}
+                data-testid="language-select"
                 styles={{
                     control: (base, state) => ({
                         ...base,
                         backgroundColor: '#fefae0',
-                        borderColor: state.isFocused ? '#bc6c25' : '#ffffff', // olive on focus
-                        boxShadow: state.isFocused
-                            ? '0 0 0 2px #606c38'
-                            : 'none',
+                        borderColor: state.isFocused ? '#bc6c25' : '#ffffff',
+                        boxShadow: state.isFocused ? '0 0 0 2px #606c38' : 'none',
                         '&:hover': {
                             borderColor: '#b5c99a',
                         },
@@ -62,7 +59,6 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
                         backgroundColor: '#fff',
                         zIndex: 10,
                     }),
-
                     option: (base, state) => ({
                         ...base,
                         backgroundColor: state.isFocused ? '#dda15e' : '#fff',

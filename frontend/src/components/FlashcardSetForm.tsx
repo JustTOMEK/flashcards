@@ -72,17 +72,22 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
     }
 
     return (
-        <div className="relative bg-tan p-8 rounded-lg shadow-lg w-full max-w-xl space-y-4">
+        <div
+            className="relative bg-tan p-8 rounded-lg shadow-lg w-full max-w-xl space-y-4"
+            data-testid="flashcard-set-form"
+        >
             <button
-                onClick={() => {
-                    setShowForm(false)
-                }}
+                onClick={() => setShowForm(false)}
                 className="absolute top-2 right-2 text-olive text-xl font-bold"
+                data-testid="close-form-button"
             >
                 <IoMdCloseCircleOutline className="text-3xl" />
             </button>
 
-            <h2 className="text-2xl text-olive text-center font-semibold">
+            <h2
+                className="text-2xl text-olive text-center font-semibold"
+                data-testid="form-title"
+            >
                 {t('set_form_1')}
             </h2>
 
@@ -92,6 +97,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 value={name}
                 className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setName(e.target.value)}
+                data-testid="input-name"
             />
 
             <input
@@ -100,9 +106,12 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 value={description}
                 className="w-full px-4 py-2 bg-cream text-olive rounded focus:outline-none focus:ring-2"
                 onChange={(e) => setDescription(e.target.value)}
+                data-testid="input-description"
             />
 
-            <label className="text-olive">{t('set_form_2')}:</label>
+            <label className="text-olive" data-testid="label-source-language">
+                {t('set_form_2')}:
+            </label>
             <LanguageSelector
                 onChange={(selected: LanguageOption | null) => {
                     setSourceLanguage(selected?.label || '')
@@ -110,7 +119,9 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
                 }}
             />
 
-            <label className="text-olive">{t('set_form_3')}</label>
+            <label className="text-olive" data-testid="label-target-language">
+                {t('set_form_3')}
+            </label>
             <LanguageSelector
                 onChange={(selected: LanguageOption | null) => {
                     setTargetLanguage(selected?.label || '')
@@ -121,6 +132,7 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
             <button
                 onClick={handleAddSet}
                 className="w-full px-4 py-2 bg-cream text-olive rounded hover:bg-blue-600 transition"
+                data-testid="submit-set-button"
             >
                 {t('set_form_4')}
             </button>

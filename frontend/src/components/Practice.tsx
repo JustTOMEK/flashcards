@@ -25,6 +25,8 @@ function Practice() {
     const location = useLocation()
     const setId = location.state.setId
     const { t } = useTranslation()
+    const navigate = useNavigate()
+
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/flashcardSets/set/${setId}`, {
@@ -36,16 +38,17 @@ function Practice() {
             .then((data) => {
                 setFlashcards([...data].sort((a, b) => a.level - b.level))
             })
-    })
+    }, [setId])
 
     async function handleAnswer(answer: boolean) {
         let updatedLevel = flashcards[currentIndex].level
         if (answer && updatedLevel < 3) {
-            updatedLevel = updatedLevel + 1
+            updatedLevel += 1
         } else if (!answer && updatedLevel > 0) {
-            updatedLevel = updatedLevel - 1
+            updatedLevel -= 1
         }
-        fetch(
+
+        await fetch(
             `http://localhost:3000/flashcards/level/${flashcards[currentIndex].id}`,
             {
                 method: 'PATCH',
@@ -56,6 +59,7 @@ function Practice() {
                 body: JSON.stringify({ updatedLevel }),
             }
         )
+
         setisAnswered(true)
     }
 
@@ -69,16 +73,14 @@ function Practice() {
         setisAnswered(false)
     }
 
-    const navigate = useNavigate()
-
     return (
-        <div className="h-full flex justify-center items-center">
-            <div className="bg-tan w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-                <div className="text-dark-olive text-sm font-medium">
+        <div className="h-full flex justify-center items-center" data-testid="practice-page">
+            <div className="bg-tan w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6" data-testid="practice-container">
+                <div className="text-dark-olive text-sm font-medium" data-testid="progress-indicator">
                     {currentIndex + 1} / {flashcards.length}
                 </div>
 
-                <div className="bg-cream w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-dark-olive">
+                <div className="bg-cream w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-dark-olive" data-testid="flashcard-display">
                     {flashcards.length > 0 &&
                         flashcards[currentIndex] &&
                         (isFlipped
@@ -86,11 +88,12 @@ function Practice() {
                             : flashcards[currentIndex].word)}
                 </div>
 
-                <div className="flex w-full justify-between space-x-4">
+                <div className="flex w-full justify-between space-x-4" data-testid="answer-buttons">
                     <button
                         className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
                         disabled={isAnswered}
                         onClick={() => handleAnswer(true)}
+                        data-testid="answer-correct"
                     >
                         <FaThumbsUp />
                         {t('practice_1')}
@@ -100,34 +103,40 @@ function Practice() {
                         className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
                         disabled={isAnswered}
                         onClick={() => handleAnswer(false)}
+                        data-testid="answer-incorrect"
                     >
                         <FaThumbsDown />
                         {t('practice_2')}
                     </button>
                 </div>
 
-                <div className="flex w-full justify-between space-x-2 pt-4">
+                <div className="flex w-full justify-between space-x-2 pt-4" data-testid="navigation-buttons">
                     <button
                         className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
                         disabled={!isAnswered}
                         onClick={handleFlip}
+                        data-testid="flip-button"
                     >
                         <FaSync />
                         {t('practice_3')}
                     </button>
-                    {currentIndex + 1 != flashcards.length && (
+
+                    {currentIndex + 1 !== flashcards.length && (
                         <button
                             className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
                             disabled={!isAnswered}
                             onClick={handleNext}
+                            data-testid="next-button"
                         >
                             <FaArrowRight />
                             {t('practice_4')}
                         </button>
                     )}
+
                     <button
                         className="flex-1 bg-cream text-dark-olive py-2 rounded-md flex items-center justify-center gap-2"
                         onClick={() => navigate('/')}
+                        data-testid="finish-button"
                     >
                         <FaFlagCheckered />
                         {t('practice_5')}

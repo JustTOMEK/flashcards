@@ -31,9 +31,9 @@ interface BarResponse {
 
 function Statistics() {
     const [barResponse, setBarResponse] = useState<BarResponse[]>([])
-    const [doughnutResponse, setDougnutResponse] =
-        useState<DoughnutResponse | null>()
+    const [doughnutResponse, setDougnutResponse] = useState<DoughnutResponse | null>(null)
     const { t } = useTranslation()
+
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/statistics/percentage`, {
@@ -45,6 +45,7 @@ function Statistics() {
             .then((data) => {
                 setBarResponse(data)
             })
+
         fetch(`http://localhost:3000/statistics/completed`, {
             headers: {
                 token: token ?? '',
@@ -54,7 +55,7 @@ function Statistics() {
             .then((data) => {
                 setDougnutResponse(data)
             })
-    })
+    }, [])
 
     const labels = barResponse.map((item) => item.setName)
     const percentages = barResponse.map((item) =>
@@ -73,12 +74,12 @@ function Statistics() {
             },
         ],
     }
+
     const dailyStreak = doughnutResponse?.dailyStreak ?? 0
     const totalRepetitions = doughnutResponse?.repetitions ?? 0
     const completedCount = doughnutResponse?.completed ?? 0
     const notCompletedCount = doughnutResponse?.notCompleted ?? 0
 
-    console.log(doughnutResponse)
     const doughnutData = {
         labels: [t('completed'), t('not_completed')],
         datasets: [
@@ -93,14 +94,16 @@ function Statistics() {
 
     return (
         <>
-            <div className="p-4 text-center">
-                <h2 className="text-2xl font-semibold"> {t('statistics_1')}</h2>
-                <p className="text-lg mt-2">
+            <div className="p-4 text-center" data-testid="statistics-header">
+                <h2 className="text-2xl font-semibold" data-testid="statistics-title">
+                    {t('statistics_1')}
+                </h2>
+                <p className="text-lg mt-2" data-testid="total-repetitions">
                     {t('statistics_2')}{' '}
                     <span className="font-bold">{totalRepetitions}</span>
                 </p>
 
-                <p className="flex justify-center items-center gap-2">
+                <p className="flex justify-center items-center gap-2" data-testid="daily-streak">
                     {t('statistics_3')}
                     <span className="font-bold ml-1">
                         {dailyStreak} {t('days')}
@@ -109,19 +112,13 @@ function Statistics() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-                <div className="p-4 h-[200px] md:h-[300px]">
-                    <Bar
-                        data={barData}
-                        options={{ maintainAspectRatio: false }}
-                    />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4" data-testid="charts-container">
+                <div className="p-4 h-[200px] md:h-[300px]" data-testid="bar-chart">
+                    <Bar data={barData} options={{ maintainAspectRatio: false }} />
                 </div>
 
-                <div className="p-4 flex justify-center h-[200px] md:h-[300px]">
-                    <Doughnut
-                        data={doughnutData}
-                        options={{ maintainAspectRatio: false }}
-                    />
+                <div className="p-4 flex justify-center h-[200px] md:h-[300px]" data-testid="doughnut-chart">
+                    <Doughnut data={doughnutData} options={{ maintainAspectRatio: false }} />
                 </div>
             </div>
         </>

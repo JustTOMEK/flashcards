@@ -10,7 +10,6 @@ function Register() {
     const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
-
     const { t } = useTranslation()
 
     function handleLogin() {
@@ -32,7 +31,7 @@ function Register() {
             } else {
                 setUsername('')
                 setPassword('')
-                console.log('Register unsucessful')
+                console.log('Register unsuccessful')
             }
         } catch (error) {
             console.error('Error tu jest: ', error)
@@ -40,72 +39,66 @@ function Register() {
     }
 
     return (
-        <div className="flex h-screen bg-blue-50 text-blue-900">
-            <div className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center">
+        <div className="flex h-screen bg-blue-50 text-blue-900" data-testid="register-page">
+            <div className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center" data-testid="register-left-panel">
                 <div className="space-y-6">
-                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">
-                            {t('welcome_1')}
-                        </h3>
+                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md" data-testid="register-card-1">
+                        <h3 className="text-xl mb-2 text-cream">{t('welcome_1')}</h3>
                         <p className="text-base text-cream">{t('welcome_2')}</p>
                     </div>
-                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">
-                            {t('practice')}
-                        </h3>
+                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md" data-testid="register-card-2">
+                        <h3 className="text-xl mb-2 text-cream">{t('practice')}</h3>
                         <p className="text-base text-cream">{t('welcome_3')}</p>
                     </div>
-                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl mb-2 text-cream">
-                            {t('welcome_4')}
-                        </h3>
+                    <div className="bg-burnt-orange p-6 rounded-lg shadow-md" data-testid="register-card-3">
+                        <h3 className="text-xl mb-2 text-cream">{t('welcome_4')}</h3>
                         <p className="text-base text-cream">{t('welcome_5')}</p>
                     </div>
                 </div>
             </div>
 
-            <div className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md">
-                <h2 className="text-2xl font-semibold mb-6 text-dark-olive">
+            <div className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md" data-testid="register-right-panel">
+                <h2 className="text-2xl font-semibold mb-6 text-dark-olive" data-testid="register-title">
                     {t('register')}
                 </h2>
 
-                <label className="w-full max-w-sm mb-4">
-                    <span className="block mb-1 text-sm font-medium text-dark-olive">
-                        {t('username')}
-                    </span>
+                <label className="w-full max-w-sm mb-4" data-testid="username-label">
+                    <span className="block mb-1 text-sm font-medium text-dark-olive">{t('username')}</span>
                     <input
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className="w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
+                        data-testid="username-input"
                     />
                 </label>
 
-                <label className="w-full max-w-sm mb-6">
-                    <span className="block mb-1 text-sm font-medium text-dark-olive">
-                        {t('password')}
-                    </span>
+                <label className="w-full max-w-sm mb-6" data-testid="password-label">
+                    <span className="block mb-1 text-sm font-medium text-dark-olive">{t('password')}</span>
                     <div className="relative w-full">
                         <input
                             type={showPassword ? 'text' : 'password'}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
+                            data-testid="password-input"
                         />
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
                             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-olive"
+                            data-testid="toggle-password-visibility"
                         >
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
                 </label>
 
-                <div className="w-full max-w-sm space-y-4">
+                <div className="w-full max-w-sm space-y-4" data-testid="register-buttons">
                     <button
                         onClick={handleRegister}
                         className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
+                        data-testid="submit-register"
                     >
                         {t('register')}
                     </button>
@@ -113,6 +106,7 @@ function Register() {
                     <button
                         onClick={handleLogin}
                         className="w-full bg-burnt-orange hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded transition"
+                        data-testid="go-to-login"
                     >
                         {t('register_1')}
                     </button>
@@ -121,4 +115,5 @@ function Register() {
         </div>
     )
 }
+
 export default Register
