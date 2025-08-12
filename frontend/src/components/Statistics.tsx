@@ -37,21 +37,27 @@ function Statistics() {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        fetch(`https://flashcards-backend-fl4p.onrender.com/statistics/percentage`, {
-            headers: {
-                token: token ?? '',
-            },
-        })
+        fetch(
+            `https://flashcards-backend-fl4p.onrender.com/statistics/percentage`,
+            {
+                headers: {
+                    token: token ?? '',
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 setBarResponse(data)
             })
 
-        fetch(`https://flashcards-backend-fl4p.onrender.com/statistics/completed`, {
-            headers: {
-                token: token ?? '',
-            },
-        })
+        fetch(
+            `https://flashcards-backend-fl4p.onrender.com/statistics/completed`,
+            {
+                headers: {
+                    token: token ?? '',
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 setDougnutResponse(data)

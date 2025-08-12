@@ -13,13 +13,16 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('https://flashcards-backend-fl4p.onrender.com/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            })
+            const response = await fetch(
+                'https://flashcards-backend-fl4p.onrender.com/login',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                }
+            )
             setUsername('')
             setPassword('')
 

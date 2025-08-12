@@ -18,13 +18,16 @@ function Register() {
 
     const handleRegister = async () => {
         try {
-            const response = await fetch('https://flashcards-backend-fl4p.onrender.com/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            })
+            const response = await fetch(
+                'https://flashcards-backend-fl4p.onrender.com/register',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                }
+            )
 
             if (response.ok) {
                 navigate('/login')

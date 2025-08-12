@@ -28,11 +28,14 @@ function Flashcards() {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        fetch(`https://flashcards-backend-fl4p.onrender.com/${flashcardSet.id}`, {
-            headers: {
-                token: token ?? '',
-            },
-        })
+        fetch(
+            `https://flashcards-backend-fl4p.onrender.com/${flashcardSet.id}`,
+            {
+                headers: {
+                    token: token ?? '',
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 setFlashcards(data)
@@ -44,18 +47,21 @@ function Flashcards() {
 
     const handleAddFlashcard = async () => {
         try {
-            const addRes = await fetch('https://flashcards-backend-fl4p.onrender.com/flashcards', {
-                method: 'POST',
-                headers: {
-                    token: token ?? '',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    word,
-                    translation,
-                    setId: flashcardSet?.id || '',
-                }),
-            })
+            const addRes = await fetch(
+                'https://flashcards-backend-fl4p.onrender.com/flashcards',
+                {
+                    method: 'POST',
+                    headers: {
+                        token: token ?? '',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        word,
+                        translation,
+                        setId: flashcardSet?.id || '',
+                    }),
+                }
+            )
             const newFlashcard = await addRes.json()
 
             setFlashcards((prevFlashcards) => [...prevFlashcards, newFlashcard])
