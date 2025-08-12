@@ -28,4 +28,11 @@ npm npm run devStart
 cd frontend
 npm npm run dev
 ```
+W celu uruchomienia tłumaczenia trzeba mieć 
+- pip
+```bash
+pip install libretranslate
+libretranslate
+```
 
+https://docs.libretranslate.com/guides/installation/
