@@ -41,21 +41,24 @@ const FlashcardSetForm: React.FC<FlashcardSetFormProps> = ({
         try {
             const token = localStorage.getItem('token')
 
-            const addRes = await fetch('https://flashcards-backend-fl4p.onrender.com/flashcardSets', {
-                method: 'POST',
-                headers: {
-                    token: token ?? '',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name,
-                    description,
-                    sourceLanguage,
-                    targetLanguage,
-                    sourceLanguageCode,
-                    targetLanguageCode,
-                }),
-            })
+            const addRes = await fetch(
+                'https://flashcards-backend-fl4p.onrender.com/flashcardSets',
+                {
+                    method: 'POST',
+                    headers: {
+                        token: token ?? '',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        description,
+                        sourceLanguage,
+                        targetLanguage,
+                        sourceLanguageCode,
+                        targetLanguageCode,
+                    }),
+                }
+            )
 
             const newFlashcardSet = await addRes.json()
 

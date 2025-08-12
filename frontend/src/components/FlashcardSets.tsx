@@ -38,12 +38,15 @@ function FlashcardSets() {
 
     const handleDelete = async (id: string) => {
         const token = localStorage.getItem('token')
-        await fetch(`https://flashcards-backend-fl4p.onrender.com/flashcardSets/${id}`, {
-            method: 'DELETE',
-            headers: {
-                token: token ?? '',
-            },
-        })
+        await fetch(
+            `https://flashcards-backend-fl4p.onrender.com/flashcardSets/${id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    token: token ?? '',
+                },
+            }
+        )
         setflashcardSets((previous) =>
             previous.filter((card) => card.id !== id)
         )
