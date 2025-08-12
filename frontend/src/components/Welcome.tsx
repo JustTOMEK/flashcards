@@ -10,14 +10,20 @@ function Welcome() {
             className="flex flex-col sm:flex-row h-screen bg-blue-50 text-blue-900"
             data-testid="welcome-page"
         >
-             <div
+            <div
                 className="w-full sm:w-1/2 p-8 bg-cream flex flex-col justify-center items-center"
                 data-testid="right-panel"
             >
-                <h1 className="text-4xl mb-6 text-dark-olive" data-testid="main-title">
+                <h1
+                    className="text-4xl mb-6 text-dark-olive"
+                    data-testid="main-title"
+                >
                     {t('welcome_6')}
                 </h1>
-                <p className="text-lg text-dark-olive mb-10 text-center" data-testid="main-description">
+                <p
+                    className="text-lg text-dark-olive mb-10 text-center"
+                    data-testid="main-description"
+                >
                     {t('welcome_7')}
                 </p>
                 <div className="flex space-x-4" data-testid="button-group">
@@ -46,10 +52,16 @@ function Welcome() {
                         className="bg-burnt-orange p-6 rounded-lg shadow-md"
                         data-testid="card-1"
                     >
-                        <h3 className="text-xl mb-2 text-cream" data-testid="card-1-title">
+                        <h3
+                            className="text-xl mb-2 text-cream"
+                            data-testid="card-1-title"
+                        >
                             {t('welcome_1')}
                         </h3>
-                        <p className="text-base text-cream" data-testid="card-1-text">
+                        <p
+                            className="text-base text-cream"
+                            data-testid="card-1-text"
+                        >
                             {t('welcome_2')}
                         </p>
                     </div>
@@ -57,10 +69,16 @@ function Welcome() {
                         className="bg-burnt-orange p-6 rounded-lg shadow-md"
                         data-testid="card-2"
                     >
-                        <h3 className="text-xl mb-2 text-cream" data-testid="card-2-title">
+                        <h3
+                            className="text-xl mb-2 text-cream"
+                            data-testid="card-2-title"
+                        >
                             {t('practice')}
                         </h3>
-                        <p className="text-base text-cream" data-testid="card-2-text">
+                        <p
+                            className="text-base text-cream"
+                            data-testid="card-2-text"
+                        >
                             {t('welcome_3')}
                         </p>
                     </div>
@@ -68,16 +86,21 @@ function Welcome() {
                         className="bg-burnt-orange p-6 rounded-lg shadow-md"
                         data-testid="card-3"
                     >
-                        <h3 className="text-xl mb-2 text-cream" data-testid="card-3-title">
+                        <h3
+                            className="text-xl mb-2 text-cream"
+                            data-testid="card-3-title"
+                        >
                             {t('welcome_4')}
                         </h3>
-                        <p className="text-base text-cream" data-testid="card-3-text">
+                        <p
+                            className="text-base text-cream"
+                            data-testid="card-3-text"
+                        >
                             {t('welcome_5')}
                         </p>
                     </div>
                 </div>
             </div>
-           
         </div>
     )
 }
