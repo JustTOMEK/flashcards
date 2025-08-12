@@ -105,8 +105,13 @@ function Register() {
                     />
                 </label>
 
-                <label className="w-full max-w-sm mb-6" data-testid="password-label">
-                    <span className="text-dark-olive block mb-1 text-sm font-medium text-dark-olive">{t('password')}</span>
+                <label
+                    className="w-full max-w-sm mb-6"
+                    data-testid="password-label"
+                >
+                    <span className="text-dark-olive block mb-1 text-sm font-medium text-dark-olive">
+                        {t('password')}
+                    </span>
                     <div className="relative w-full">
                         <input
                             type={showPassword ? 'text' : 'password'}
