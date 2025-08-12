@@ -65,7 +65,7 @@ function Login() {
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="w-full p-2 rounded border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
+                        className="text-dark-olive w-full p-2 rounded border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
                         data-testid="username-input"
                     />
                 </label>
@@ -77,7 +77,7 @@ function Login() {
                             type={showPassword ? 'text' : 'password'}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
+                            className="text-dark-olive w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
                             data-testid="password-input"
                         />
                         <button

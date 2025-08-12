@@ -68,13 +68,13 @@ function Register() {
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
+                        className="text-dark-olive w-full p-2 rounded pr-10 border-dark-olive border-2 focus:outline-none focus:ring-2 focus:ring-dark-olive"
                         data-testid="username-input"
                     />
                 </label>
 
                 <label className="w-full max-w-sm mb-6" data-testid="password-label">
-                    <span className="block mb-1 text-sm font-medium text-dark-olive">{t('password')}</span>
+                    <span className="text-dark-olive block mb-1 text-sm font-medium text-dark-olive">{t('password')}</span>
                     <div className="relative w-full">
                         <input
                             type={showPassword ? 'text' : 'password'}
