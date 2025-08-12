@@ -36,3 +36,6 @@ libretranslate
 ```
 
 https://docs.libretranslate.com/guides/installation/
+
+Strona jest dostępna pod linkiem:
+https://flashcards-6lk1.onrender.com/
