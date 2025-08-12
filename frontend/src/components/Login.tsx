@@ -40,46 +40,11 @@ function Login() {
 
     return (
         <div
-            className="flex h-screen bg-blue-50 text-blue-900"
+            className="flex flex-col sm:flex-row h-screen bg-blue-50 text-blue-900"
             data-testid="login-page"
         >
             <div
-                className="w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center"
-                data-testid="login-left-panel"
-            >
-                <div className="space-y-6">
-                    <div
-                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
-                        data-testid="login-card-1"
-                    >
-                        <h3 className="text-xl mb-2 text-cream">
-                            {t('welcome_1')}
-                        </h3>
-                        <p className="text-base text-cream">{t('welcome_2')}</p>
-                    </div>
-                    <div
-                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
-                        data-testid="login-card-2"
-                    >
-                        <h3 className="text-xl mb-2 text-cream">
-                            {t('practice')}
-                        </h3>
-                        <p className="text-base text-cream">{t('welcome_3')}</p>
-                    </div>
-                    <div
-                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
-                        data-testid="login-card-3"
-                    >
-                        <h3 className="text-xl mb-2 text-cream">
-                            {t('welcome_4')}
-                        </h3>
-                        <p className="text-base text-cream">{t('welcome_5')}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                className="w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md"
+                className="w-full sm:w-1/2 p-8 flex flex-col justify-center items-center bg-cream shadow-md"
                 data-testid="login-right-panel"
             >
                 <h2
@@ -150,6 +115,40 @@ function Login() {
                     >
                         {t('login_1')}
                     </button>
+                </div>
+            </div>
+            <div
+                className="w-full sm:w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center"
+                data-testid="login-left-panel"
+            >
+                <div className="space-y-6">
+                    <div
+                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
+                        data-testid="login-card-1"
+                    >
+                        <h3 className="text-xl mb-2 text-cream">
+                            {t('welcome_1')}
+                        </h3>
+                        <p className="text-base text-cream">{t('welcome_2')}</p>
+                    </div>
+                    <div
+                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
+                        data-testid="login-card-2"
+                    >
+                        <h3 className="text-xl mb-2 text-cream">
+                            {t('practice')}
+                        </h3>
+                        <p className="text-base text-cream">{t('welcome_3')}</p>
+                    </div>
+                    <div
+                        className="bg-burnt-orange p-6 rounded-lg shadow-md"
+                        data-testid="login-card-3"
+                    >
+                        <h3 className="text-xl mb-2 text-cream">
+                            {t('welcome_4')}
+                        </h3>
+                        <p className="text-base text-cream">{t('welcome_5')}</p>
+                    </div>
                 </div>
             </div>
         </div>
