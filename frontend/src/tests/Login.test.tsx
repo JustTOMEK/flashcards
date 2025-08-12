@@ -7,7 +7,8 @@ import Login from '../components/Login'
 const mockNavigate = vi.fn()
 
 vi.mock('react-router', async () => {
-    const actual = await vi.importActual<typeof import('react-router')>('react-router')
+    const actual =
+        await vi.importActual<typeof import('react-router')>('react-router')
     return {
         ...actual,
         useNavigate: () => mockNavigate,
@@ -82,7 +83,10 @@ describe('Login Component', () => {
         )
 
         await userEvent.type(screen.getByTestId('username-input'), 'testuser')
-        await userEvent.type(screen.getByTestId('password-input'), 'password123')
+        await userEvent.type(
+            screen.getByTestId('password-input'),
+            'password123'
+        )
         await userEvent.click(screen.getByTestId('submit-login'))
 
         await waitFor(() => {
@@ -97,7 +101,8 @@ describe('Login Component', () => {
             vi.fn(() =>
                 Promise.resolve({
                     ok: false,
-                    json: () => Promise.resolve({ message: 'Invalid credentials' }),
+                    json: () =>
+                        Promise.resolve({ message: 'Invalid credentials' }),
                 })
             ) as unknown as typeof fetch
         )
@@ -118,7 +123,9 @@ describe('Login Component', () => {
     })
 
     test('handles network error gracefully', async () => {
-        const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+        const consoleErrorSpy = vi
+            .spyOn(console, 'error')
+            .mockImplementation(() => {})
 
         vi.stubGlobal(
             'fetch',
@@ -134,7 +141,10 @@ describe('Login Component', () => {
         )
 
         await userEvent.type(screen.getByTestId('username-input'), 'testuser')
-        await userEvent.type(screen.getByTestId('password-input'), 'password123')
+        await userEvent.type(
+            screen.getByTestId('password-input'),
+            'password123'
+        )
         await userEvent.click(screen.getByTestId('submit-login'))
 
         await waitFor(() => {

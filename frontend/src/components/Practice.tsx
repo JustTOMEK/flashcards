@@ -74,13 +74,25 @@ function Practice() {
     }
 
     return (
-        <div className="h-full flex justify-center items-center" data-testid="practice-page">
-            <div className="bg-tan w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6" data-testid="practice-container">
-                <div className="text-dark-olive text-sm font-medium" data-testid="progress-indicator">
+        <div
+            className="h-full flex justify-center items-center"
+            data-testid="practice-page"
+        >
+            <div
+                className="bg-tan w-[90%] max-w-md p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6"
+                data-testid="practice-container"
+            >
+                <div
+                    className="text-dark-olive text-sm font-medium"
+                    data-testid="progress-indicator"
+                >
                     {currentIndex + 1} / {flashcards.length}
                 </div>
 
-                <div className="bg-cream w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-dark-olive" data-testid="flashcard-display">
+                <div
+                    className="bg-cream w-full py-10 px-4 rounded-lg text-center text-2xl font-semibold text-dark-olive"
+                    data-testid="flashcard-display"
+                >
                     {flashcards.length > 0 &&
                         flashcards[currentIndex] &&
                         (isFlipped
@@ -88,7 +100,10 @@ function Practice() {
                             : flashcards[currentIndex].word)}
                 </div>
 
-                <div className="flex w-full justify-between space-x-4" data-testid="answer-buttons">
+                <div
+                    className="flex w-full justify-between space-x-4"
+                    data-testid="answer-buttons"
+                >
                     <button
                         className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 w-1/2 flex items-center justify-center gap-2"
                         disabled={isAnswered}
@@ -110,7 +125,10 @@ function Practice() {
                     </button>
                 </div>
 
-                <div className="flex w-full justify-between space-x-2 pt-4" data-testid="navigation-buttons">
+                <div
+                    className="flex w-full justify-between space-x-2 pt-4"
+                    data-testid="navigation-buttons"
+                >
                     <button
                         className="flex-1 bg-cream text-dark-olive py-2 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
                         disabled={!isAnswered}

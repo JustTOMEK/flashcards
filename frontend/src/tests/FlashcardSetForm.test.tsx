@@ -80,7 +80,10 @@ describe('FlashcardSetForm Component', () => {
         )
 
         await userEvent.type(screen.getByTestId('input-name'), 'Test Set')
-        await userEvent.type(screen.getByTestId('input-description'), 'Test Description')
+        await userEvent.type(
+            screen.getByTestId('input-description'),
+            'Test Description'
+        )
 
         const languageComboboxes = screen.getAllByRole('combobox')
         await userEvent.click(languageComboboxes[0])

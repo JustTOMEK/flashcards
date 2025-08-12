@@ -18,8 +18,13 @@ function Navbar() {
             className="sticky top-0 bg-olive text-white px-4 py-3 flex justify-between items-center z-[2116]"
             data-testid="navbar"
         >
-            <p className="text-2xl" data-testid="navbar-title">Flashcards</p>
-            <div className="text-3xl flex justify-center items-center gap-3 relative" data-testid="navbar-icons">
+            <p className="text-2xl" data-testid="navbar-title">
+                Flashcards
+            </p>
+            <div
+                className="text-3xl flex justify-center items-center gap-3 relative"
+                data-testid="navbar-icons"
+            >
                 <FaHome
                     aria-label="Home"
                     onClick={() => navigate('/')}
@@ -44,7 +49,10 @@ function Navbar() {
                         data-testid="language-toggle"
                     />
                     {openLang && (
-                        <ul className="absolute right-0 mt-1 w-48 rounded shadow-lg z-50" data-testid="language-menu">
+                        <ul
+                            className="absolute right-0 mt-1 w-48 rounded shadow-lg z-50"
+                            data-testid="language-menu"
+                        >
                             <li>
                                 <button
                                     className="bg-cream w-full text-left px-4 py-2 text-olive text-xl cursor-pointer"
@@ -95,7 +103,10 @@ function Navbar() {
                         data-testid="user-toggle"
                     />
                     {openMenu && (
-                        <ul className="absolute right-0 mt-1 w-48 rounded shadow-lg z-50" data-testid="user-menu">
+                        <ul
+                            className="absolute right-0 mt-1 w-48 rounded shadow-lg z-50"
+                            data-testid="user-menu"
+                        >
                             <li>
                                 <button
                                     className="bg-cream w-full text-left px-4 py-2 text-olive text-xl cursor-pointer"

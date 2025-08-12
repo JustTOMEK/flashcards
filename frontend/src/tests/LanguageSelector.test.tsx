@@ -21,7 +21,9 @@ describe('LanguageSelector Component', () => {
             lang.name.toLowerCase().includes('english')
         )
         if (matchingOption) {
-            expect(await screen.findByText(matchingOption.name)).toBeInTheDocument()
+            expect(
+                await screen.findByText(matchingOption.name)
+            ).toBeInTheDocument()
         }
     })
 

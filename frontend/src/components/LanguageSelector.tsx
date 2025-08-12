@@ -13,7 +13,9 @@ interface LanguageSelectorProps {
 }
 
 const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
-    const [selectedOption, setSelectedOption] = useState<LanguageOption | null>(null)
+    const [selectedOption, setSelectedOption] = useState<LanguageOption | null>(
+        null
+    )
     const { t } = useTranslation()
 
     const options: LanguageOption[] = languages.map((lang) => ({
@@ -41,7 +43,9 @@ const LanguageSelector = ({ onChange }: LanguageSelectorProps) => {
                         ...base,
                         backgroundColor: '#fefae0',
                         borderColor: state.isFocused ? '#bc6c25' : '#ffffff',
-                        boxShadow: state.isFocused ? '0 0 0 2px #606c38' : 'none',
+                        boxShadow: state.isFocused
+                            ? '0 0 0 2px #606c38'
+                            : 'none',
                         '&:hover': {
                             borderColor: '#b5c99a',
                         },

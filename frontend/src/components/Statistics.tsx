@@ -31,7 +31,8 @@ interface BarResponse {
 
 function Statistics() {
     const [barResponse, setBarResponse] = useState<BarResponse[]>([])
-    const [doughnutResponse, setDougnutResponse] = useState<DoughnutResponse | null>(null)
+    const [doughnutResponse, setDougnutResponse] =
+        useState<DoughnutResponse | null>(null)
     const { t } = useTranslation()
 
     useEffect(() => {
@@ -95,7 +96,10 @@ function Statistics() {
     return (
         <>
             <div className="p-4 text-center" data-testid="statistics-header">
-                <h2 className="text-2xl font-semibold" data-testid="statistics-title">
+                <h2
+                    className="text-2xl font-semibold"
+                    data-testid="statistics-title"
+                >
                     {t('statistics_1')}
                 </h2>
                 <p className="text-lg mt-2" data-testid="total-repetitions">
@@ -103,7 +107,10 @@ function Statistics() {
                     <span className="font-bold">{totalRepetitions}</span>
                 </p>
 
-                <p className="flex justify-center items-center gap-2" data-testid="daily-streak">
+                <p
+                    className="flex justify-center items-center gap-2"
+                    data-testid="daily-streak"
+                >
                     {t('statistics_3')}
                     <span className="font-bold ml-1">
                         {dailyStreak} {t('days')}
@@ -112,13 +119,28 @@ function Statistics() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4" data-testid="charts-container">
-                <div className="p-4 h-[200px] md:h-[300px]" data-testid="bar-chart">
-                    <Bar data={barData} options={{ maintainAspectRatio: false }} />
+            <div
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4"
+                data-testid="charts-container"
+            >
+                <div
+                    className="p-4 h-[200px] md:h-[300px]"
+                    data-testid="bar-chart"
+                >
+                    <Bar
+                        data={barData}
+                        options={{ maintainAspectRatio: false }}
+                    />
                 </div>
 
-                <div className="p-4 flex justify-center h-[200px] md:h-[300px]" data-testid="doughnut-chart">
-                    <Doughnut data={doughnutData} options={{ maintainAspectRatio: false }} />
+                <div
+                    className="p-4 flex justify-center h-[200px] md:h-[300px]"
+                    data-testid="doughnut-chart"
+                >
+                    <Doughnut
+                        data={doughnutData}
+                        options={{ maintainAspectRatio: false }}
+                    />
                 </div>
             </div>
         </>
