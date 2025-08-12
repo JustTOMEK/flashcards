@@ -37,7 +37,7 @@ function Statistics() {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        fetch(`http://localhost:3000/statistics/percentage`, {
+        fetch(`https://flashcards-backend-fl4p.onrender.com/statistics/percentage`, {
             headers: {
                 token: token ?? '',
             },
@@ -47,7 +47,7 @@ function Statistics() {
                 setBarResponse(data)
             })
 
-        fetch(`http://localhost:3000/statistics/completed`, {
+        fetch(`https://flashcards-backend-fl4p.onrender.com/statistics/completed`, {
             headers: {
                 token: token ?? '',
             },

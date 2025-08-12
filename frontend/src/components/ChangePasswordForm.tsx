@@ -22,7 +22,7 @@ function ChangePasswordForm() {
         setSuccess('')
         console.log(token)
 
-        const response = await fetch('http://localhost:3000/change-password', {
+        const response = await fetch('https://flashcards-backend-fl4p.onrender.com/change-password', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

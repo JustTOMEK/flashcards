@@ -10,7 +10,7 @@ const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
             const checkAuth = async () => {
                 const token = localStorage.getItem('token')
                 const response = await fetch(
-                    'http://localhost:3000/authenticate',
+                    'https://flashcards-backend-fl4p.onrender.com/authenticate',
                     {
                         method: 'POST',
                         headers: {

@@ -29,7 +29,7 @@ function Practice() {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        fetch(`http://localhost:3000/flashcardSets/set/${setId}`, {
+        fetch(`https://flashcards-backend-fl4p.onrender.com/set/${setId}`, {
             headers: {
                 token: token ?? '',
             },
@@ -49,7 +49,7 @@ function Practice() {
         }
 
         await fetch(
-            `http://localhost:3000/flashcards/level/${flashcards[currentIndex].id}`,
+            `https://flashcards-backend-fl4p.onrender.com/flashcards/level/${flashcards[currentIndex].id}`,
             {
                 method: 'PATCH',
                 headers: {
