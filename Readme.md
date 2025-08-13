@@ -36,3 +36,5 @@ libretranslate
 ```
 
 https://docs.libretranslate.com/guides/installation/
+
+Online dostępne: https://flashcards-qncz.onrender.com/
