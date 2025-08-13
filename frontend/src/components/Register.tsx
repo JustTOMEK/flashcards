@@ -118,7 +118,7 @@ function Register() {
                 </div>
             </div>
             <div
-                className="w-full sm;w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center"
+                className="w-full sm:w-1/2 p-8 bg-dark-olive flex flex-col justify-center items-center"
                 data-testid="register-left-panel"
             >
                 <div className="space-y-6">
