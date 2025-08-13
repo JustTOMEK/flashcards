@@ -32,7 +32,7 @@ const EditFlashcardForm: React.FC<{
     const token = localStorage.getItem('token')
 
     async function handleEdit() {
-        fetch(`https://flashcards-backend-fl4p.onrender.com/${flashcard.id}`, {
+        fetch(`https://flashcards-backend-2xbz.onrender.com/${flashcard.id}`, {
             method: 'PATCH',
             headers: {
                 token: token ?? '',

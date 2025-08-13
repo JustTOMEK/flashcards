@@ -14,7 +14,7 @@ function Login() {
     const handleLogin = async () => {
         try {
             const response = await fetch(
-                'https://flashcards-backend-fl4p.onrender.com/login',
+                'https://flashcards-backend-2xbz.onrender.com/login',
                 {
                     method: 'POST',
                     headers: {

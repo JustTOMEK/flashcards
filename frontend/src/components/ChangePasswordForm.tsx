@@ -23,7 +23,7 @@ function ChangePasswordForm() {
         console.log(token)
 
         const response = await fetch(
-            'https://flashcards-backend-fl4p.onrender.com/change-password',
+            'https://flashcards-backend-2xbz.onrender.com/change-password',
             {
                 method: 'PATCH',
                 headers: {

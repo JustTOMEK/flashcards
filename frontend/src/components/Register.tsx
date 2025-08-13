@@ -19,7 +19,7 @@ function Register() {
     const handleRegister = async () => {
         try {
             const response = await fetch(
-                'https://flashcards-backend-fl4p.onrender.com/register',
+                'https://flashcards-backend-2xbz.onrender.com/register',
                 {
                     method: 'POST',
                     headers: {
