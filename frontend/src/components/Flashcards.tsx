@@ -29,7 +29,7 @@ function Flashcards() {
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(
-            `https://flashcards-backend-2xbz.onrender.com/flashcardSets/set${flashcardSet.id}`,
+            `https://flashcards-backend-2xbz.onrender.com/flashcardSets/set/${flashcardSet.id}`,
             {
                 headers: {
                     token: token ?? '',
