@@ -74,7 +74,7 @@ function Flashcards() {
     }
 
     const handleDelete = async (id: string) => {
-        fetch(`https://flashcards-backend-2xbz.onrender.com/${id}`, {
+        fetch(`https://flashcards-backend-2xbz.onrender.com/set/${id}`, {
             method: 'DELETE',
             headers: {
                 token: token ?? '',
