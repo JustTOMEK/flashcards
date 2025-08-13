@@ -29,7 +29,7 @@ function Flashcards() {
     useEffect(() => {
         const token = localStorage.getItem('token')
         fetch(
-            `https://flashcards-backend-2xbz.onrender.com/${flashcardSet.id}`,
+            `https://flashcards-backend-2xbz.onrender.com/flashcardSets/set${flashcardSet.id}`,
             {
                 headers: {
                     token: token ?? '',
@@ -74,7 +74,7 @@ function Flashcards() {
     }
 
     const handleDelete = async (id: string) => {
-        fetch(`https://flashcards-backend-2xbz.onrender.com/set/${id}`, {
+        fetch(`https://flashcards-backend-2xbz.onrender.com/flashcards/${id}`, {
             method: 'DELETE',
             headers: {
                 token: token ?? '',
